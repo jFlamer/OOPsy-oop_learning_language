@@ -25,3 +25,12 @@ if meaning_of_life == not_a_meaning:
 else:
     print("All is well in the code realm!")
 
+string Robert = "Robert"
+int wiekRoberta = 11
+
+function dodaj(a, b)
+    liczba = a + b
+    return liczba
+
+tablica = [1, 2, 3]
+tablica[0] = 10
