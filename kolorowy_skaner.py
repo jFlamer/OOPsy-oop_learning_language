@@ -1,7 +1,7 @@
 KEYWORDS = ["if", "else", "elif", "for", "while", "import", "function", "return"]
 BOOLEANS = ["true", "false"]
 OPERATORS = ["=", "!", "+", "-", "*", "/", "<", ">"]
-BRACKETS = ["(", ")", "[", "]", "{", "}"]
+BRACKETS = ["(", ")", "{", "}"]
 TYPES = ["int", "string", "decimal", "true", "false"]
 
 def is_letter(c):
@@ -73,11 +73,15 @@ def color_lines(line):
         if c == "[":
             start_of_array = i
             i += 1
-            while i < l and (is_letter_or_digit(line[i]) or line[i] == " " or line[i] == ","):
+            z = 1 #dla kilkuwymiarowych list
+            while i < l and z > 0:
+                if line[i] == "[":
+                    z += 1
+                elif line[i] == "]":
+                    z -= 1
                 i += 1
-            if i < l and line[i] == "]":
-                result += f'<span class="token-array">{line[start_of_array:i+1]}</span>'
-                continue
+            result += f'<span class="token-array">{line[start_of_array:i]}</span>'
+            continue
 
         if c == "=" and i > 0 and line[i - 1] == "]":
             result += f'<span class="token-operator">=</span>'

@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.11.11 WSL (Ubuntu-24.04): (/home/jflamer/miniconda3/envs/MLpy11/bin/python) (4)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (musicDatabase)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.13" project-jdk-type="Python SDK" />
 </project>
