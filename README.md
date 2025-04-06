@@ -145,3 +145,48 @@ ANTLR will be used to define the grammar of the language, from which it will aut
 | BREAK_STATEMENT              | `break`                        | Keyword to exit a loop early |
 | CONTINUE_STATEMENT          | `continue`                     | Keyword to skip to next loop iteration |
 
+## Sample Code
+
+```py
+class Animal {
+    has name: string;
+    has age: int;
+
+    method speak() {
+        print("I am an animal.");
+    }
+}
+
+class Dog inherits Animal {
+    has breed: string;
+
+    method speak() {
+        print("Woof!");
+    }
+
+    method describe() {
+        print(self.name);
+        print(self.age);
+        print(self.breed);
+    }
+}
+
+method main() {
+    create myDog of Dog;
+    myDog.name = "Burek";
+    myDog.age = 5;
+    myDog.breed = "Labrador";
+
+    if myDog.age > 3 {
+        myDog.speak();
+    } else {
+        print("Too young to bark.");
+    }
+
+    repeat {
+        print(myDog.name);
+        myDog.age = myDog.age + 1;
+    } until myDog.age > 6;
+
+    return;
+}
