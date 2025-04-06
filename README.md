@@ -190,3 +190,12 @@ method main() {
 
     return;
 }
+
+```
+## Grammar
+This project uses **ANTLR 4** for lexical and syntactic analysis.
+
+The grammar is defined using two files:
+
+- `OOPsyLexer.g4` – defines tokens (keywords, operators, literals, etc.)
+- `OOPsy.g4` – defines parser rules (program structure, statements, expressions)
