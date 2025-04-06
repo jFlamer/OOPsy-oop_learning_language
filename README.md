@@ -1,4 +1,4 @@
-# OOPsy-oop learning language
+# OOPsy-OOP Learning Language
 ## Authors 
 Natalia Dybczak & Jagoda Flejmer 
 ## Contact 
