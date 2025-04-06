@@ -1,11 +1,11 @@
-lexer grammar OOPsyLexer;
+lexer grammar OOPsy;
 
 // === Data Types ===
-TYPE_INT      : 'int';
-TYPE_FLOAT    : 'float';
-TYPE_CHAR     : 'char';
-TYPE_STRING   : 'string';
-TYPE_BOOL     : 'bool';
+OOPSY_TYPE_INT   : 'int';
+OOPSY_TYPE_FLOAT : 'float';
+OOPSY_TYPE_STRING : 'string';
+OOPSY_TYPE_CHAR  : 'char';
+OOPSY_TYPE_BOOL  : 'bool';
 
 // === Literals ===
 BOOL_LITERAL_TRUE  : 'true';
@@ -13,8 +13,8 @@ BOOL_LITERAL_FALSE : 'false';
 
 INT_LITERAL     : [0-9]+;
 FLOAT_LITERAL   : [0-9]+ '.' [0-9]+;
-CHAR_LITERAL    : '\'' . '\'';
-STRING_LITERAL  : '"' .*? '"';
+CHAR_LITERAL    : '\'' ( ~[\r\n\\] | '\\' . ) '\'';
+STRING_LITERAL  : '"' ( ~["\\] | '\\' . )* '"';
 
 // === Arithmetic and Logical Operators ===
 PLUS_OPERATOR     : '+';

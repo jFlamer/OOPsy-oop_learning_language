@@ -1,0 +1,7 @@
+class Dog {
+    has name: string;
+
+    method speak() {
+        print("Woof");
+    }
+}
