@@ -1,6 +1,6 @@
-# Generated from OOPsy.g4 by ANTLR 4.9.3
+# Generated from OOPsy.g4 by ANTLR 4.13.1
 from antlr4 import *
-if __name__ is not None and "." in __name__:
+if "." in __name__:
     from .OOPsyParser import OOPsyParser
 else:
     from OOPsyParser import OOPsyParser
@@ -23,6 +23,15 @@ class OOPsyListener(ParseTreeListener):
 
     # Exit a parse tree produced by OOPsyParser#statement.
     def exitStatement(self, ctx:OOPsyParser.StatementContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#mainMethod.
+    def enterMainMethod(self, ctx:OOPsyParser.MainMethodContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#mainMethod.
+    def exitMainMethod(self, ctx:OOPsyParser.MainMethodContext):
         pass
 
 
@@ -89,6 +98,15 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by OOPsyParser#createStatement.
+    def enterCreateStatement(self, ctx:OOPsyParser.CreateStatementContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#createStatement.
+    def exitCreateStatement(self, ctx:OOPsyParser.CreateStatementContext):
+        pass
+
+
     # Enter a parse tree produced by OOPsyParser#ifStatement.
     def enterIfStatement(self, ctx:OOPsyParser.IfStatementContext):
         pass
@@ -125,12 +143,30 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by OOPsyParser#expression.
-    def enterExpression(self, ctx:OOPsyParser.ExpressionContext):
+    # Enter a parse tree produced by OOPsyParser#valueExpression.
+    def enterValueExpression(self, ctx:OOPsyParser.ValueExpressionContext):
         pass
 
-    # Exit a parse tree produced by OOPsyParser#expression.
-    def exitExpression(self, ctx:OOPsyParser.ExpressionContext):
+    # Exit a parse tree produced by OOPsyParser#valueExpression.
+    def exitValueExpression(self, ctx:OOPsyParser.ValueExpressionContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#logicalExpression.
+    def enterLogicalExpression(self, ctx:OOPsyParser.LogicalExpressionContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#logicalExpression.
+    def exitLogicalExpression(self, ctx:OOPsyParser.LogicalExpressionContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#anyExpression.
+    def enterAnyExpression(self, ctx:OOPsyParser.AnyExpressionContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#anyExpression.
+    def exitAnyExpression(self, ctx:OOPsyParser.AnyExpressionContext):
         pass
 
 
@@ -149,6 +185,15 @@ class OOPsyListener(ParseTreeListener):
 
     # Exit a parse tree produced by OOPsyParser#argumentList.
     def exitArgumentList(self, ctx:OOPsyParser.ArgumentListContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#memberAccess.
+    def enterMemberAccess(self, ctx:OOPsyParser.MemberAccessContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#memberAccess.
+    def exitMemberAccess(self, ctx:OOPsyParser.MemberAccessContext):
         pass
 
 

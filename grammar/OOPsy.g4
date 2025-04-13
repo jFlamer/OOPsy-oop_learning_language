@@ -1,10 +1,9 @@
 grammar OOPsy;
 
-program         : statement* EOF ;
+program         : classDecl* mainMethod EOF ;
 
 statement
-    : classDecl
-    | methodDecl
+    : methodDecl
     | attributeDecl
     | assignment
     | ifStatement
@@ -12,28 +11,30 @@ statement
     | returnStatement
     | printStatement
     | expressionStatement
+    | createStatement
     ;
 
+mainMethod      : METHOD_KEYWORD MAIN_KEYWORD LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
 classDecl       : CLASS_KEYWORD IDENTIFIER (INHERITS_KEYWORD IDENTIFIER)? LEFT_BRACE statement* RIGHT_BRACE ;
 methodDecl      : METHOD_KEYWORD IDENTIFIER LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
 attributeDecl   : HAS_ATTRIBUTE_KEYWORD IDENTIFIER COLON_SEPARATOR typeName SEMICOLON_SEPARATOR ;
 
-assignment      : IDENTIFIER ASSIGNMENT_OPERATOR expression SEMICOLON_SEPARATOR ;
-returnStatement : RETURN_STATEMENT expression? SEMICOLON_SEPARATOR ;
-expressionStatement : expression SEMICOLON_SEPARATOR ;
-printStatement : PRINT_KEYWORD LEFT_PARENTHESIS expression RIGHT_PARENTHESIS SEMICOLON_SEPARATOR ;
+assignment      : (IDENTIFIER | memberAccess) ASSIGNMENT_OPERATOR valueExpression SEMICOLON_SEPARATOR ;
+returnStatement : RETURN_STATEMENT valueExpression? SEMICOLON_SEPARATOR ;
+expressionStatement : anyExpression SEMICOLON_SEPARATOR ;
+printStatement  : PRINT_KEYWORD LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS SEMICOLON_SEPARATOR ;
+createStatement : CREATE_KEYWORD IDENTIFIER OF_STATEMENT IDENTIFIER SEMICOLON_SEPARATOR ;
 
-ifStatement     : IF_KEYWORD expression block (ELSE_KEYWORD block)? ;
-loopStatement   : REPEAT_KEYWORD block UNTIL_KEYWORD expression SEMICOLON_SEPARATOR ;
+ifStatement     : IF_KEYWORD logicalExpression block (ELSE_KEYWORD block)? ;
+loopStatement   : REPEAT_KEYWORD block UNTIL_KEYWORD logicalExpression SEMICOLON_SEPARATOR ;
 
 block           : LEFT_BRACE statement* RIGHT_BRACE ;
 
 paramList       : IDENTIFIER (COMMA_SEPARATOR IDENTIFIER)* ;
 
-expression
-    : expression operator=('*' | '/' | '%') expression
-    | expression operator=('+' | '-') expression
-    | expression operator=('==' | '!=' | '<' | '>' | '<=' | '>=') expression
+valueExpression
+    : valueExpression ('*' | '/' | '%') valueExpression
+    | valueExpression ('+' | '-') valueExpression
     | IDENTIFIER
     | INT_LITERAL
     | FLOAT_LITERAL
@@ -42,12 +43,23 @@ expression
     | BOOL_LITERAL_TRUE
     | BOOL_LITERAL_FALSE
     | methodCall
-    | LEFT_PARENTHESIS expression RIGHT_PARENTHESIS
-    | PRINT_KEYWORD LEFT_PARENTHESIS expression RIGHT_PARENTHESIS
+    | memberAccess
+    | LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS
+    ;
+
+logicalExpression
+    : valueExpression (('==' | '!=' | '<' | '>' | '<=' | '>=') valueExpression)?
+    ;
+
+
+anyExpression
+    : valueExpression
+    | PRINT_KEYWORD LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS
     ;
 
 methodCall      : IDENTIFIER DOT_SEPARATOR IDENTIFIER LEFT_PARENTHESIS argumentList? RIGHT_PARENTHESIS ;
-argumentList    : expression (COMMA_SEPARATOR expression)* ;
+argumentList    : valueExpression (COMMA_SEPARATOR valueExpression)* ;
+memberAccess    : (IDENTIFIER | SELF_KEYWORD) DOT_SEPARATOR IDENTIFIER ;
 
 typeName        : OOPSY_TYPE_INT | OOPSY_TYPE_FLOAT | OOPSY_TYPE_STRING | OOPSY_TYPE_CHAR | OOPSY_TYPE_BOOL | IDENTIFIER ;
 
@@ -114,6 +126,7 @@ WHITESPACE    : [ \t\r\n]+ -> skip;
 
 // === OOP Keywords ===
 CLASS_KEYWORD          : 'class';
+MAIN_KEYWORD           : 'main';
 INHERITS_KEYWORD       : 'inherits';
 HAS_ATTRIBUTE_KEYWORD  : 'has';
 METHOD_KEYWORD         : 'method';
