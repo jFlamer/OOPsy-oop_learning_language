@@ -98,7 +98,6 @@ ANTLR will be used to define the grammar of the language, from which it will aut
 | HAS_ATTRIBUTE_KEYWORD    | `has`         | Keyword to declare attributes |
 | METHOD_KEYWORD           | `method`      | Keyword to declare methods |
 | CONSTRUCTOR_KEYWORD      | `constructor` | Keyword to define constructor |
-| END_STATEMENT            | `end`         | Keyword to mark end of block |
 | CREATE_KEYWORD           | `create`      | Keyword to instantiate objects |
 | OF_STATEMENT             | `of`          | Used in constructs like `create X of Y` |
 | SELF_KEYWORD             | `self`        | Reference to current object |
