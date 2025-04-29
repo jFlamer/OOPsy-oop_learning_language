@@ -199,3 +199,7 @@ The grammar is defined using two files:
 
 - `OOPsyLexer.g4` – defines tokens (keywords, operators, literals, etc.)
 - `OOPsy.g4` – defines parser rules (program structure, statements, expressions)
+
+## TBA
+1. Exceptions handling (semantic).
+2. GUI
