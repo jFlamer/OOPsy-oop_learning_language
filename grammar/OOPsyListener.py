@@ -44,6 +44,15 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by OOPsyParser#classElement.
+    def enterClassElement(self, ctx:OOPsyParser.ClassElementContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#classElement.
+    def exitClassElement(self, ctx:OOPsyParser.ClassElementContext):
+        pass
+
+
     # Enter a parse tree produced by OOPsyParser#methodDecl.
     def enterMethodDecl(self, ctx:OOPsyParser.MethodDeclContext):
         pass
@@ -59,6 +68,15 @@ class OOPsyListener(ParseTreeListener):
 
     # Exit a parse tree produced by OOPsyParser#attributeDecl.
     def exitAttributeDecl(self, ctx:OOPsyParser.AttributeDeclContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#constructorDecl.
+    def enterConstructorDecl(self, ctx:OOPsyParser.ConstructorDeclContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#constructorDecl.
+    def exitConstructorDecl(self, ctx:OOPsyParser.ConstructorDeclContext):
         pass
 
 
@@ -125,6 +143,24 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by OOPsyParser#breakStatement.
+    def enterBreakStatement(self, ctx:OOPsyParser.BreakStatementContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#breakStatement.
+    def exitBreakStatement(self, ctx:OOPsyParser.BreakStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#continueStatement.
+    def enterContinueStatement(self, ctx:OOPsyParser.ContinueStatementContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#continueStatement.
+    def exitContinueStatement(self, ctx:OOPsyParser.ContinueStatementContext):
+        pass
+
+
     # Enter a parse tree produced by OOPsyParser#block.
     def enterBlock(self, ctx:OOPsyParser.BlockContext):
         pass
@@ -158,6 +194,24 @@ class OOPsyListener(ParseTreeListener):
 
     # Exit a parse tree produced by OOPsyParser#logicalExpression.
     def exitLogicalExpression(self, ctx:OOPsyParser.LogicalExpressionContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#logicalTerm.
+    def enterLogicalTerm(self, ctx:OOPsyParser.LogicalTermContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#logicalTerm.
+    def exitLogicalTerm(self, ctx:OOPsyParser.LogicalTermContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#logicalFactor.
+    def enterLogicalFactor(self, ctx:OOPsyParser.LogicalFactorContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#logicalFactor.
+    def exitLogicalFactor(self, ctx:OOPsyParser.LogicalFactorContext):
         pass
 
 

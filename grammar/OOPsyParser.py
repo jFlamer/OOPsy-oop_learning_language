@@ -10,84 +10,104 @@ else:
 
 def serializedATN():
     return [
-        4,1,72,226,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,71,281,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
-        7,20,2,21,7,21,1,0,5,0,46,8,0,10,0,12,0,49,9,0,1,0,1,0,1,0,1,1,1,
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,63,8,1,1,2,1,2,1,2,1,2,3,2,69,
-        8,2,1,2,1,2,1,2,1,3,1,3,1,3,1,3,3,3,78,8,3,1,3,1,3,5,3,82,8,3,10,
-        3,12,3,85,9,3,1,3,1,3,1,4,1,4,1,4,1,4,3,4,93,8,4,1,4,1,4,1,4,1,5,
-        1,5,1,5,1,5,1,5,1,5,1,6,1,6,3,6,106,8,6,1,6,1,6,1,6,1,6,1,7,1,7,
-        3,7,114,8,7,1,7,1,7,1,8,1,8,1,8,1,9,1,9,1,9,1,9,1,9,1,9,1,10,1,10,
-        1,10,1,10,1,10,1,10,1,11,1,11,1,11,1,11,1,11,3,11,138,8,11,1,12,
-        1,12,1,12,1,12,1,12,1,12,1,13,1,13,5,13,148,8,13,10,13,12,13,151,
-        9,13,1,13,1,13,1,14,1,14,1,14,5,14,158,8,14,10,14,12,14,161,9,14,
-        1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,
-        1,15,3,15,177,8,15,1,15,1,15,1,15,1,15,1,15,1,15,5,15,185,8,15,10,
-        15,12,15,188,9,15,1,16,1,16,1,16,3,16,193,8,16,1,17,1,17,1,17,1,
-        17,1,17,1,17,3,17,201,8,17,1,18,1,18,1,18,1,18,1,18,3,18,208,8,18,
-        1,18,1,18,1,19,1,19,1,19,5,19,215,8,19,10,19,12,19,218,9,19,1,20,
-        1,20,1,20,1,20,1,21,1,21,1,21,0,1,30,22,0,2,4,6,8,10,12,14,16,18,
-        20,22,24,26,28,30,32,34,36,38,40,42,0,5,1,0,14,16,1,0,12,13,1,0,
-        24,29,2,0,60,60,72,72,2,0,1,5,72,72,236,0,47,1,0,0,0,2,62,1,0,0,
-        0,4,64,1,0,0,0,6,73,1,0,0,0,8,88,1,0,0,0,10,97,1,0,0,0,12,105,1,
-        0,0,0,14,111,1,0,0,0,16,117,1,0,0,0,18,120,1,0,0,0,20,126,1,0,0,
-        0,22,132,1,0,0,0,24,139,1,0,0,0,26,145,1,0,0,0,28,154,1,0,0,0,30,
-        176,1,0,0,0,32,189,1,0,0,0,34,200,1,0,0,0,36,202,1,0,0,0,38,211,
-        1,0,0,0,40,219,1,0,0,0,42,223,1,0,0,0,44,46,3,6,3,0,45,44,1,0,0,
-        0,46,49,1,0,0,0,47,45,1,0,0,0,47,48,1,0,0,0,48,50,1,0,0,0,49,47,
-        1,0,0,0,50,51,3,4,2,0,51,52,5,0,0,1,52,1,1,0,0,0,53,63,3,8,4,0,54,
-        63,3,10,5,0,55,63,3,12,6,0,56,63,3,22,11,0,57,63,3,24,12,0,58,63,
-        3,14,7,0,59,63,3,18,9,0,60,63,3,16,8,0,61,63,3,20,10,0,62,53,1,0,
-        0,0,62,54,1,0,0,0,62,55,1,0,0,0,62,56,1,0,0,0,62,57,1,0,0,0,62,58,
-        1,0,0,0,62,59,1,0,0,0,62,60,1,0,0,0,62,61,1,0,0,0,63,3,1,0,0,0,64,
-        65,5,49,0,0,65,66,5,46,0,0,66,68,5,34,0,0,67,69,3,28,14,0,68,67,
-        1,0,0,0,68,69,1,0,0,0,69,70,1,0,0,0,70,71,5,35,0,0,71,72,3,26,13,
-        0,72,5,1,0,0,0,73,74,5,45,0,0,74,77,5,72,0,0,75,76,5,47,0,0,76,78,
-        5,72,0,0,77,75,1,0,0,0,77,78,1,0,0,0,78,79,1,0,0,0,79,83,5,36,0,
-        0,80,82,3,2,1,0,81,80,1,0,0,0,82,85,1,0,0,0,83,81,1,0,0,0,83,84,
-        1,0,0,0,84,86,1,0,0,0,85,83,1,0,0,0,86,87,5,37,0,0,87,7,1,0,0,0,
-        88,89,5,49,0,0,89,90,5,72,0,0,90,92,5,34,0,0,91,93,3,28,14,0,92,
-        91,1,0,0,0,92,93,1,0,0,0,93,94,1,0,0,0,94,95,5,35,0,0,95,96,3,26,
-        13,0,96,9,1,0,0,0,97,98,5,48,0,0,98,99,5,72,0,0,99,100,5,40,0,0,
-        100,101,3,42,21,0,101,102,5,41,0,0,102,11,1,0,0,0,103,106,5,72,0,
-        0,104,106,3,40,20,0,105,103,1,0,0,0,105,104,1,0,0,0,106,107,1,0,
-        0,0,107,108,5,19,0,0,108,109,3,30,15,0,109,110,5,41,0,0,110,13,1,
-        0,0,0,111,113,5,69,0,0,112,114,3,30,15,0,113,112,1,0,0,0,113,114,
-        1,0,0,0,114,115,1,0,0,0,115,116,5,41,0,0,116,15,1,0,0,0,117,118,
-        3,34,17,0,118,119,5,41,0,0,119,17,1,0,0,0,120,121,5,54,0,0,121,122,
-        5,34,0,0,122,123,3,30,15,0,123,124,5,35,0,0,124,125,5,41,0,0,125,
-        19,1,0,0,0,126,127,5,52,0,0,127,128,5,72,0,0,128,129,5,53,0,0,129,
-        130,5,72,0,0,130,131,5,41,0,0,131,21,1,0,0,0,132,133,5,55,0,0,133,
-        134,3,32,16,0,134,137,3,26,13,0,135,136,5,56,0,0,136,138,3,26,13,
-        0,137,135,1,0,0,0,137,138,1,0,0,0,138,23,1,0,0,0,139,140,5,57,0,
-        0,140,141,3,26,13,0,141,142,5,58,0,0,142,143,3,32,16,0,143,144,5,
-        41,0,0,144,25,1,0,0,0,145,149,5,36,0,0,146,148,3,2,1,0,147,146,1,
-        0,0,0,148,151,1,0,0,0,149,147,1,0,0,0,149,150,1,0,0,0,150,152,1,
-        0,0,0,151,149,1,0,0,0,152,153,5,37,0,0,153,27,1,0,0,0,154,159,5,
-        72,0,0,155,156,5,39,0,0,156,158,5,72,0,0,157,155,1,0,0,0,158,161,
-        1,0,0,0,159,157,1,0,0,0,159,160,1,0,0,0,160,29,1,0,0,0,161,159,1,
-        0,0,0,162,163,6,15,-1,0,163,177,5,72,0,0,164,177,5,8,0,0,165,177,
-        5,9,0,0,166,177,5,11,0,0,167,177,5,10,0,0,168,177,5,6,0,0,169,177,
-        5,7,0,0,170,177,3,36,18,0,171,177,3,40,20,0,172,173,5,34,0,0,173,
-        174,3,30,15,0,174,175,5,35,0,0,175,177,1,0,0,0,176,162,1,0,0,0,176,
-        164,1,0,0,0,176,165,1,0,0,0,176,166,1,0,0,0,176,167,1,0,0,0,176,
-        168,1,0,0,0,176,169,1,0,0,0,176,170,1,0,0,0,176,171,1,0,0,0,176,
-        172,1,0,0,0,177,186,1,0,0,0,178,179,10,12,0,0,179,180,7,0,0,0,180,
-        185,3,30,15,13,181,182,10,11,0,0,182,183,7,1,0,0,183,185,3,30,15,
-        12,184,178,1,0,0,0,184,181,1,0,0,0,185,188,1,0,0,0,186,184,1,0,0,
-        0,186,187,1,0,0,0,187,31,1,0,0,0,188,186,1,0,0,0,189,192,3,30,15,
-        0,190,191,7,2,0,0,191,193,3,30,15,0,192,190,1,0,0,0,192,193,1,0,
-        0,0,193,33,1,0,0,0,194,201,3,30,15,0,195,196,5,54,0,0,196,197,5,
-        34,0,0,197,198,3,30,15,0,198,199,5,35,0,0,199,201,1,0,0,0,200,194,
-        1,0,0,0,200,195,1,0,0,0,201,35,1,0,0,0,202,203,5,72,0,0,203,204,
-        5,38,0,0,204,205,5,72,0,0,205,207,5,34,0,0,206,208,3,38,19,0,207,
-        206,1,0,0,0,207,208,1,0,0,0,208,209,1,0,0,0,209,210,5,35,0,0,210,
-        37,1,0,0,0,211,216,3,30,15,0,212,213,5,39,0,0,213,215,3,30,15,0,
-        214,212,1,0,0,0,215,218,1,0,0,0,216,214,1,0,0,0,216,217,1,0,0,0,
-        217,39,1,0,0,0,218,216,1,0,0,0,219,220,7,3,0,0,220,221,5,38,0,0,
-        221,222,5,72,0,0,222,41,1,0,0,0,223,224,7,4,0,0,224,43,1,0,0,0,18,
-        47,62,68,77,83,92,105,113,137,149,159,176,184,186,192,200,207,216
+        7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,
+        2,27,7,27,1,0,5,0,58,8,0,10,0,12,0,61,9,0,1,0,1,0,1,0,1,1,1,1,1,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,77,8,1,1,2,1,2,1,2,1,2,3,2,
+        83,8,2,1,2,1,2,1,2,1,3,1,3,1,3,1,3,3,3,92,8,3,1,3,1,3,5,3,96,8,3,
+        10,3,12,3,99,9,3,1,3,1,3,1,4,1,4,1,4,3,4,106,8,4,1,5,1,5,1,5,1,5,
+        3,5,112,8,5,1,5,1,5,1,5,1,6,1,6,1,6,1,6,1,6,1,6,1,7,1,7,1,7,3,7,
+        126,8,7,1,7,1,7,1,7,1,8,1,8,3,8,133,8,8,1,8,1,8,1,8,1,8,1,9,1,9,
+        3,9,141,8,9,1,9,1,9,1,10,1,10,1,10,1,11,1,11,1,11,1,11,1,11,1,11,
+        1,12,1,12,1,12,1,12,1,12,1,12,1,13,1,13,1,13,1,13,1,13,3,13,165,
+        8,13,1,14,1,14,1,14,1,14,1,14,1,14,1,15,1,15,1,15,1,16,1,16,1,16,
+        1,17,1,17,5,17,181,8,17,10,17,12,17,184,9,17,1,17,1,17,1,18,1,18,
+        1,18,5,18,191,8,18,10,18,12,18,194,9,18,1,19,1,19,1,19,1,19,1,19,
+        1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,3,19,210,8,19,1,19,
+        1,19,1,19,1,19,1,19,1,19,5,19,218,8,19,10,19,12,19,221,9,19,1,20,
+        1,20,1,20,5,20,226,8,20,10,20,12,20,229,9,20,1,21,1,21,1,21,5,21,
+        234,8,21,10,21,12,21,237,9,21,1,22,1,22,1,22,3,22,242,8,22,1,22,
+        1,22,1,22,1,22,3,22,248,8,22,1,23,1,23,1,23,1,23,1,23,1,23,3,23,
+        256,8,23,1,24,1,24,1,24,1,24,1,24,3,24,263,8,24,1,24,1,24,1,25,1,
+        25,1,25,5,25,270,8,25,10,25,12,25,273,9,25,1,26,1,26,1,26,1,26,1,
+        27,1,27,1,27,0,1,38,28,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,
+        32,34,36,38,40,42,44,46,48,50,52,54,0,5,1,0,14,16,1,0,12,13,1,0,
+        24,29,2,0,59,59,71,71,2,0,1,5,71,71,293,0,59,1,0,0,0,2,76,1,0,0,
+        0,4,78,1,0,0,0,6,87,1,0,0,0,8,105,1,0,0,0,10,107,1,0,0,0,12,116,
+        1,0,0,0,14,122,1,0,0,0,16,132,1,0,0,0,18,138,1,0,0,0,20,144,1,0,
+        0,0,22,147,1,0,0,0,24,153,1,0,0,0,26,159,1,0,0,0,28,166,1,0,0,0,
+        30,172,1,0,0,0,32,175,1,0,0,0,34,178,1,0,0,0,36,187,1,0,0,0,38,209,
+        1,0,0,0,40,222,1,0,0,0,42,230,1,0,0,0,44,247,1,0,0,0,46,255,1,0,
+        0,0,48,257,1,0,0,0,50,266,1,0,0,0,52,274,1,0,0,0,54,278,1,0,0,0,
+        56,58,3,6,3,0,57,56,1,0,0,0,58,61,1,0,0,0,59,57,1,0,0,0,59,60,1,
+        0,0,0,60,62,1,0,0,0,61,59,1,0,0,0,62,63,3,4,2,0,63,64,5,0,0,1,64,
+        1,1,0,0,0,65,77,3,10,5,0,66,77,3,12,6,0,67,77,3,16,8,0,68,77,3,26,
+        13,0,69,77,3,28,14,0,70,77,3,18,9,0,71,77,3,22,11,0,72,77,3,20,10,
+        0,73,77,3,24,12,0,74,77,3,30,15,0,75,77,3,32,16,0,76,65,1,0,0,0,
+        76,66,1,0,0,0,76,67,1,0,0,0,76,68,1,0,0,0,76,69,1,0,0,0,76,70,1,
+        0,0,0,76,71,1,0,0,0,76,72,1,0,0,0,76,73,1,0,0,0,76,74,1,0,0,0,76,
+        75,1,0,0,0,77,3,1,0,0,0,78,79,5,49,0,0,79,80,5,46,0,0,80,82,5,34,
+        0,0,81,83,3,36,18,0,82,81,1,0,0,0,82,83,1,0,0,0,83,84,1,0,0,0,84,
+        85,5,35,0,0,85,86,3,34,17,0,86,5,1,0,0,0,87,88,5,45,0,0,88,91,5,
+        71,0,0,89,90,5,47,0,0,90,92,5,71,0,0,91,89,1,0,0,0,91,92,1,0,0,0,
+        92,93,1,0,0,0,93,97,5,36,0,0,94,96,3,8,4,0,95,94,1,0,0,0,96,99,1,
+        0,0,0,97,95,1,0,0,0,97,98,1,0,0,0,98,100,1,0,0,0,99,97,1,0,0,0,100,
+        101,5,37,0,0,101,7,1,0,0,0,102,106,3,12,6,0,103,106,3,10,5,0,104,
+        106,3,14,7,0,105,102,1,0,0,0,105,103,1,0,0,0,105,104,1,0,0,0,106,
+        9,1,0,0,0,107,108,5,49,0,0,108,109,5,71,0,0,109,111,5,34,0,0,110,
+        112,3,36,18,0,111,110,1,0,0,0,111,112,1,0,0,0,112,113,1,0,0,0,113,
+        114,5,35,0,0,114,115,3,34,17,0,115,11,1,0,0,0,116,117,5,48,0,0,117,
+        118,5,71,0,0,118,119,5,40,0,0,119,120,3,54,27,0,120,121,5,41,0,0,
+        121,13,1,0,0,0,122,123,5,50,0,0,123,125,5,34,0,0,124,126,3,36,18,
+        0,125,124,1,0,0,0,125,126,1,0,0,0,126,127,1,0,0,0,127,128,5,35,0,
+        0,128,129,3,34,17,0,129,15,1,0,0,0,130,133,5,71,0,0,131,133,3,52,
+        26,0,132,130,1,0,0,0,132,131,1,0,0,0,133,134,1,0,0,0,134,135,5,19,
+        0,0,135,136,3,38,19,0,136,137,5,41,0,0,137,17,1,0,0,0,138,140,5,
+        68,0,0,139,141,3,38,19,0,140,139,1,0,0,0,140,141,1,0,0,0,141,142,
+        1,0,0,0,142,143,5,41,0,0,143,19,1,0,0,0,144,145,3,46,23,0,145,146,
+        5,41,0,0,146,21,1,0,0,0,147,148,5,53,0,0,148,149,5,34,0,0,149,150,
+        3,38,19,0,150,151,5,35,0,0,151,152,5,41,0,0,152,23,1,0,0,0,153,154,
+        5,51,0,0,154,155,5,71,0,0,155,156,5,52,0,0,156,157,5,71,0,0,157,
+        158,5,41,0,0,158,25,1,0,0,0,159,160,5,54,0,0,160,161,3,40,20,0,161,
+        164,3,34,17,0,162,163,5,55,0,0,163,165,3,34,17,0,164,162,1,0,0,0,
+        164,165,1,0,0,0,165,27,1,0,0,0,166,167,5,56,0,0,167,168,3,34,17,
+        0,168,169,5,57,0,0,169,170,3,40,20,0,170,171,5,41,0,0,171,29,1,0,
+        0,0,172,173,5,69,0,0,173,174,5,41,0,0,174,31,1,0,0,0,175,176,5,70,
+        0,0,176,177,5,41,0,0,177,33,1,0,0,0,178,182,5,36,0,0,179,181,3,2,
+        1,0,180,179,1,0,0,0,181,184,1,0,0,0,182,180,1,0,0,0,182,183,1,0,
+        0,0,183,185,1,0,0,0,184,182,1,0,0,0,185,186,5,37,0,0,186,35,1,0,
+        0,0,187,192,5,71,0,0,188,189,5,39,0,0,189,191,5,71,0,0,190,188,1,
+        0,0,0,191,194,1,0,0,0,192,190,1,0,0,0,192,193,1,0,0,0,193,37,1,0,
+        0,0,194,192,1,0,0,0,195,196,6,19,-1,0,196,210,5,71,0,0,197,210,5,
+        8,0,0,198,210,5,9,0,0,199,210,5,11,0,0,200,210,5,10,0,0,201,210,
+        5,6,0,0,202,210,5,7,0,0,203,210,3,48,24,0,204,210,3,52,26,0,205,
+        206,5,34,0,0,206,207,3,38,19,0,207,208,5,35,0,0,208,210,1,0,0,0,
+        209,195,1,0,0,0,209,197,1,0,0,0,209,198,1,0,0,0,209,199,1,0,0,0,
+        209,200,1,0,0,0,209,201,1,0,0,0,209,202,1,0,0,0,209,203,1,0,0,0,
+        209,204,1,0,0,0,209,205,1,0,0,0,210,219,1,0,0,0,211,212,10,12,0,
+        0,212,213,7,0,0,0,213,218,3,38,19,13,214,215,10,11,0,0,215,216,7,
+        1,0,0,216,218,3,38,19,12,217,211,1,0,0,0,217,214,1,0,0,0,218,221,
+        1,0,0,0,219,217,1,0,0,0,219,220,1,0,0,0,220,39,1,0,0,0,221,219,1,
+        0,0,0,222,227,3,42,21,0,223,224,5,31,0,0,224,226,3,42,21,0,225,223,
+        1,0,0,0,226,229,1,0,0,0,227,225,1,0,0,0,227,228,1,0,0,0,228,41,1,
+        0,0,0,229,227,1,0,0,0,230,235,3,44,22,0,231,232,5,30,0,0,232,234,
+        3,44,22,0,233,231,1,0,0,0,234,237,1,0,0,0,235,233,1,0,0,0,235,236,
+        1,0,0,0,236,43,1,0,0,0,237,235,1,0,0,0,238,241,3,38,19,0,239,240,
+        7,2,0,0,240,242,3,38,19,0,241,239,1,0,0,0,241,242,1,0,0,0,242,248,
+        1,0,0,0,243,244,5,34,0,0,244,245,3,40,20,0,245,246,5,35,0,0,246,
+        248,1,0,0,0,247,238,1,0,0,0,247,243,1,0,0,0,248,45,1,0,0,0,249,256,
+        3,38,19,0,250,251,5,53,0,0,251,252,5,34,0,0,252,253,3,38,19,0,253,
+        254,5,35,0,0,254,256,1,0,0,0,255,249,1,0,0,0,255,250,1,0,0,0,256,
+        47,1,0,0,0,257,258,5,71,0,0,258,259,5,38,0,0,259,260,5,71,0,0,260,
+        262,5,34,0,0,261,263,3,50,25,0,262,261,1,0,0,0,262,263,1,0,0,0,263,
+        264,1,0,0,0,264,265,5,35,0,0,265,49,1,0,0,0,266,271,3,38,19,0,267,
+        268,5,39,0,0,268,270,3,38,19,0,269,267,1,0,0,0,270,273,1,0,0,0,271,
+        269,1,0,0,0,271,272,1,0,0,0,272,51,1,0,0,0,273,271,1,0,0,0,274,275,
+        7,3,0,0,275,276,5,38,0,0,276,277,5,71,0,0,277,53,1,0,0,0,278,279,
+        7,4,0,0,279,55,1,0,0,0,23,59,76,82,91,97,105,111,125,132,140,164,
+        182,192,209,217,219,227,235,241,247,255,262,271
     ]
 
 class OOPsyParser ( Parser ):
@@ -108,11 +128,11 @@ class OOPsyParser ( Parser ):
                      "'&&'", "'||'", "'['", "']'", "'('", "')'", "'{'", 
                      "'}'", "'.'", "','", "':'", "';'", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "'class'", "'main'", "'inherits'", "'has'", 
-                     "'method'", "'constructor'", "'end'", "'create'", "'of'", 
-                     "'print'", "'if'", "'else'", "'repeat'", "'until'", 
-                     "'input'", "'self'", "'abstract'", "'final'", "'override'", 
-                     "'super'", "'public'", "'private'", "'list'", "'dict'", 
-                     "'return'", "'break'", "'continue'" ]
+                     "'method'", "'constructor'", "'create'", "'of'", "'print'", 
+                     "'if'", "'else'", "'repeat'", "'until'", "'input'", 
+                     "'self'", "'abstract'", "'final'", "'override'", "'super'", 
+                     "'public'", "'private'", "'list'", "'dict'", "'return'", 
+                     "'break'", "'continue'" ]
 
     symbolicNames = [ "<INVALID>", "OOPSY_TYPE_INT", "OOPSY_TYPE_FLOAT", 
                       "OOPSY_TYPE_STRING", "OOPSY_TYPE_CHAR", "OOPSY_TYPE_BOOL", 
@@ -131,41 +151,49 @@ class OOPsyParser ( Parser ):
                       "SEMICOLON_SEPARATOR", "LINE_COMMENT", "BLOCK_COMMENT", 
                       "WHITESPACE", "CLASS_KEYWORD", "MAIN_KEYWORD", "INHERITS_KEYWORD", 
                       "HAS_ATTRIBUTE_KEYWORD", "METHOD_KEYWORD", "CONSTRUCTOR_KEYWORD", 
-                      "END_STATEMENT", "CREATE_KEYWORD", "OF_STATEMENT", 
-                      "PRINT_KEYWORD", "IF_KEYWORD", "ELSE_KEYWORD", "REPEAT_KEYWORD", 
-                      "UNTIL_KEYWORD", "INPUT_STATEMENT", "SELF_KEYWORD", 
-                      "ABSTRACT_CLASS", "FINAL_CLASS", "OVERRIDE_METHOD", 
-                      "SUPER_CALL", "PUBLIC_MODIFIER", "PRIVATE_MODIFIER", 
-                      "LIST_TYPE", "DICTIONARY_TYPE", "RETURN_STATEMENT", 
-                      "BREAK_STATEMENT", "CONTINUE_STATEMENT", "IDENTIFIER" ]
+                      "CREATE_KEYWORD", "OF_STATEMENT", "PRINT_KEYWORD", 
+                      "IF_KEYWORD", "ELSE_KEYWORD", "REPEAT_KEYWORD", "UNTIL_KEYWORD", 
+                      "INPUT_STATEMENT", "SELF_KEYWORD", "ABSTRACT_CLASS", 
+                      "FINAL_CLASS", "OVERRIDE_METHOD", "SUPER_CALL", "PUBLIC_MODIFIER", 
+                      "PRIVATE_MODIFIER", "LIST_TYPE", "DICTIONARY_TYPE", 
+                      "RETURN_STATEMENT", "BREAK_STATEMENT", "CONTINUE_STATEMENT", 
+                      "IDENTIFIER" ]
 
     RULE_program = 0
     RULE_statement = 1
     RULE_mainMethod = 2
     RULE_classDecl = 3
-    RULE_methodDecl = 4
-    RULE_attributeDecl = 5
-    RULE_assignment = 6
-    RULE_returnStatement = 7
-    RULE_expressionStatement = 8
-    RULE_printStatement = 9
-    RULE_createStatement = 10
-    RULE_ifStatement = 11
-    RULE_loopStatement = 12
-    RULE_block = 13
-    RULE_paramList = 14
-    RULE_valueExpression = 15
-    RULE_logicalExpression = 16
-    RULE_anyExpression = 17
-    RULE_methodCall = 18
-    RULE_argumentList = 19
-    RULE_memberAccess = 20
-    RULE_typeName = 21
+    RULE_classElement = 4
+    RULE_methodDecl = 5
+    RULE_attributeDecl = 6
+    RULE_constructorDecl = 7
+    RULE_assignment = 8
+    RULE_returnStatement = 9
+    RULE_expressionStatement = 10
+    RULE_printStatement = 11
+    RULE_createStatement = 12
+    RULE_ifStatement = 13
+    RULE_loopStatement = 14
+    RULE_breakStatement = 15
+    RULE_continueStatement = 16
+    RULE_block = 17
+    RULE_paramList = 18
+    RULE_valueExpression = 19
+    RULE_logicalExpression = 20
+    RULE_logicalTerm = 21
+    RULE_logicalFactor = 22
+    RULE_anyExpression = 23
+    RULE_methodCall = 24
+    RULE_argumentList = 25
+    RULE_memberAccess = 26
+    RULE_typeName = 27
 
-    ruleNames =  [ "program", "statement", "mainMethod", "classDecl", "methodDecl", 
-                   "attributeDecl", "assignment", "returnStatement", "expressionStatement", 
-                   "printStatement", "createStatement", "ifStatement", "loopStatement", 
-                   "block", "paramList", "valueExpression", "logicalExpression", 
+    ruleNames =  [ "program", "statement", "mainMethod", "classDecl", "classElement", 
+                   "methodDecl", "attributeDecl", "constructorDecl", "assignment", 
+                   "returnStatement", "expressionStatement", "printStatement", 
+                   "createStatement", "ifStatement", "loopStatement", "breakStatement", 
+                   "continueStatement", "block", "paramList", "valueExpression", 
+                   "logicalExpression", "logicalTerm", "logicalFactor", 
                    "anyExpression", "methodCall", "argumentList", "memberAccess", 
                    "typeName" ]
 
@@ -220,28 +248,27 @@ class OOPsyParser ( Parser ):
     HAS_ATTRIBUTE_KEYWORD=48
     METHOD_KEYWORD=49
     CONSTRUCTOR_KEYWORD=50
-    END_STATEMENT=51
-    CREATE_KEYWORD=52
-    OF_STATEMENT=53
-    PRINT_KEYWORD=54
-    IF_KEYWORD=55
-    ELSE_KEYWORD=56
-    REPEAT_KEYWORD=57
-    UNTIL_KEYWORD=58
-    INPUT_STATEMENT=59
-    SELF_KEYWORD=60
-    ABSTRACT_CLASS=61
-    FINAL_CLASS=62
-    OVERRIDE_METHOD=63
-    SUPER_CALL=64
-    PUBLIC_MODIFIER=65
-    PRIVATE_MODIFIER=66
-    LIST_TYPE=67
-    DICTIONARY_TYPE=68
-    RETURN_STATEMENT=69
-    BREAK_STATEMENT=70
-    CONTINUE_STATEMENT=71
-    IDENTIFIER=72
+    CREATE_KEYWORD=51
+    OF_STATEMENT=52
+    PRINT_KEYWORD=53
+    IF_KEYWORD=54
+    ELSE_KEYWORD=55
+    REPEAT_KEYWORD=56
+    UNTIL_KEYWORD=57
+    INPUT_STATEMENT=58
+    SELF_KEYWORD=59
+    ABSTRACT_CLASS=60
+    FINAL_CLASS=61
+    OVERRIDE_METHOD=62
+    SUPER_CALL=63
+    PUBLIC_MODIFIER=64
+    PRIVATE_MODIFIER=65
+    LIST_TYPE=66
+    DICTIONARY_TYPE=67
+    RETURN_STATEMENT=68
+    BREAK_STATEMENT=69
+    CONTINUE_STATEMENT=70
+    IDENTIFIER=71
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -284,6 +311,12 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitProgram" ):
                 listener.exitProgram(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitProgram" ):
+                return visitor.visitProgram(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -294,19 +327,19 @@ class OOPsyParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 47
+            self.state = 59
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==45:
-                self.state = 44
+                self.state = 56
                 self.classDecl()
-                self.state = 49
+                self.state = 61
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 50
+            self.state = 62
             self.mainMethod()
-            self.state = 51
+            self.state = 63
             self.match(OOPsyParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
@@ -360,6 +393,14 @@ class OOPsyParser ( Parser ):
             return self.getTypedRuleContext(OOPsyParser.CreateStatementContext,0)
 
 
+        def breakStatement(self):
+            return self.getTypedRuleContext(OOPsyParser.BreakStatementContext,0)
+
+
+        def continueStatement(self):
+            return self.getTypedRuleContext(OOPsyParser.ContinueStatementContext,0)
+
+
         def getRuleIndex(self):
             return OOPsyParser.RULE_statement
 
@@ -371,6 +412,12 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitStatement" ):
                 listener.exitStatement(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitStatement" ):
+                return visitor.visitStatement(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -379,61 +426,73 @@ class OOPsyParser ( Parser ):
         localctx = OOPsyParser.StatementContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_statement)
         try:
-            self.state = 62
+            self.state = 76
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 53
+                self.state = 65
                 self.methodDecl()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 54
+                self.state = 66
                 self.attributeDecl()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 55
+                self.state = 67
                 self.assignment()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 56
+                self.state = 68
                 self.ifStatement()
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 57
+                self.state = 69
                 self.loopStatement()
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 58
+                self.state = 70
                 self.returnStatement()
                 pass
 
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
-                self.state = 59
+                self.state = 71
                 self.printStatement()
                 pass
 
             elif la_ == 8:
                 self.enterOuterAlt(localctx, 8)
-                self.state = 60
+                self.state = 72
                 self.expressionStatement()
                 pass
 
             elif la_ == 9:
                 self.enterOuterAlt(localctx, 9)
-                self.state = 61
+                self.state = 73
                 self.createStatement()
+                pass
+
+            elif la_ == 10:
+                self.enterOuterAlt(localctx, 10)
+                self.state = 74
+                self.breakStatement()
+                pass
+
+            elif la_ == 11:
+                self.enterOuterAlt(localctx, 11)
+                self.state = 75
+                self.continueStatement()
                 pass
 
 
@@ -484,6 +543,12 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitMainMethod" ):
                 listener.exitMainMethod(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitMainMethod" ):
+                return visitor.visitMainMethod(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -494,23 +559,23 @@ class OOPsyParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 64
+            self.state = 78
             self.match(OOPsyParser.METHOD_KEYWORD)
-            self.state = 65
+            self.state = 79
             self.match(OOPsyParser.MAIN_KEYWORD)
-            self.state = 66
+            self.state = 80
             self.match(OOPsyParser.LEFT_PARENTHESIS)
-            self.state = 68
+            self.state = 82
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==72:
-                self.state = 67
+            if _la==71:
+                self.state = 81
                 self.paramList()
 
 
-            self.state = 70
+            self.state = 84
             self.match(OOPsyParser.RIGHT_PARENTHESIS)
-            self.state = 71
+            self.state = 85
             self.block()
         except RecognitionException as re:
             localctx.exception = re
@@ -546,11 +611,11 @@ class OOPsyParser ( Parser ):
         def INHERITS_KEYWORD(self):
             return self.getToken(OOPsyParser.INHERITS_KEYWORD, 0)
 
-        def statement(self, i:int=None):
+        def classElement(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(OOPsyParser.StatementContext)
+                return self.getTypedRuleContexts(OOPsyParser.ClassElementContext)
             else:
-                return self.getTypedRuleContext(OOPsyParser.StatementContext,i)
+                return self.getTypedRuleContext(OOPsyParser.ClassElementContext,i)
 
 
         def getRuleIndex(self):
@@ -564,6 +629,12 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitClassDecl" ):
                 listener.exitClassDecl(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitClassDecl" ):
+                return visitor.visitClassDecl(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -574,34 +645,108 @@ class OOPsyParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 73
+            self.state = 87
             self.match(OOPsyParser.CLASS_KEYWORD)
-            self.state = 74
+            self.state = 88
             self.match(OOPsyParser.IDENTIFIER)
-            self.state = 77
+            self.state = 91
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==47:
-                self.state = 75
+                self.state = 89
                 self.match(OOPsyParser.INHERITS_KEYWORD)
-                self.state = 76
+                self.state = 90
                 self.match(OOPsyParser.IDENTIFIER)
 
 
-            self.state = 79
+            self.state = 93
             self.match(OOPsyParser.LEFT_BRACE)
-            self.state = 83
+            self.state = 97
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 1356427929948524480) != 0) or _la==69 or _la==72:
-                self.state = 80
-                self.statement()
-                self.state = 85
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 1970324836974592) != 0):
+                self.state = 94
+                self.classElement()
+                self.state = 99
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 86
+            self.state = 100
             self.match(OOPsyParser.RIGHT_BRACE)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ClassElementContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def attributeDecl(self):
+            return self.getTypedRuleContext(OOPsyParser.AttributeDeclContext,0)
+
+
+        def methodDecl(self):
+            return self.getTypedRuleContext(OOPsyParser.MethodDeclContext,0)
+
+
+        def constructorDecl(self):
+            return self.getTypedRuleContext(OOPsyParser.ConstructorDeclContext,0)
+
+
+        def getRuleIndex(self):
+            return OOPsyParser.RULE_classElement
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterClassElement" ):
+                listener.enterClassElement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitClassElement" ):
+                listener.exitClassElement(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitClassElement" ):
+                return visitor.visitClassElement(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def classElement(self):
+
+        localctx = OOPsyParser.ClassElementContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 8, self.RULE_classElement)
+        try:
+            self.state = 105
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [48]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 102
+                self.attributeDecl()
+                pass
+            elif token in [49]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 103
+                self.methodDecl()
+                pass
+            elif token in [50]:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 104
+                self.constructorDecl()
+                pass
+            else:
+                raise NoViableAltException(self)
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -649,33 +794,39 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitMethodDecl" ):
                 listener.exitMethodDecl(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitMethodDecl" ):
+                return visitor.visitMethodDecl(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def methodDecl(self):
 
         localctx = OOPsyParser.MethodDeclContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 8, self.RULE_methodDecl)
+        self.enterRule(localctx, 10, self.RULE_methodDecl)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 88
+            self.state = 107
             self.match(OOPsyParser.METHOD_KEYWORD)
-            self.state = 89
+            self.state = 108
             self.match(OOPsyParser.IDENTIFIER)
-            self.state = 90
+            self.state = 109
             self.match(OOPsyParser.LEFT_PARENTHESIS)
-            self.state = 92
+            self.state = 111
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==72:
-                self.state = 91
+            if _la==71:
+                self.state = 110
                 self.paramList()
 
 
-            self.state = 94
+            self.state = 113
             self.match(OOPsyParser.RIGHT_PARENTHESIS)
-            self.state = 95
+            self.state = 114
             self.block()
         except RecognitionException as re:
             localctx.exception = re
@@ -720,25 +871,107 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitAttributeDecl" ):
                 listener.exitAttributeDecl(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAttributeDecl" ):
+                return visitor.visitAttributeDecl(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def attributeDecl(self):
 
         localctx = OOPsyParser.AttributeDeclContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 10, self.RULE_attributeDecl)
+        self.enterRule(localctx, 12, self.RULE_attributeDecl)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 97
+            self.state = 116
             self.match(OOPsyParser.HAS_ATTRIBUTE_KEYWORD)
-            self.state = 98
+            self.state = 117
             self.match(OOPsyParser.IDENTIFIER)
-            self.state = 99
+            self.state = 118
             self.match(OOPsyParser.COLON_SEPARATOR)
-            self.state = 100
+            self.state = 119
             self.typeName()
-            self.state = 101
+            self.state = 120
             self.match(OOPsyParser.SEMICOLON_SEPARATOR)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ConstructorDeclContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def CONSTRUCTOR_KEYWORD(self):
+            return self.getToken(OOPsyParser.CONSTRUCTOR_KEYWORD, 0)
+
+        def LEFT_PARENTHESIS(self):
+            return self.getToken(OOPsyParser.LEFT_PARENTHESIS, 0)
+
+        def RIGHT_PARENTHESIS(self):
+            return self.getToken(OOPsyParser.RIGHT_PARENTHESIS, 0)
+
+        def block(self):
+            return self.getTypedRuleContext(OOPsyParser.BlockContext,0)
+
+
+        def paramList(self):
+            return self.getTypedRuleContext(OOPsyParser.ParamListContext,0)
+
+
+        def getRuleIndex(self):
+            return OOPsyParser.RULE_constructorDecl
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterConstructorDecl" ):
+                listener.enterConstructorDecl(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitConstructorDecl" ):
+                listener.exitConstructorDecl(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitConstructorDecl" ):
+                return visitor.visitConstructorDecl(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def constructorDecl(self):
+
+        localctx = OOPsyParser.ConstructorDeclContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 14, self.RULE_constructorDecl)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 122
+            self.match(OOPsyParser.CONSTRUCTOR_KEYWORD)
+            self.state = 123
+            self.match(OOPsyParser.LEFT_PARENTHESIS)
+            self.state = 125
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==71:
+                self.state = 124
+                self.paramList()
+
+
+            self.state = 127
+            self.match(OOPsyParser.RIGHT_PARENTHESIS)
+            self.state = 128
+            self.block()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -783,34 +1016,40 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitAssignment" ):
                 listener.exitAssignment(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAssignment" ):
+                return visitor.visitAssignment(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def assignment(self):
 
         localctx = OOPsyParser.AssignmentContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 12, self.RULE_assignment)
+        self.enterRule(localctx, 16, self.RULE_assignment)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 105
+            self.state = 132
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
             if la_ == 1:
-                self.state = 103
+                self.state = 130
                 self.match(OOPsyParser.IDENTIFIER)
                 pass
 
             elif la_ == 2:
-                self.state = 104
+                self.state = 131
                 self.memberAccess()
                 pass
 
 
-            self.state = 107
+            self.state = 134
             self.match(OOPsyParser.ASSIGNMENT_OPERATOR)
-            self.state = 108
+            self.state = 135
             self.valueExpression(0)
-            self.state = 109
+            self.state = 136
             self.match(OOPsyParser.SEMICOLON_SEPARATOR)
         except RecognitionException as re:
             localctx.exception = re
@@ -849,27 +1088,33 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitReturnStatement" ):
                 listener.exitReturnStatement(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitReturnStatement" ):
+                return visitor.visitReturnStatement(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def returnStatement(self):
 
         localctx = OOPsyParser.ReturnStatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_returnStatement)
+        self.enterRule(localctx, 18, self.RULE_returnStatement)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 111
+            self.state = 138
             self.match(OOPsyParser.RETURN_STATEMENT)
-            self.state = 113
+            self.state = 140
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 1152921521786720192) != 0) or _la==72:
-                self.state = 112
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 576460769483296704) != 0) or _la==71:
+                self.state = 139
                 self.valueExpression(0)
 
 
-            self.state = 115
+            self.state = 142
             self.match(OOPsyParser.SEMICOLON_SEPARATOR)
         except RecognitionException as re:
             localctx.exception = re
@@ -905,18 +1150,24 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitExpressionStatement" ):
                 listener.exitExpressionStatement(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpressionStatement" ):
+                return visitor.visitExpressionStatement(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def expressionStatement(self):
 
         localctx = OOPsyParser.ExpressionStatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_expressionStatement)
+        self.enterRule(localctx, 20, self.RULE_expressionStatement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 117
+            self.state = 144
             self.anyExpression()
-            self.state = 118
+            self.state = 145
             self.match(OOPsyParser.SEMICOLON_SEPARATOR)
         except RecognitionException as re:
             localctx.exception = re
@@ -961,24 +1212,30 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitPrintStatement" ):
                 listener.exitPrintStatement(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPrintStatement" ):
+                return visitor.visitPrintStatement(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def printStatement(self):
 
         localctx = OOPsyParser.PrintStatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_printStatement)
+        self.enterRule(localctx, 22, self.RULE_printStatement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 120
+            self.state = 147
             self.match(OOPsyParser.PRINT_KEYWORD)
-            self.state = 121
+            self.state = 148
             self.match(OOPsyParser.LEFT_PARENTHESIS)
-            self.state = 122
+            self.state = 149
             self.valueExpression(0)
-            self.state = 123
+            self.state = 150
             self.match(OOPsyParser.RIGHT_PARENTHESIS)
-            self.state = 124
+            self.state = 151
             self.match(OOPsyParser.SEMICOLON_SEPARATOR)
         except RecognitionException as re:
             localctx.exception = re
@@ -1022,24 +1279,30 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitCreateStatement" ):
                 listener.exitCreateStatement(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitCreateStatement" ):
+                return visitor.visitCreateStatement(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def createStatement(self):
 
         localctx = OOPsyParser.CreateStatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_createStatement)
+        self.enterRule(localctx, 24, self.RULE_createStatement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 126
+            self.state = 153
             self.match(OOPsyParser.CREATE_KEYWORD)
-            self.state = 127
+            self.state = 154
             self.match(OOPsyParser.IDENTIFIER)
-            self.state = 128
+            self.state = 155
             self.match(OOPsyParser.OF_STATEMENT)
-            self.state = 129
+            self.state = 156
             self.match(OOPsyParser.IDENTIFIER)
-            self.state = 130
+            self.state = 157
             self.match(OOPsyParser.SEMICOLON_SEPARATOR)
         except RecognitionException as re:
             localctx.exception = re
@@ -1085,29 +1348,35 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitIfStatement" ):
                 listener.exitIfStatement(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitIfStatement" ):
+                return visitor.visitIfStatement(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def ifStatement(self):
 
         localctx = OOPsyParser.IfStatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_ifStatement)
+        self.enterRule(localctx, 26, self.RULE_ifStatement)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 132
+            self.state = 159
             self.match(OOPsyParser.IF_KEYWORD)
-            self.state = 133
+            self.state = 160
             self.logicalExpression()
-            self.state = 134
+            self.state = 161
             self.block()
-            self.state = 137
+            self.state = 164
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==56:
-                self.state = 135
+            if _la==55:
+                self.state = 162
                 self.match(OOPsyParser.ELSE_KEYWORD)
-                self.state = 136
+                self.state = 163
                 self.block()
 
 
@@ -1155,24 +1424,134 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitLoopStatement" ):
                 listener.exitLoopStatement(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLoopStatement" ):
+                return visitor.visitLoopStatement(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def loopStatement(self):
 
         localctx = OOPsyParser.LoopStatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_loopStatement)
+        self.enterRule(localctx, 28, self.RULE_loopStatement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 139
+            self.state = 166
             self.match(OOPsyParser.REPEAT_KEYWORD)
-            self.state = 140
+            self.state = 167
             self.block()
-            self.state = 141
+            self.state = 168
             self.match(OOPsyParser.UNTIL_KEYWORD)
-            self.state = 142
+            self.state = 169
             self.logicalExpression()
-            self.state = 143
+            self.state = 170
+            self.match(OOPsyParser.SEMICOLON_SEPARATOR)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BreakStatementContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def BREAK_STATEMENT(self):
+            return self.getToken(OOPsyParser.BREAK_STATEMENT, 0)
+
+        def SEMICOLON_SEPARATOR(self):
+            return self.getToken(OOPsyParser.SEMICOLON_SEPARATOR, 0)
+
+        def getRuleIndex(self):
+            return OOPsyParser.RULE_breakStatement
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBreakStatement" ):
+                listener.enterBreakStatement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBreakStatement" ):
+                listener.exitBreakStatement(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBreakStatement" ):
+                return visitor.visitBreakStatement(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def breakStatement(self):
+
+        localctx = OOPsyParser.BreakStatementContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 30, self.RULE_breakStatement)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 172
+            self.match(OOPsyParser.BREAK_STATEMENT)
+            self.state = 173
+            self.match(OOPsyParser.SEMICOLON_SEPARATOR)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ContinueStatementContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def CONTINUE_STATEMENT(self):
+            return self.getToken(OOPsyParser.CONTINUE_STATEMENT, 0)
+
+        def SEMICOLON_SEPARATOR(self):
+            return self.getToken(OOPsyParser.SEMICOLON_SEPARATOR, 0)
+
+        def getRuleIndex(self):
+            return OOPsyParser.RULE_continueStatement
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterContinueStatement" ):
+                listener.enterContinueStatement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitContinueStatement" ):
+                listener.exitContinueStatement(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitContinueStatement" ):
+                return visitor.visitContinueStatement(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def continueStatement(self):
+
+        localctx = OOPsyParser.ContinueStatementContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 32, self.RULE_continueStatement)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 175
+            self.match(OOPsyParser.CONTINUE_STATEMENT)
+            self.state = 176
             self.match(OOPsyParser.SEMICOLON_SEPARATOR)
         except RecognitionException as re:
             localctx.exception = re
@@ -1214,29 +1593,35 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitBlock" ):
                 listener.exitBlock(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBlock" ):
+                return visitor.visitBlock(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def block(self):
 
         localctx = OOPsyParser.BlockContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_block)
+        self.enterRule(localctx, 34, self.RULE_block)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 145
+            self.state = 178
             self.match(OOPsyParser.LEFT_BRACE)
-            self.state = 149
+            self.state = 182
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 1356427929948524480) != 0) or _la==69 or _la==72:
-                self.state = 146
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 678636186029264832) != 0) or ((((_la - 68)) & ~0x3f) == 0 and ((1 << (_la - 68)) & 15) != 0):
+                self.state = 179
                 self.statement()
-                self.state = 151
+                self.state = 184
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 152
+            self.state = 185
             self.match(OOPsyParser.RIGHT_BRACE)
         except RecognitionException as re:
             localctx.exception = re
@@ -1277,27 +1662,33 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitParamList" ):
                 listener.exitParamList(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitParamList" ):
+                return visitor.visitParamList(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def paramList(self):
 
         localctx = OOPsyParser.ParamListContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_paramList)
+        self.enterRule(localctx, 36, self.RULE_paramList)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 154
+            self.state = 187
             self.match(OOPsyParser.IDENTIFIER)
-            self.state = 159
+            self.state = 192
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==39:
-                self.state = 155
+                self.state = 188
                 self.match(OOPsyParser.COMMA_SEPARATOR)
-                self.state = 156
+                self.state = 189
                 self.match(OOPsyParser.IDENTIFIER)
-                self.state = 161
+                self.state = 194
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1385,6 +1776,12 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitValueExpression" ):
                 listener.exitValueExpression(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitValueExpression" ):
+                return visitor.visitValueExpression(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
     def valueExpression(self, _p:int=0):
@@ -1392,121 +1789,121 @@ class OOPsyParser ( Parser ):
         _parentState = self.state
         localctx = OOPsyParser.ValueExpressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 30
-        self.enterRecursionRule(localctx, 30, self.RULE_valueExpression, _p)
+        _startState = 38
+        self.enterRecursionRule(localctx, 38, self.RULE_valueExpression, _p)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 176
+            self.state = 209
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
             if la_ == 1:
-                self.state = 163
+                self.state = 196
                 self.match(OOPsyParser.IDENTIFIER)
                 pass
 
             elif la_ == 2:
-                self.state = 164
+                self.state = 197
                 self.match(OOPsyParser.INT_LITERAL)
                 pass
 
             elif la_ == 3:
-                self.state = 165
+                self.state = 198
                 self.match(OOPsyParser.FLOAT_LITERAL)
                 pass
 
             elif la_ == 4:
-                self.state = 166
+                self.state = 199
                 self.match(OOPsyParser.STRING_LITERAL)
                 pass
 
             elif la_ == 5:
-                self.state = 167
+                self.state = 200
                 self.match(OOPsyParser.CHAR_LITERAL)
                 pass
 
             elif la_ == 6:
-                self.state = 168
+                self.state = 201
                 self.match(OOPsyParser.BOOL_LITERAL_TRUE)
                 pass
 
             elif la_ == 7:
-                self.state = 169
+                self.state = 202
                 self.match(OOPsyParser.BOOL_LITERAL_FALSE)
                 pass
 
             elif la_ == 8:
-                self.state = 170
+                self.state = 203
                 self.methodCall()
                 pass
 
             elif la_ == 9:
-                self.state = 171
+                self.state = 204
                 self.memberAccess()
                 pass
 
             elif la_ == 10:
-                self.state = 172
+                self.state = 205
                 self.match(OOPsyParser.LEFT_PARENTHESIS)
-                self.state = 173
+                self.state = 206
                 self.valueExpression(0)
-                self.state = 174
+                self.state = 207
                 self.match(OOPsyParser.RIGHT_PARENTHESIS)
                 pass
 
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 186
+            self.state = 219
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 184
+                    self.state = 217
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
+                    la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
                     if la_ == 1:
                         localctx = OOPsyParser.ValueExpressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_valueExpression)
-                        self.state = 178
+                        self.state = 211
                         if not self.precpred(self._ctx, 12):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 12)")
-                        self.state = 179
+                        self.state = 212
                         _la = self._input.LA(1)
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 114688) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 180
+                        self.state = 213
                         self.valueExpression(13)
                         pass
 
                     elif la_ == 2:
                         localctx = OOPsyParser.ValueExpressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_valueExpression)
-                        self.state = 181
+                        self.state = 214
                         if not self.precpred(self._ctx, 11):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 11)")
-                        self.state = 182
+                        self.state = 215
                         _la = self._input.LA(1)
                         if not(_la==12 or _la==13):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 183
+                        self.state = 216
                         self.valueExpression(12)
                         pass
 
              
-                self.state = 188
+                self.state = 221
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1518,6 +1915,146 @@ class OOPsyParser ( Parser ):
 
 
     class LogicalExpressionContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def logicalTerm(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(OOPsyParser.LogicalTermContext)
+            else:
+                return self.getTypedRuleContext(OOPsyParser.LogicalTermContext,i)
+
+
+        def OR_OPERATOR(self, i:int=None):
+            if i is None:
+                return self.getTokens(OOPsyParser.OR_OPERATOR)
+            else:
+                return self.getToken(OOPsyParser.OR_OPERATOR, i)
+
+        def getRuleIndex(self):
+            return OOPsyParser.RULE_logicalExpression
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLogicalExpression" ):
+                listener.enterLogicalExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLogicalExpression" ):
+                listener.exitLogicalExpression(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLogicalExpression" ):
+                return visitor.visitLogicalExpression(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def logicalExpression(self):
+
+        localctx = OOPsyParser.LogicalExpressionContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 40, self.RULE_logicalExpression)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 222
+            self.logicalTerm()
+            self.state = 227
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==31:
+                self.state = 223
+                self.match(OOPsyParser.OR_OPERATOR)
+                self.state = 224
+                self.logicalTerm()
+                self.state = 229
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class LogicalTermContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def logicalFactor(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(OOPsyParser.LogicalFactorContext)
+            else:
+                return self.getTypedRuleContext(OOPsyParser.LogicalFactorContext,i)
+
+
+        def AND_OPERATOR(self, i:int=None):
+            if i is None:
+                return self.getTokens(OOPsyParser.AND_OPERATOR)
+            else:
+                return self.getToken(OOPsyParser.AND_OPERATOR, i)
+
+        def getRuleIndex(self):
+            return OOPsyParser.RULE_logicalTerm
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLogicalTerm" ):
+                listener.enterLogicalTerm(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLogicalTerm" ):
+                listener.exitLogicalTerm(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLogicalTerm" ):
+                return visitor.visitLogicalTerm(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def logicalTerm(self):
+
+        localctx = OOPsyParser.LogicalTermContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 42, self.RULE_logicalTerm)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 230
+            self.logicalFactor()
+            self.state = 235
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==30:
+                self.state = 231
+                self.match(OOPsyParser.AND_OPERATOR)
+                self.state = 232
+                self.logicalFactor()
+                self.state = 237
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class LogicalFactorContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1549,42 +2086,75 @@ class OOPsyParser ( Parser ):
         def GREATER_EQ_OPERATOR(self):
             return self.getToken(OOPsyParser.GREATER_EQ_OPERATOR, 0)
 
+        def LEFT_PARENTHESIS(self):
+            return self.getToken(OOPsyParser.LEFT_PARENTHESIS, 0)
+
+        def logicalExpression(self):
+            return self.getTypedRuleContext(OOPsyParser.LogicalExpressionContext,0)
+
+
+        def RIGHT_PARENTHESIS(self):
+            return self.getToken(OOPsyParser.RIGHT_PARENTHESIS, 0)
+
         def getRuleIndex(self):
-            return OOPsyParser.RULE_logicalExpression
+            return OOPsyParser.RULE_logicalFactor
 
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLogicalExpression" ):
-                listener.enterLogicalExpression(self)
+            if hasattr( listener, "enterLogicalFactor" ):
+                listener.enterLogicalFactor(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLogicalExpression" ):
-                listener.exitLogicalExpression(self)
+            if hasattr( listener, "exitLogicalFactor" ):
+                listener.exitLogicalFactor(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLogicalFactor" ):
+                return visitor.visitLogicalFactor(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
 
-    def logicalExpression(self):
+    def logicalFactor(self):
 
-        localctx = OOPsyParser.LogicalExpressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 32, self.RULE_logicalExpression)
+        localctx = OOPsyParser.LogicalFactorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 44, self.RULE_logicalFactor)
         self._la = 0 # Token type
         try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 189
-            self.valueExpression(0)
-            self.state = 192
+            self.state = 247
             self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 1056964608) != 0):
-                self.state = 190
-                _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1056964608) != 0)):
-                    self._errHandler.recoverInline(self)
-                else:
-                    self._errHandler.reportMatch(self)
-                    self.consume()
-                self.state = 191
+            la_ = self._interp.adaptivePredict(self._input,19,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 238
                 self.valueExpression(0)
+                self.state = 241
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & 1056964608) != 0):
+                    self.state = 239
+                    _la = self._input.LA(1)
+                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1056964608) != 0)):
+                        self._errHandler.recoverInline(self)
+                    else:
+                        self._errHandler.reportMatch(self)
+                        self.consume()
+                    self.state = 240
+                    self.valueExpression(0)
+
+
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 243
+                self.match(OOPsyParser.LEFT_PARENTHESIS)
+                self.state = 244
+                self.logicalExpression()
+                self.state = 245
+                self.match(OOPsyParser.RIGHT_PARENTHESIS)
+                pass
 
 
         except RecognitionException as re:
@@ -1627,31 +2197,37 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitAnyExpression" ):
                 listener.exitAnyExpression(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAnyExpression" ):
+                return visitor.visitAnyExpression(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def anyExpression(self):
 
         localctx = OOPsyParser.AnyExpressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 34, self.RULE_anyExpression)
+        self.enterRule(localctx, 46, self.RULE_anyExpression)
         try:
-            self.state = 200
+            self.state = 255
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [6, 7, 8, 9, 10, 11, 34, 60, 72]:
+            if token in [6, 7, 8, 9, 10, 11, 34, 59, 71]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 194
+                self.state = 249
                 self.valueExpression(0)
                 pass
-            elif token in [54]:
+            elif token in [53]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 195
+                self.state = 250
                 self.match(OOPsyParser.PRINT_KEYWORD)
-                self.state = 196
+                self.state = 251
                 self.match(OOPsyParser.LEFT_PARENTHESIS)
-                self.state = 197
+                self.state = 252
                 self.valueExpression(0)
-                self.state = 198
+                self.state = 253
                 self.match(OOPsyParser.RIGHT_PARENTHESIS)
                 pass
             else:
@@ -1703,33 +2279,39 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitMethodCall" ):
                 listener.exitMethodCall(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitMethodCall" ):
+                return visitor.visitMethodCall(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def methodCall(self):
 
         localctx = OOPsyParser.MethodCallContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 36, self.RULE_methodCall)
+        self.enterRule(localctx, 48, self.RULE_methodCall)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 202
+            self.state = 257
             self.match(OOPsyParser.IDENTIFIER)
-            self.state = 203
+            self.state = 258
             self.match(OOPsyParser.DOT_SEPARATOR)
-            self.state = 204
+            self.state = 259
             self.match(OOPsyParser.IDENTIFIER)
-            self.state = 205
+            self.state = 260
             self.match(OOPsyParser.LEFT_PARENTHESIS)
-            self.state = 207
+            self.state = 262
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 1152921521786720192) != 0) or _la==72:
-                self.state = 206
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 576460769483296704) != 0) or _la==71:
+                self.state = 261
                 self.argumentList()
 
 
-            self.state = 209
+            self.state = 264
             self.match(OOPsyParser.RIGHT_PARENTHESIS)
         except RecognitionException as re:
             localctx.exception = re
@@ -1771,27 +2353,33 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitArgumentList" ):
                 listener.exitArgumentList(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitArgumentList" ):
+                return visitor.visitArgumentList(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def argumentList(self):
 
         localctx = OOPsyParser.ArgumentListContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 38, self.RULE_argumentList)
+        self.enterRule(localctx, 50, self.RULE_argumentList)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 211
+            self.state = 266
             self.valueExpression(0)
-            self.state = 216
+            self.state = 271
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==39:
-                self.state = 212
+                self.state = 267
                 self.match(OOPsyParser.COMMA_SEPARATOR)
-                self.state = 213
+                self.state = 268
                 self.valueExpression(0)
-                self.state = 218
+                self.state = 273
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1834,26 +2422,32 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitMemberAccess" ):
                 listener.exitMemberAccess(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitMemberAccess" ):
+                return visitor.visitMemberAccess(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def memberAccess(self):
 
         localctx = OOPsyParser.MemberAccessContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 40, self.RULE_memberAccess)
+        self.enterRule(localctx, 52, self.RULE_memberAccess)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 219
+            self.state = 274
             _la = self._input.LA(1)
-            if not(_la==60 or _la==72):
+            if not(_la==59 or _la==71):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-            self.state = 220
+            self.state = 275
             self.match(OOPsyParser.DOT_SEPARATOR)
-            self.state = 221
+            self.state = 276
             self.match(OOPsyParser.IDENTIFIER)
         except RecognitionException as re:
             localctx.exception = re
@@ -1900,19 +2494,25 @@ class OOPsyParser ( Parser ):
             if hasattr( listener, "exitTypeName" ):
                 listener.exitTypeName(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitTypeName" ):
+                return visitor.visitTypeName(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
     def typeName(self):
 
         localctx = OOPsyParser.TypeNameContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 42, self.RULE_typeName)
+        self.enterRule(localctx, 54, self.RULE_typeName)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 223
+            self.state = 278
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 62) != 0) or _la==72):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 62) != 0) or _la==71):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1930,7 +2530,7 @@ class OOPsyParser ( Parser ):
     def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
         if self._predicates == None:
             self._predicates = dict()
-        self._predicates[15] = self.valueExpression_sempred
+        self._predicates[19] = self.valueExpression_sempred
         pred = self._predicates.get(ruleIndex, None)
         if pred is None:
             raise Exception("No predicate with index:" + str(ruleIndex))

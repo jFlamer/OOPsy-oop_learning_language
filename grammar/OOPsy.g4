@@ -12,12 +12,21 @@ statement
     | printStatement
     | expressionStatement
     | createStatement
+    | breakStatement
+    | continueStatement
     ;
 
 mainMethod      : METHOD_KEYWORD MAIN_KEYWORD LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
-classDecl       : CLASS_KEYWORD IDENTIFIER (INHERITS_KEYWORD IDENTIFIER)? LEFT_BRACE statement* RIGHT_BRACE ;
+classDecl       : CLASS_KEYWORD IDENTIFIER (INHERITS_KEYWORD IDENTIFIER)? LEFT_BRACE classElement* RIGHT_BRACE ;
+classElement
+    : attributeDecl
+    | methodDecl
+    | constructorDecl
+    ;
 methodDecl      : METHOD_KEYWORD IDENTIFIER LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
 attributeDecl   : HAS_ATTRIBUTE_KEYWORD IDENTIFIER COLON_SEPARATOR typeName SEMICOLON_SEPARATOR ;
+constructorDecl : CONSTRUCTOR_KEYWORD LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
+
 
 assignment      : (IDENTIFIER | memberAccess) ASSIGNMENT_OPERATOR valueExpression SEMICOLON_SEPARATOR ;
 returnStatement : RETURN_STATEMENT valueExpression? SEMICOLON_SEPARATOR ;
@@ -27,6 +36,8 @@ createStatement : CREATE_KEYWORD IDENTIFIER OF_STATEMENT IDENTIFIER SEMICOLON_SE
 
 ifStatement     : IF_KEYWORD logicalExpression block (ELSE_KEYWORD block)? ;
 loopStatement   : REPEAT_KEYWORD block UNTIL_KEYWORD logicalExpression SEMICOLON_SEPARATOR ;
+breakStatement  : BREAK_STATEMENT SEMICOLON_SEPARATOR ;
+continueStatement   : CONTINUE_STATEMENT SEMICOLON_SEPARATOR ;
 
 block           : LEFT_BRACE statement* RIGHT_BRACE ;
 
@@ -48,7 +59,16 @@ valueExpression
     ;
 
 logicalExpression
+    : logicalTerm (OR_OPERATOR logicalTerm)*
+    ;
+
+logicalTerm
+    : logicalFactor (AND_OPERATOR logicalFactor)*
+    ;
+
+logicalFactor
     : valueExpression (('==' | '!=' | '<' | '>' | '<=' | '>=') valueExpression)?
+    | LEFT_PARENTHESIS logicalExpression RIGHT_PARENTHESIS
     ;
 
 
@@ -131,7 +151,6 @@ INHERITS_KEYWORD       : 'inherits';
 HAS_ATTRIBUTE_KEYWORD  : 'has';
 METHOD_KEYWORD         : 'method';
 CONSTRUCTOR_KEYWORD    : 'constructor';
-END_STATEMENT          : 'end';
 CREATE_KEYWORD         : 'create';
 OF_STATEMENT           : 'of';
 PRINT_KEYWORD          : 'print';

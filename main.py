@@ -2,6 +2,7 @@ from antlr4 import *
 from grammar.OOPsyLexer import OOPsyLexer
 from grammar.OOPsyParser import OOPsyParser
 from tree_printer import print_pretty_tree
+from interpreter import Interpreter
 
 
 def main():
@@ -29,6 +30,10 @@ def main():
 
     print("🦄 Pretty Printed Parser Parser Tree")
     print_pretty_tree(tree)
+
+    print("Interpreter output:")
+    interpreter = Interpreter()
+    interpreter.visit(tree)
 
 
 if __name__ == "__main__":
