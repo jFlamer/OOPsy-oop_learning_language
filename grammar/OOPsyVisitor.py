@@ -94,6 +94,11 @@ class OOPsyVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by OOPsyParser#superCallStatement.
+    def visitSuperCallStatement(self, ctx:OOPsyParser.SuperCallStatementContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by OOPsyParser#block.
     def visitBlock(self, ctx:OOPsyParser.BlockContext):
         return self.visitChildren(ctx)
@@ -101,6 +106,11 @@ class OOPsyVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by OOPsyParser#paramList.
     def visitParamList(self, ctx:OOPsyParser.ParamListContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by OOPsyParser#typedParam.
+    def visitTypedParam(self, ctx:OOPsyParser.TypedParamContext):
         return self.visitChildren(ctx)
 
 

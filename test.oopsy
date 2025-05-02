@@ -1,0 +1,43 @@
+class Person {
+    has name: string;
+    has age: int;
+
+    constructor(name: string, age: int) {
+        self.name = name;
+        self.age = age;
+    }
+
+    method introduce() {
+        print("Hi, my name is " + self.name);
+    }
+}
+
+class Student inherits Person {
+    has isGraduated: bool;
+
+    constructor(name: string, age: int, isGraduated: bool) {
+        super(name, age);
+        self.isGraduated = isGraduated;
+    }
+
+    method status() {
+        if self.isGraduated {
+            print(self.name + " has graduated.");
+        } else {
+            print(self.name + " is still studying.");
+        }
+    }
+}
+
+method main() {
+    create alice of Student("Alice", 22, false);
+    alice.introduce();
+    alice.status();
+
+    repeat {
+        print("Age: " + alice.age);
+        alice.age = alice.age + 1;
+    } until alice.age > 24;
+
+    return;
+}

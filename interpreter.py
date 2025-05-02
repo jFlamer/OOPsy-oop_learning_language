@@ -8,6 +8,15 @@ class ClassDef:
         self.attributes = {}
         self.methods = {}
 
+    def get_attr(self, name):
+        if name in self.attributes:
+            return None
+        elif self.superclass:
+            return self.superclass.get_attr(name)
+        else:
+            raise Exception(f"Atrybut '{name}' nie istnieje w klasie '{self.name}' ani w jej nadklasie")
+
+
 class Instance:
     def __init__(self, class_def):
         self.class_def = class_def
@@ -72,24 +81,37 @@ class Interpreter(OOPsyBaseVisitor):
         class_def = self.classes.get(class_name)
         if not class_def:
             raise Exception(f"Nieznana klasa '{class_name}'")
-        self.variables[var_name] = Instance(class_def)
+        instance = Instance(class_def)
+
+        if ctx.argumentList():
+            args = [self.visit(arg) for arg in ctx.argumentList().valueExpression()]
+            self.set_constructor_attributes(instance, args)
+
+        self.variables[var_name] = instance
 
     def visitAssignment(self, ctx):
         target = ctx.getChild(0)
         value = self.visit(ctx.valueExpression())
-        if target.getChildCount() == 1:  # zmienna
+
+        if target.getChildCount() == 1:  # zwykła zmienna
             var_name = target.getText()
             if var_name in self.variables:
                 self.variables[var_name] = value
             else:
                 raise Exception(f"Nieznana zmienna '{var_name}'")
-        else:  # memberAccess
+        else:  # przypisanie do pola obiektu
             obj_name = target.getChild(0).getText()
             attr_name = target.getChild(2).getText()
-            obj = self.variables.get(obj_name)
-            if not obj:
-                raise Exception(f"Nieznany obiekt '{obj_name}'")
-            obj.set_attr(attr_name, value)
+
+            if obj_name == "self":
+                if self.current_instance is None:
+                    raise Exception("Użycie 'self' poza metodą")
+                self.current_instance.set_attr(attr_name, value)
+            else:
+                obj = self.variables.get(obj_name)
+                if not obj:
+                    raise Exception(f"Nieznany obiekt '{obj_name}'")
+                obj.set_attr(attr_name, value)
 
     def visitPrintStatement(self, ctx):
         value = self.visit(ctx.valueExpression())
@@ -132,6 +154,12 @@ class Interpreter(OOPsyBaseVisitor):
     def visitMemberAccess(self, ctx):
         obj_name = ctx.getChild(0).getText()
         attr_name = ctx.getChild(2).getText()
+
+        if obj_name == "self":
+            if self.current_instance is None:
+                raise Exception("Użycie 'self' poza metodą")
+            return self.current_instance.get_attr(attr_name)
+
         obj = self.variables.get(obj_name)
         if not obj:
             raise Exception(f"Nieznany obiekt '{obj_name}'")
@@ -190,6 +218,8 @@ class Interpreter(OOPsyBaseVisitor):
 
     def evaluate_binary_operation(self, left, op, right):
         if op == '+':
+            if isinstance(left, str) or isinstance(right, str):
+                return str(left) + str(right)
             return left + right
         if op == '-':
             return left - right
@@ -215,3 +245,16 @@ class Interpreter(OOPsyBaseVisitor):
         if op == '>=':
             return left >= right
         raise Exception(f"Nieznany operator porównania '{op}'")
+
+    def set_constructor_attributes(self, instance, args):
+        def collect_attributes(class_def):
+            attrs = []
+            if class_def.superclass:
+                attrs.extend(collect_attributes(class_def.superclass))
+            attrs.extend(list(class_def.attributes.keys()))
+            return attrs
+
+        attr_names = collect_attributes(instance.class_def)
+        for i, value in enumerate(args):
+            if i < len(attr_names):
+                instance.set_attr(attr_names[i], value)

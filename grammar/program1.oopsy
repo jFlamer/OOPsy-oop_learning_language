@@ -1,0 +1,12 @@
+class Dog {
+    has name: string;
+    method speak() {
+        print("woof");
+    }
+}
+
+method main() {
+    create d of Dog;
+    d.name = "Burek";
+    d.speak();
+}

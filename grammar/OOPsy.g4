@@ -14,6 +14,7 @@ statement
     | createStatement
     | breakStatement
     | continueStatement
+    | superCallStatement
     ;
 
 mainMethod      : METHOD_KEYWORD MAIN_KEYWORD LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
@@ -32,16 +33,20 @@ assignment      : (IDENTIFIER | memberAccess) ASSIGNMENT_OPERATOR valueExpressio
 returnStatement : RETURN_STATEMENT valueExpression? SEMICOLON_SEPARATOR ;
 expressionStatement : anyExpression SEMICOLON_SEPARATOR ;
 printStatement  : PRINT_KEYWORD LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS SEMICOLON_SEPARATOR ;
-createStatement : CREATE_KEYWORD IDENTIFIER OF_STATEMENT IDENTIFIER SEMICOLON_SEPARATOR ;
+createStatement : CREATE_KEYWORD IDENTIFIER OF_STATEMENT IDENTIFIER (LEFT_PARENTHESIS argumentList? RIGHT_PARENTHESIS)? SEMICOLON_SEPARATOR ;
 
 ifStatement     : IF_KEYWORD logicalExpression block (ELSE_KEYWORD block)? ;
 loopStatement   : REPEAT_KEYWORD block UNTIL_KEYWORD logicalExpression SEMICOLON_SEPARATOR ;
 breakStatement  : BREAK_STATEMENT SEMICOLON_SEPARATOR ;
 continueStatement   : CONTINUE_STATEMENT SEMICOLON_SEPARATOR ;
+superCallStatement
+    : 'super' '(' argumentList? ')' ';'
+    ;
 
 block           : LEFT_BRACE statement* RIGHT_BRACE ;
 
-paramList       : IDENTIFIER (COMMA_SEPARATOR IDENTIFIER)* ;
+paramList       : typedParam (COMMA_SEPARATOR typedParam)* ;
+typedParam      : IDENTIFIER COLON_SEPARATOR typeName ;
 
 valueExpression
     : valueExpression ('*' | '/' | '%') valueExpression

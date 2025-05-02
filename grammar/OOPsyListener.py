@@ -161,6 +161,15 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by OOPsyParser#superCallStatement.
+    def enterSuperCallStatement(self, ctx:OOPsyParser.SuperCallStatementContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#superCallStatement.
+    def exitSuperCallStatement(self, ctx:OOPsyParser.SuperCallStatementContext):
+        pass
+
+
     # Enter a parse tree produced by OOPsyParser#block.
     def enterBlock(self, ctx:OOPsyParser.BlockContext):
         pass
@@ -176,6 +185,15 @@ class OOPsyListener(ParseTreeListener):
 
     # Exit a parse tree produced by OOPsyParser#paramList.
     def exitParamList(self, ctx:OOPsyParser.ParamListContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#typedParam.
+    def enterTypedParam(self, ctx:OOPsyParser.TypedParamContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#typedParam.
+    def exitTypedParam(self, ctx:OOPsyParser.TypedParamContext):
         pass
 
 

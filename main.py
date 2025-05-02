@@ -3,17 +3,31 @@ from grammar.OOPsyLexer import OOPsyLexer
 from grammar.OOPsyParser import OOPsyParser
 from tree_printer import print_pretty_tree
 from interpreter import Interpreter
+from javaCompiler import JavaCompiler
 
+def compile_oopsy_to_java(file_path: str, output_path: str):
+    input_stream = FileStream(file_path, encoding="utf-8")
+    lexer = OOPsyLexer(input_stream)
+    token_stream = CommonTokenStream(lexer)
+    parser = OOPsyParser(token_stream)
+    tree = parser.program()
+
+    compiler = JavaCompiler()
+    java_code = compiler.compile(tree)
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(java_code)
+    print(f"Wygenerowano plik: {output_path}")
 
 def main():
     # Wczytaj kod z pliku
-    with open("program.oopsy", "rb") as f:
+    with open("test.oopsy", "rb") as f:
         content = f.read()
         print("Raw bytes:", content)
 
-    with open("program.oopsy", encoding="utf-8") as f:
+    with open("test.oopsy", encoding="utf-8") as f:
         print("Text:\n", f.read())
-    input_stream = FileStream("program.oopsy", encoding='utf-8')
+    input_stream = FileStream("test.oopsy", encoding='utf-8')
 
     # Tokenizacja
     lexer = OOPsyLexer(input_stream)
@@ -34,6 +48,8 @@ def main():
     print("Interpreter output:")
     interpreter = Interpreter()
     interpreter.visit(tree)
+
+    compile_oopsy_to_java("test.oopsy", "CompiledFile.java")
 
 
 if __name__ == "__main__":
