@@ -1,0 +1,25 @@
+class Person {
+    public has name: string;
+    private has age: int;
+
+    public method introduce() {
+        print("Hi, my name is " + self.name);
+    }
+
+    public method setAge(newAge: int) {
+        self.age = newAge;
+    }
+
+    public method showAge() {
+        print("I'm " + self.age);
+    }
+}
+
+method main() {
+    create p of Person();
+    p.name = "Alice";
+    p.setAge(30);
+    p.introduce();
+    p.showAge();
+    // p.age = 100; // powinno być niedozwolone!
+}

@@ -197,6 +197,15 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by OOPsyParser#commentStatement.
+    def enterCommentStatement(self, ctx:OOPsyParser.CommentStatementContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#commentStatement.
+    def exitCommentStatement(self, ctx:OOPsyParser.CommentStatementContext):
+        pass
+
+
     # Enter a parse tree produced by OOPsyParser#block.
     def enterBlock(self, ctx:OOPsyParser.BlockContext):
         pass

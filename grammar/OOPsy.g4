@@ -17,6 +17,7 @@ statement
     | continueStatement
     | superCallStatement
     | inputStatement
+    | commentStatement
     ;
 
 mainMethod      : METHOD_KEYWORD MAIN_KEYWORD LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
@@ -45,12 +46,9 @@ loopStatement   : REPEAT_KEYWORD block UNTIL_KEYWORD logicalExpression SEMICOLON
 forStatement    : FOR_KEYWORD IDENTIFIER IN_KEYWORD valueExpression block ;
 breakStatement  : BREAK_STATEMENT SEMICOLON_SEPARATOR ;
 continueStatement   : CONTINUE_STATEMENT SEMICOLON_SEPARATOR ;
-superCallStatement
-    : SUPER_CALL LEFT_PARENTHESIS argumentList? RIGHT_PARENTHESIS SEMICOLON_SEPARATOR
-    ;
-inputStatement
-    : INPUT_STATEMENT LEFT_PARENTHESIS STRING_LITERAL RIGHT_PARENTHESIS ASSIGNMENT_OPERATOR (IDENTIFIER | memberAccess) SEMICOLON_SEPARATOR
-    ;
+superCallStatement  : SUPER_CALL LEFT_PARENTHESIS argumentList? RIGHT_PARENTHESIS SEMICOLON_SEPARATOR ;
+inputStatement  : INPUT_STATEMENT LEFT_PARENTHESIS STRING_LITERAL RIGHT_PARENTHESIS ASSIGNMENT_OPERATOR (IDENTIFIER | memberAccess) SEMICOLON_SEPARATOR ;
+commentStatement: LINE_COMMENT ;
 
 block           : LEFT_BRACE statement* RIGHT_BRACE ;
 
@@ -156,7 +154,7 @@ COLON_SEPARATOR      : ':';
 SEMICOLON_SEPARATOR  : ';';
 
 // === Comments and Whitespace ===
-LINE_COMMENT  : '//' ~[\r\n]* -> skip;
+LINE_COMMENT  : '//' ~[\r\n]* ;
 BLOCK_COMMENT : '/*' .*? '*/' -> skip;
 WHITESPACE    : [ \t\r\n]+ -> skip;
 

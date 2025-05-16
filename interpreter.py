@@ -16,27 +16,87 @@ class ClassDef:
         else:
             raise Exception(f"Atrybut '{name}' nie istnieje w klasie '{self.name}' ani w jej nadklasie")
 
+    def get_attr_modifier(self, name):
+        if name in self.attributes:
+            return self.attributes[name][0]
+        elif self.superclass:
+            return self.superclass.get_attr_modifier(name)
+        else:
+            return None
+
+    def get_method_modifier(self, name):
+        if name in self.methods:
+            return self.methods[name][0]
+        elif self.superclass:
+            return self.superclass.get_method_modifier(name)
+        else:
+            return None
+
 
 class Instance:
     def __init__(self, class_def):
         self.class_def = class_def
         self.fields = {}
 
-    def get_attr(self, name):
+    def get_attr(self, name, requester=None):
         if name in self.fields:
+            modifier = self.class_def.get_attr_modifier(name)
+            if modifier == "private" and requester != self:
+                raise Exception(f"Nie można odczytać prywatnego atrybutu '{name}' spoza klasy '{self.class_def.name}'")
             return self.fields[name]
-        elif name in self.class_def.attributes:
-            return None
-        elif self.class_def.superclass:
-            return self.class_def.superclass.get_attr(name)
-        else:
-            raise Exception(f"Brak atrybutu '{name}' w obiekcie '{self.class_def.name}'")
 
-    def set_attr(self, name, value):
-        if name in self.class_def.attributes or self.class_def.superclass:
+        if name in self.class_def.attributes:
+            modifier = self.class_def.get_attr_modifier(name)
+            if modifier == "private" and requester != self:
+                raise Exception(f"Nie można odczytać prywatnego atrybutu '{name}' spoza klasy '{self.class_def.name}'")
+            return None
+
+        if self.class_def.superclass:
+            return self.class_def.superclass.get_attr(name, requester)
+
+        raise Exception(f"Brak atrybutu '{name}' w obiekcie '{self.class_def.name}'")
+
+    # def set_attr(self, name, value, requester=None):
+    #     if name in self.class_def.attributes:
+    #         modifier = self.class_def.get_attr_modifier(name)
+    #         if modifier == "private" and requester != self:
+    #             raise Exception(
+    #                 f"Nie można zmodyfikować prywatnego atrybutu '{name}' spoza klasy '{self.class_def.name}'")
+    #         self.fields[name] = value
+    #     elif self.class_def.superclass:
+    #         self.class_def.superclass.set_attr(name, value, requester)
+    #     else:
+    #         raise Exception(f"Próba ustawienia nieistniejącego atrybutu '{name}'")
+    def set_attr(self, name, value, requester=None):
+        if name in self.class_def.attributes:
+            modifier = self.class_def.get_attr_modifier(name)
+            if modifier == "private" and requester != self:
+                raise Exception(
+                    f"Nie można zmodyfikować prywatnego atrybutu '{name}' spoza klasy '{self.class_def.name}'")
             self.fields[name] = value
+        elif self.class_def.superclass:
+            super_instance = Instance(self.class_def.superclass)
+            super_instance.fields = self.fields
+            super_instance.set_attr(name, value, requester)
         else:
             raise Exception(f"Próba ustawienia nieistniejącego atrybutu '{name}'")
+
+    # Basic version
+    # def get_attr(self, name):
+    #     if name in self.fields:
+    #         return self.fields[name]
+    #     elif name in self.class_def.attributes:
+    #         return None
+    #     elif self.class_def.superclass:
+    #         return self.class_def.superclass.get_attr(name)
+    #     else:
+    #         raise Exception(f"Brak atrybutu '{name}' w obiekcie '{self.class_def.name}'")
+    #
+    # def set_attr(self, name, value):
+    #     if name in self.class_def.attributes or self.class_def.superclass:
+    #         self.fields[name] = value
+    #     else:
+    #         raise Exception(f"Próba ustawienia nieistniejącego atrybutu '{name}'")
 
 class Interpreter(OOPsyBaseVisitor):
     def __init__(self):
@@ -61,11 +121,15 @@ class Interpreter(OOPsyBaseVisitor):
         class_def = ClassDef(name, superclass)
         for element in ctx.classElement():
             if element.attributeDecl():
-                attr_name = element.attributeDecl().IDENTIFIER().getText()
-                class_def.attributes[attr_name] = None
+                attr_ctx = element.attributeDecl()
+                attr_name = attr_ctx.IDENTIFIER().getText()
+                modifier = attr_ctx.accessModifier().getText() if attr_ctx.accessModifier() else "public"
+                class_def.attributes[attr_name] = (modifier, None)
             elif element.methodDecl():
-                method_name = element.methodDecl().IDENTIFIER().getText()
-                class_def.methods[method_name] = element.methodDecl()
+                method_ctx = element.methodDecl()
+                method_name = method_ctx.IDENTIFIER().getText()
+                modifier = method_ctx.accessModifier().getText() if method_ctx.accessModifier() else "public"
+                class_def.methods[method_name] = (modifier, method_ctx)
         self.classes[name] = class_def
 
     def visitMainMethod(self, ctx):
@@ -106,7 +170,7 @@ class Interpreter(OOPsyBaseVisitor):
             if obj_name == "self":
                 if self.current_instance is None:
                     raise Exception("Użycie 'self' poza metodą")
-                self.current_instance.set_attr(attr_name, value)
+                self.current_instance.set_attr(attr_name, value, requester=self.current_instance)
             else:
                 obj = self.variables.get(obj_name)
                 if not obj:
@@ -141,15 +205,37 @@ class Interpreter(OOPsyBaseVisitor):
         obj = self.variables.get(obj_name)
         if not obj:
             raise Exception(f"Nieznany obiekt '{obj_name}'")
-        method = obj.class_def.methods.get(method_name)
-        if not method and obj.class_def.superclass:
-            method = obj.class_def.superclass.methods.get(method_name)
-        if not method:
+        method_entry = obj.class_def.methods.get(method_name)
+        if not method_entry and obj.class_def.superclass:
+            method_entry = obj.class_def.superclass.methods.get(method_name)
+        if not method_entry:
             raise Exception(f"Obiekt '{obj_name}' nie posiada metody '{method_name}()'")
+
+        modifier, method_ctx = method_entry
+        if modifier == "private" and self.current_instance != obj:
+            raise Exception(f"Metoda '{method_name}' jest prywatna i nie może być wywołana spoza klasy")
+
+        param_names = []
+        if method_ctx.paramList():
+            for param in method_ctx.paramList().typedParam():
+                param_names.append(param.IDENTIFIER().getText())
+
+        arg_values = []
+        if ctx.argumentList():
+            arg_values = [self.visit(arg) for arg in ctx.argumentList().valueExpression()]
+
+        if len(param_names) != len(arg_values):
+            raise Exception(f"Zła liczba argumentów dla metody '{method_name}'")
+
+        old_vars = self.variables.copy()
+        for name, value in zip(param_names, arg_values):
+            self.variables[name] = value
+
         saved_instance = self.current_instance
         self.current_instance = obj
-        self.visit(method.block())
+        self.visit(method_ctx.block())
         self.current_instance = saved_instance
+        self.variables = old_vars
 
     def visitMemberAccess(self, ctx):
         obj_name = ctx.getChild(0).getText()
@@ -158,7 +244,7 @@ class Interpreter(OOPsyBaseVisitor):
         if obj_name == "self":
             if self.current_instance is None:
                 raise Exception("Użycie 'self' poza metodą")
-            return self.current_instance.get_attr(attr_name)
+            return self.current_instance.get_attr(attr_name, requester=self.current_instance)
 
         obj = self.variables.get(obj_name)
         if not obj:
@@ -264,4 +350,7 @@ class Interpreter(OOPsyBaseVisitor):
     def visitInputCall(self, ctx):
         prompt = self.visit(ctx.valueExpression())
         return input(prompt)
+
+    def visitCommentStatement(self, ctx):
+        pass
 

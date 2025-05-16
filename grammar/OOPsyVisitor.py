@@ -114,6 +114,11 @@ class OOPsyVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by OOPsyParser#commentStatement.
+    def visitCommentStatement(self, ctx:OOPsyParser.CommentStatementContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by OOPsyParser#block.
     def visitBlock(self, ctx:OOPsyParser.BlockContext):
         return self.visitChildren(ctx)

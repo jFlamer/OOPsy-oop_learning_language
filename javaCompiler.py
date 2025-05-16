@@ -44,18 +44,20 @@ class JavaCompiler(OOPsyBaseVisitor):
 
     def visitAttributeDecl(self, ctx):
         name = ctx.IDENTIFIER().getText()
+        modifier = ctx.accessModifier().getText() if ctx.accessModifier() else "public"
         type_ = TYPE_MAP.get(ctx.typeName().getText(), ctx.typeName().getText())
 
         if self.current_class not in self.class_fields:
             self.class_fields[self.current_class] = {}
         self.class_fields[self.current_class][name] = type_
 
-        self.output.append(f"    public {type_} {name};")
+        self.output.append(f"    {modifier} {type_} {name};")
 
     def visitMethodDecl(self, ctx):
         name = ctx.IDENTIFIER().getText()
+        modifier = ctx.accessModifier().getText() if ctx.accessModifier() else "public"
         params = self.visit(ctx.paramList()) if ctx.paramList() else ""
-        self.output.append(f"    public void {name}({params}) {{")
+        self.output.append(f"    {modifier} void {name}({params}) {{")
         self.visit(ctx.block())
         self.output.append("    }")
 
@@ -257,9 +259,7 @@ class JavaCompiler(OOPsyBaseVisitor):
     def visitMethodCall(self, ctx):
         obj = ctx.IDENTIFIER(0).getText()
         method = ctx.IDENTIFIER(1).getText()
-        args = ""
-        if ctx.argumentList():
-            args = self.visit(ctx.argumentList())
+        args = self.visit(ctx.argumentList()) if ctx.argumentList() else ""
         return f"{obj}.{method}({args})"
 
     def visitArgumentList(self, ctx):
@@ -281,6 +281,10 @@ class JavaCompiler(OOPsyBaseVisitor):
     def visitSuperCallStatement(self, ctx):
         args = self.visit(ctx.argumentList()) if ctx.argumentList() else ""
         self.output.append(f"        super({args});")
+
+    def visitCommentStatement(self, ctx):
+        comment = ctx.LINE_COMMENT().getText()
+        self.output.append(f"        {comment}")
 
     def ensure_scanner_initialized(self):
         if "import java.util.Scanner;" not in self.output:
