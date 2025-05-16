@@ -206,6 +206,15 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by OOPsyParser#localVarDecl.
+    def enterLocalVarDecl(self, ctx:OOPsyParser.LocalVarDeclContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#localVarDecl.
+    def exitLocalVarDecl(self, ctx:OOPsyParser.LocalVarDeclContext):
+        pass
+
+
     # Enter a parse tree produced by OOPsyParser#block.
     def enterBlock(self, ctx:OOPsyParser.BlockContext):
         pass
@@ -239,6 +248,15 @@ class OOPsyListener(ParseTreeListener):
 
     # Exit a parse tree produced by OOPsyParser#valueExpression.
     def exitValueExpression(self, ctx:OOPsyParser.ValueExpressionContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#listLiteral.
+    def enterListLiteral(self, ctx:OOPsyParser.ListLiteralContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#listLiteral.
+    def exitListLiteral(self, ctx:OOPsyParser.ListLiteralContext):
         pass
 
 

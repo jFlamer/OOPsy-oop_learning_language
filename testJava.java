@@ -33,6 +33,10 @@ public class Main {
         System.out.println(("Age: " + alice.age));
         alice.age = (alice.age + 1);
         } while (!(alice.age > 24));
+        var numbers = java.util.Arrays.asList(1, 2, 3);
+        for (Object n : numbers) {
+        System.out.println(("Liczba: " + n));
+        }
         return;
     }
 }

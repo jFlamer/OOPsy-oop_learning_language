@@ -2,11 +2,13 @@ from grammar.OOPsyBaseVisitor import OOPsyBaseVisitor
 
 
 class ClassDef:
-    def __init__(self, name, superclass=None):
+    def __init__(self, name, superclass=None, is_abstract=False):
         self.name = name
         self.superclass = superclass
         self.attributes = {}
         self.methods = {}
+        self.abstract_methods = set()
+        self.is_abstract = is_abstract
 
     def get_attr(self, name):
         if name in self.attributes:
@@ -31,6 +33,13 @@ class ClassDef:
             return self.superclass.get_method_modifier(name)
         else:
             return None
+
+    def get_all_super_methods(self):
+        methods = {}
+        if self.superclass:
+            methods.update(self.superclass.get_all_super_methods())
+            methods.update(self.superclass.methods)
+        return methods
 
 
 class Instance:
@@ -118,19 +127,93 @@ class Interpreter(OOPsyBaseVisitor):
             superclass = self.classes.get(superclass_name)
             if superclass is None:
                 raise Exception(f"Brak klasy bazowej '{superclass_name}'")
-        class_def = ClassDef(name, superclass)
+
+        is_abstract = bool(ctx.ABSTRACT_KEYWORD())
+        class_def = ClassDef(name, superclass, is_abstract)
+
         for element in ctx.classElement():
             if element.attributeDecl():
                 attr_ctx = element.attributeDecl()
                 attr_name = attr_ctx.IDENTIFIER().getText()
                 modifier = attr_ctx.accessModifier().getText() if attr_ctx.accessModifier() else "public"
                 class_def.attributes[attr_name] = (modifier, None)
+
             elif element.methodDecl():
                 method_ctx = element.methodDecl()
                 method_name = method_ctx.IDENTIFIER().getText()
                 modifier = method_ctx.accessModifier().getText() if method_ctx.accessModifier() else "public"
-                class_def.methods[method_name] = (modifier, method_ctx)
+                is_abstract_method = bool(method_ctx.ABSTRACT_KEYWORD())
+                is_override = bool(method_ctx.OVERRIDE_KEYWORD())
+                is_final = bool(method_ctx.FINAL_KEYWORD())
+
+                # Pobranie metod z nadklasy
+                super_methods = class_def.get_all_super_methods()
+                overridden = method_name in super_methods
+
+                if is_override and not overridden:
+                    raise Exception(f"Metoda '{method_name}' oznaczona jako override, ale nie istnieje w nadklasie.")
+
+                if overridden:
+                    super_modifier, _ = super_methods[method_name]
+                    if super_modifier == "final":
+                        raise Exception(f"Nie można nadpisać finalnej metody '{method_name}'")
+
+                if is_abstract_method:
+                    if method_ctx.block():
+                        raise Exception(f"Abstrakcyjna metoda '{method_name}' nie może mieć ciała.")
+                    class_def.abstract_methods.add(method_name)
+                    class_def.methods[method_name] = ("abstract", None)
+                else:
+                    final_or_modifier = "final" if is_final else modifier
+                    class_def.methods[method_name] = (final_or_modifier, method_ctx)
+
+        inherited_abstracts = set()
+        if superclass:
+            inherited_abstracts |= superclass.abstract_methods
+
+        not_implemented = inherited_abstracts - set(class_def.methods.keys())
+        if not_implemented and not is_abstract:
+            raise Exception(f"Klasa '{name}' nie implementuje metod abstrakcyjnych: {', '.join(not_implemented)}")
+
         self.classes[name] = class_def
+
+    # def visitClassDecl(self, ctx):
+    #     name = ctx.IDENTIFIER(0).getText()
+    #     superclass = None
+    #     if ctx.INHERITS_KEYWORD():
+    #         superclass_name = ctx.IDENTIFIER(1).getText()
+    #         superclass = self.classes.get(superclass_name)
+    #         if superclass is None:
+    #             raise Exception(f"Brak klasy bazowej '{superclass_name}'")
+    #     is_abstract = bool(ctx.ABSTRACT_KEYWORD())
+    #     class_def = ClassDef(name, superclass)
+    #     for element in ctx.classElement():
+    #         if element.attributeDecl():
+    #             attr_ctx = element.attributeDecl()
+    #             attr_name = attr_ctx.IDENTIFIER().getText()
+    #             modifier = attr_ctx.accessModifier().getText() if attr_ctx.accessModifier() else "public"
+    #             class_def.attributes[attr_name] = (modifier, None)
+    #         elif element.methodDecl():
+    #             method_ctx = element.methodDecl()
+    #             method_name = method_ctx.IDENTIFIER().getText()
+    #             modifier = method_ctx.accessModifier().getText() if method_ctx.accessModifier() else "public"
+    #             if method_ctx.ABSTRACT_KEYWORD():
+    #                 if method_ctx.block():
+    #                     raise Exception(f"Abstrakcyjna metoda '{method_name}' nie może mieć ciała.")
+    #                 class_def.abstract_methods.add(method_name)
+    #                 class_def.methods[method_name] = (modifier, None)
+    #             else:
+    #                 class_def.methods[method_name] = (modifier, method_ctx)
+    #
+    #     inherited_abstracts = set()
+    #     if superclass:
+    #         inherited_abstracts |= superclass.abstract_methods
+    #
+    #     not_implemented = inherited_abstracts - set(class_def.methods.keys())
+    #     if not_implemented and not is_abstract:
+    #         raise Exception(f"Klasa '{name}' nie implementuje metod abstrakcyjnych: {', '.join(not_implemented)}")
+    #
+    #     self.classes[name] = class_def
 
     def visitMainMethod(self, ctx):
         self.visit(ctx.block())
@@ -145,6 +228,9 @@ class Interpreter(OOPsyBaseVisitor):
         class_def = self.classes.get(class_name)
         if not class_def:
             raise Exception(f"Nieznana klasa '{class_name}'")
+        if class_def.is_abstract:
+            raise Exception(f"Nie można tworzyć instancji klasy abstrakcyjnej '{class_name}'")
+
         instance = Instance(class_def)
 
         if ctx.argumentList():
@@ -193,6 +279,17 @@ class Interpreter(OOPsyBaseVisitor):
             self.visit(ctx.block())
             if self.visit(ctx.logicalExpression()):
                 break
+
+    def visitForStatement(self, ctx):
+        var_name = ctx.IDENTIFIER().getText()
+        iterable = self.visit(ctx.valueExpression())
+
+        if not isinstance(iterable, list):
+            raise Exception(f"Wyrażenie w pętli for musi być listą (otrzymano: {type(iterable).__name__})")
+
+        for item in iterable:
+            self.variables[var_name] = item
+            self.visit(ctx.block())
 
     # def visitReturnStatement(self, ctx):
     #     raise Exception("Instrukcja 'return' obsługiwana tylko w pełnym wykonaniu funkcji (do zaimplementowania)")
@@ -282,6 +379,8 @@ class Interpreter(OOPsyBaseVisitor):
             return self.visit(ctx.valueExpression(0))
         if ctx.inputCall():
             return self.visit(ctx.inputCall())
+        if ctx.listLiteral():
+            return self.visit(ctx.listLiteral())
 
     def visitLogicalExpression(self, ctx):
         result = self.visit(ctx.logicalTerm(0))
@@ -354,3 +453,10 @@ class Interpreter(OOPsyBaseVisitor):
     def visitCommentStatement(self, ctx):
         pass
 
+    def visitListLiteral(self, ctx):
+        return [self.visit(expr) for expr in ctx.valueExpression()]
+
+    def visitLocalVarDecl(self, ctx):
+        var_name = ctx.IDENTIFIER().getText()
+        value = self.visit(ctx.valueExpression())
+        self.variables[var_name] = value

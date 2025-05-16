@@ -1,0 +1,23 @@
+abstract class Animal {
+    abstract method speak();
+    final method info() {
+        print("I'm an animal");
+    }
+}
+
+class Dog inherits Animal {
+    override method speak() {
+        print("Woof!");
+    }
+
+    // Błąd – nie można nadpisać final
+    //override method info() {
+    //    print("Overridden info");
+    //}
+}
+
+method main() {
+    create d of Dog();
+    d.speak();
+    d.info();
+}

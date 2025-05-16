@@ -119,6 +119,11 @@ class OOPsyVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by OOPsyParser#localVarDecl.
+    def visitLocalVarDecl(self, ctx:OOPsyParser.LocalVarDeclContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by OOPsyParser#block.
     def visitBlock(self, ctx:OOPsyParser.BlockContext):
         return self.visitChildren(ctx)
@@ -136,6 +141,11 @@ class OOPsyVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by OOPsyParser#valueExpression.
     def visitValueExpression(self, ctx:OOPsyParser.ValueExpressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by OOPsyParser#listLiteral.
+    def visitListLiteral(self, ctx:OOPsyParser.ListLiteralContext):
         return self.visitChildren(ctx)
 
 

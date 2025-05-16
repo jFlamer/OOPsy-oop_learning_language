@@ -39,5 +39,10 @@ method main() {
         alice.age = alice.age + 1;
     } until alice.age > 24;
 
+    has numbers: list = [1, 2, 3];
+    for n in numbers do {
+        print("Liczba: " + n);
+    }
+
     return;
 }

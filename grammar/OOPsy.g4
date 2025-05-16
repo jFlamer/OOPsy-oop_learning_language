@@ -18,6 +18,7 @@ statement
     | superCallStatement
     | inputStatement
     | commentStatement
+    | localVarDecl
     ;
 
 mainMethod      : METHOD_KEYWORD MAIN_KEYWORD LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
@@ -27,7 +28,7 @@ classElement
     | methodDecl
     | constructorDecl
     ;
-methodDecl      : accessModifier? (OVERRIDE_KEYWORD | ABSTRACT_KEYWORD)? METHOD_KEYWORD IDENTIFIER LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS (block | SEMICOLON_SEPARATOR) ;
+methodDecl      : (accessModifier)? (ABSTRACT_KEYWORD)? (FINAL_KEYWORD)? OVERRIDE_KEYWORD? METHOD_KEYWORD IDENTIFIER LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS (block | SEMICOLON_SEPARATOR) ;
 attributeDecl   : accessModifier? HAS_ATTRIBUTE_KEYWORD IDENTIFIER COLON_SEPARATOR typeName SEMICOLON_SEPARATOR ;
 constructorDecl : accessModifier? CONSTRUCTOR_KEYWORD LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
 accessModifier
@@ -43,12 +44,13 @@ createStatement : CREATE_KEYWORD IDENTIFIER OF_STATEMENT IDENTIFIER (LEFT_PARENT
 
 ifStatement     : IF_KEYWORD logicalExpression block (ELSE_KEYWORD block)? ;
 loopStatement   : REPEAT_KEYWORD block UNTIL_KEYWORD logicalExpression SEMICOLON_SEPARATOR ;
-forStatement    : FOR_KEYWORD IDENTIFIER IN_KEYWORD valueExpression block ;
+forStatement    : FOR_KEYWORD IDENTIFIER IN_KEYWORD valueExpression DO_KEYWORD block ;
 breakStatement  : BREAK_STATEMENT SEMICOLON_SEPARATOR ;
 continueStatement   : CONTINUE_STATEMENT SEMICOLON_SEPARATOR ;
 superCallStatement  : SUPER_CALL LEFT_PARENTHESIS argumentList? RIGHT_PARENTHESIS SEMICOLON_SEPARATOR ;
 inputStatement  : INPUT_STATEMENT LEFT_PARENTHESIS STRING_LITERAL RIGHT_PARENTHESIS ASSIGNMENT_OPERATOR (IDENTIFIER | memberAccess) SEMICOLON_SEPARATOR ;
 commentStatement: LINE_COMMENT ;
+localVarDecl    : HAS_ATTRIBUTE_KEYWORD IDENTIFIER COLON_SEPARATOR typeName ASSIGNMENT_OPERATOR valueExpression ;
 
 block           : LEFT_BRACE statement* RIGHT_BRACE ;
 
@@ -69,6 +71,11 @@ valueExpression
     | memberAccess
     | LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS
     | inputCall
+    | listLiteral
+    ;
+
+listLiteral
+    : LEFT_BRACKET (valueExpression (COMMA_SEPARATOR valueExpression)*)? RIGHT_BRACKET
     ;
 
 logicalExpression
@@ -174,6 +181,7 @@ REPEAT_KEYWORD         : 'repeat';
 UNTIL_KEYWORD          : 'until';
 FOR_KEYWORD            : 'for';
 IN_KEYWORD             : 'in';
+DO_KEYWORD             : 'do';
 INPUT_STATEMENT        : 'input';
 SELF_KEYWORD           : 'self';
 ABSTRACT_KEYWORD       : 'abstract';

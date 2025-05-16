@@ -33,11 +33,13 @@ class JavaCompiler(OOPsyBaseVisitor):
     def visitClassDecl(self, ctx):
         class_name = ctx.IDENTIFIER(0).getText()
         self.current_class = class_name
+        is_abstract = ctx.ABSTRACT_KEYWORD() is not None
+        prefix = "abstract " if is_abstract else ""
         if ctx.INHERITS_KEYWORD():
             base_class = ctx.IDENTIFIER(1).getText()
             self.superclass_param_map[class_name] = base_class
         extends_clause = f" extends {ctx.IDENTIFIER(1).getText()}" if ctx.INHERITS_KEYWORD() else ""
-        self.output.append(f"class {class_name}{extends_clause} {{")
+        self.output.append(f"{prefix}class {class_name}{extends_clause} {{")
         for element in ctx.classElement():
             self.visit(element)
         self.output.append("}")
@@ -53,13 +55,37 @@ class JavaCompiler(OOPsyBaseVisitor):
 
         self.output.append(f"    {modifier} {type_} {name};")
 
+    # def visitMethodDecl(self, ctx):
+    #     name = ctx.IDENTIFIER().getText()
+    #     modifier = ctx.accessModifier().getText() if ctx.accessModifier() else "public"
+    #     params = self.visit(ctx.paramList()) if ctx.paramList() else ""
+    #     self.output.append(f"    {modifier} void {name}({params}) {{")
+    #     self.visit(ctx.block())
+    #     self.output.append("    }")
+
     def visitMethodDecl(self, ctx):
         name = ctx.IDENTIFIER().getText()
-        modifier = ctx.accessModifier().getText() if ctx.accessModifier() else "public"
+        access = ctx.accessModifier().getText() if ctx.accessModifier() else "public"
+        is_abstract = ctx.ABSTRACT_KEYWORD() is not None
+        is_final = ctx.FINAL_KEYWORD() is not None
+        is_override = ctx.OVERRIDE_KEYWORD() is not None
+        if is_abstract and is_final:
+            raise Exception(f"Nie można łączyć 'abstract' i 'final' w metodzie '{name}'")
+
         params = self.visit(ctx.paramList()) if ctx.paramList() else ""
-        self.output.append(f"    {modifier} void {name}({params}) {{")
-        self.visit(ctx.block())
-        self.output.append("    }")
+        modifiers = [access]
+        if is_abstract:
+            modifiers.insert(0, "abstract")
+        if is_final:
+            modifiers.insert(0, "final")
+
+        # Generujemy metodę
+        if is_abstract:
+            self.output.append(f"    {' '.join(modifiers)} void {name}({params});")
+        else:
+            self.output.append(f"    {' '.join(modifiers)} void {name}({params}) {{")
+            self.visit(ctx.block())
+            self.output.append("    }")
 
     def visitConstructorDecl(self, ctx):
         params = []
@@ -194,6 +220,8 @@ class JavaCompiler(OOPsyBaseVisitor):
             self.output.append(f'        System.out.print({prompt});')
             self.output.append(f'        String {tmp_var} = scanner.nextLine();')
             return tmp_var
+        if ctx.listLiteral():
+            return self.visit(ctx.listLiteral())
         return ""
 
     def visitMemberAccess(self, ctx):
@@ -218,6 +246,24 @@ class JavaCompiler(OOPsyBaseVisitor):
         self.visit(ctx.block())
         condition = self.visit(ctx.logicalExpression())
         self.output.append(f"        }} while (!({condition}));")
+
+    def visitForStatement(self, ctx):
+        loop_var = ctx.IDENTIFIER().getText()
+        iterable_expr = self.visit(ctx.valueExpression())
+
+        tmp_iterable = f"__list_{len(self.output)}"
+        self.output.append(f"        for (Object {loop_var} : {iterable_expr}) {{")
+        self.visit(ctx.block())
+        self.output.append("        }")
+
+    def visitLocalVarDecl(self, ctx):
+        var_name = ctx.IDENTIFIER().getText()
+        expr = self.visit(ctx.valueExpression())
+        self.output.append(f"        var {var_name} = {expr};")
+
+    def visitListLiteral(self, ctx):
+        elements = [self.visit(e) for e in ctx.valueExpression()]
+        return f"java.util.Arrays.asList({', '.join(elements)})"
 
     def visitLogicalExpression(self, ctx):
         if len(ctx.logicalTerm()) > 1:
