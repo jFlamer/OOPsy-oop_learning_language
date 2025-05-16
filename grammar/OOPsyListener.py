@@ -260,6 +260,24 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by OOPsyParser#dictLiteral.
+    def enterDictLiteral(self, ctx:OOPsyParser.DictLiteralContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#dictLiteral.
+    def exitDictLiteral(self, ctx:OOPsyParser.DictLiteralContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#dictEntry.
+    def enterDictEntry(self, ctx:OOPsyParser.DictEntryContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#dictEntry.
+    def exitDictEntry(self, ctx:OOPsyParser.DictEntryContext):
+        pass
+
+
     # Enter a parse tree produced by OOPsyParser#logicalExpression.
     def enterLogicalExpression(self, ctx:OOPsyParser.LogicalExpressionContext):
         pass

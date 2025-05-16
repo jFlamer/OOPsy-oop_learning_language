@@ -20,10 +20,14 @@ class JavaCompiler(OOPsyBaseVisitor):
         self.superclass_param_map = {}
         self.class_fields = {}
         self.variable_types = {}
+        self.imports = set()
 
+    # def compile(self, tree):
+    #     self.visit(tree)
+    #     return "\n".join(self.output)
     def compile(self, tree):
         self.visit(tree)
-        return "\n".join(self.output)
+        return "\n".join(sorted(self.imports) + [""] + self.output)
 
     def visitProgram(self, ctx):
         for class_decl in ctx.classDecl():
@@ -222,6 +226,8 @@ class JavaCompiler(OOPsyBaseVisitor):
             return tmp_var
         if ctx.listLiteral():
             return self.visit(ctx.listLiteral())
+        if ctx.dictLiteral():
+            return self.visit(ctx.dictLiteral())
         return ""
 
     def visitMemberAccess(self, ctx):
@@ -261,9 +267,35 @@ class JavaCompiler(OOPsyBaseVisitor):
         expr = self.visit(ctx.valueExpression())
         self.output.append(f"        var {var_name} = {expr};")
 
+    # def visitListLiteral(self, ctx):
+    #     elements = [self.visit(e) for e in ctx.valueExpression()]
+    #     return f"java.util.Arrays.asList({', '.join(elements)})"
     def visitListLiteral(self, ctx):
         elements = [self.visit(e) for e in ctx.valueExpression()]
-        return f"java.util.Arrays.asList({', '.join(elements)})"
+        return f"new java.util.ArrayList<>(java.util.Arrays.asList({', '.join(elements)}))"
+
+    # def visitDictLiteral(self, ctx):
+    #     entries = []
+    #     for entry in ctx.dictEntry():
+    #         key = self.visit(entry.valueExpression(0))
+    #         value = self.visit(entry.valueExpression(1))
+    #         entries.append(f"put({key}, {value})")
+    #
+    #     tmp_var = f"__map_{len(self.output)}"
+    #     self.output.append(f"        java.util.HashMap<Object, Object> {tmp_var} = new java.util.HashMap<>();")
+    #     for entry in ctx.dictEntry():
+    #         key = self.visit(entry.valueExpression(0))
+    #         value = self.visit(entry.valueExpression(1))
+    #         self.output.append(f"        {tmp_var}.put({key}, {value});")
+    #     return tmp_var
+    def visitDictLiteral(self, ctx):
+        tmp_var = f"__map_{len(self.output)}"
+        self.output.append(f"        java.util.HashMap<Object, Object> {tmp_var} = new java.util.HashMap<>();")
+        for entry in ctx.dictEntry():
+            key = self.visit(entry.valueExpression(0))
+            value = self.visit(entry.valueExpression(1))
+            self.output.append(f"        {tmp_var}.put({key}, {value});")
+        return tmp_var
 
     def visitLogicalExpression(self, ctx):
         if len(ctx.logicalTerm()) > 1:
@@ -333,6 +365,7 @@ class JavaCompiler(OOPsyBaseVisitor):
         self.output.append(f"        {comment}")
 
     def ensure_scanner_initialized(self):
+        # self.imports.add("import java.util.Scanner;")
         if "import java.util.Scanner;" not in self.output:
             self.output.insert(0, "import java.util.Scanner;")
         if not any("Scanner scanner = new Scanner(System.in);" in line for line in self.output):
@@ -340,3 +373,12 @@ class JavaCompiler(OOPsyBaseVisitor):
                 if "public static void main" in line:
                     self.output.insert(i + 1, "        Scanner scanner = new Scanner(System.in);")
                     break
+
+    def add_imports_for(self, type_name):
+        if type_name == "ArrayList":
+            self.imports.add("import java.util.ArrayList;")
+            self.imports.add("import java.util.Arrays;")
+        elif type_name == "HashMap":
+            self.imports.add("import java.util.HashMap;")
+
+

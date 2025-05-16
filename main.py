@@ -21,13 +21,13 @@ def compile_oopsy_to_java(file_path: str, output_path: str):
 
 def main():
     # Wczytaj kod z pliku
-    with open("abstrakcja.oopsy", "rb") as f:
+    with open("test.oopsy", "rb") as f:
         content = f.read()
         print("Raw bytes:", content)
 
-    with open("abstrakcja.oopsy", encoding="utf-8") as f:
+    with open("test.oopsy", encoding="utf-8") as f:
         print("Text:\n", f.read())
-    input_stream = FileStream("abstrakcja.oopsy", encoding='utf-8')
+    input_stream = FileStream("test.oopsy", encoding='utf-8')
 
     # Tokenizacja
     lexer = OOPsyLexer(input_stream)
@@ -49,7 +49,7 @@ def main():
     interpreter = Interpreter()
     interpreter.visit(tree)
 
-    compile_oopsy_to_java("abstrakcja.oopsy", "abstractTestJava.java")
+    compile_oopsy_to_java("test.oopsy", "HardTestJava.java")
 
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@ class ClassDef:
         self.methods = {}
         self.abstract_methods = set()
         self.is_abstract = is_abstract
+        self.variables = {}
 
     def get_attr(self, name):
         if name in self.attributes:
@@ -381,6 +382,8 @@ class Interpreter(OOPsyBaseVisitor):
             return self.visit(ctx.inputCall())
         if ctx.listLiteral():
             return self.visit(ctx.listLiteral())
+        if ctx.dictLiteral():
+            return self.visit(ctx.dictLiteral())
 
     def visitLogicalExpression(self, ctx):
         result = self.visit(ctx.logicalTerm(0))
@@ -454,7 +457,13 @@ class Interpreter(OOPsyBaseVisitor):
         pass
 
     def visitListLiteral(self, ctx):
-        return [self.visit(expr) for expr in ctx.valueExpression()]
+        return [self.visit(e) for e in ctx.valueExpression()]
+
+    def visitDictLiteral(self, ctx):
+        return {
+            self.visit(entry.valueExpression(0)): self.visit(entry.valueExpression(1))
+            for entry in ctx.dictEntry()
+        }
 
     def visitLocalVarDecl(self, ctx):
         var_name = ctx.IDENTIFIER().getText()

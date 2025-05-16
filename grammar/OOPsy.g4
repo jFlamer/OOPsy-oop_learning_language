@@ -72,11 +72,12 @@ valueExpression
     | LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS
     | inputCall
     | listLiteral
+    | dictLiteral
     ;
 
-listLiteral
-    : LEFT_BRACKET (valueExpression (COMMA_SEPARATOR valueExpression)*)? RIGHT_BRACKET
-    ;
+listLiteral : LEFT_BRACKET (valueExpression (COMMA_SEPARATOR valueExpression)*)? RIGHT_BRACKET ;
+dictLiteral : LEFT_BRACE dictEntry (COMMA_SEPARATOR dictEntry)* RIGHT_BRACE ;
+dictEntry   : valueExpression COLON_SEPARATOR valueExpression ;
 
 logicalExpression
     : logicalTerm (OR_OPERATOR logicalTerm)*

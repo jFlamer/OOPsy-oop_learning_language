@@ -43,6 +43,14 @@ method main() {
     for n in numbers do {
         print("Liczba: " + n);
     }
+    create unknown of Student("", 0, false);
+    unknown.name = input("What is your name? ");
+    unknown.introduce();
 
+    has l: list = [1, 2, 3];
+    print(l);
+
+    has d: dict = {"key": "value", "x": "y"};
+    print(d);
     return;
 }

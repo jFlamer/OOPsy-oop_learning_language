@@ -149,6 +149,16 @@ class OOPsyVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by OOPsyParser#dictLiteral.
+    def visitDictLiteral(self, ctx:OOPsyParser.DictLiteralContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by OOPsyParser#dictEntry.
+    def visitDictEntry(self, ctx:OOPsyParser.DictEntryContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by OOPsyParser#logicalExpression.
     def visitLogicalExpression(self, ctx:OOPsyParser.LogicalExpressionContext):
         return self.visitChildren(ctx)
