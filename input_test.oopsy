@@ -1,0 +1,23 @@
+class User {
+    has name: string;
+    has age: int;
+
+    constructor(name: string, age: int) {
+        self.name = name;
+        self.age = age;
+    }
+
+    method greet() {
+        print("Hello, " + self.name);
+    }
+}
+
+method main() {
+    create user of User("Unknown", 0);
+    user.name = input("What is your name? ");
+    user.age = input("How old are you? ");
+
+    user.greet();
+    print("You are " + user.age + " years old.");
+    return;
+}

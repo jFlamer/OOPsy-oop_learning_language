@@ -49,6 +49,11 @@ class OOPsyVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by OOPsyParser#accessModifier.
+    def visitAccessModifier(self, ctx:OOPsyParser.AccessModifierContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by OOPsyParser#assignment.
     def visitAssignment(self, ctx:OOPsyParser.AssignmentContext):
         return self.visitChildren(ctx)
@@ -84,6 +89,11 @@ class OOPsyVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by OOPsyParser#forStatement.
+    def visitForStatement(self, ctx:OOPsyParser.ForStatementContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by OOPsyParser#breakStatement.
     def visitBreakStatement(self, ctx:OOPsyParser.BreakStatementContext):
         return self.visitChildren(ctx)
@@ -96,6 +106,11 @@ class OOPsyVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by OOPsyParser#superCallStatement.
     def visitSuperCallStatement(self, ctx:OOPsyParser.SuperCallStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by OOPsyParser#inputStatement.
+    def visitInputStatement(self, ctx:OOPsyParser.InputStatementContext):
         return self.visitChildren(ctx)
 
 
@@ -141,6 +156,11 @@ class OOPsyVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by OOPsyParser#methodCall.
     def visitMethodCall(self, ctx:OOPsyParser.MethodCallContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by OOPsyParser#inputCall.
+    def visitInputCall(self, ctx:OOPsyParser.InputCallContext):
         return self.visitChildren(ctx)
 
 

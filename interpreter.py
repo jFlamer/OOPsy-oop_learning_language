@@ -26,7 +26,7 @@ class Instance:
         if name in self.fields:
             return self.fields[name]
         elif name in self.class_def.attributes:
-            return None  # domyślna wartość
+            return None
         elif self.class_def.superclass:
             return self.class_def.superclass.get_attr(name)
         else:
@@ -93,13 +93,13 @@ class Interpreter(OOPsyBaseVisitor):
         target = ctx.getChild(0)
         value = self.visit(ctx.valueExpression())
 
-        if target.getChildCount() == 1:  # zwykła zmienna
+        if target.getChildCount() == 1:
             var_name = target.getText()
             if var_name in self.variables:
                 self.variables[var_name] = value
             else:
                 raise Exception(f"Nieznana zmienna '{var_name}'")
-        else:  # przypisanie do pola obiektu
+        else:
             obj_name = target.getChild(0).getText()
             attr_name = target.getChild(2).getText()
 
@@ -194,6 +194,8 @@ class Interpreter(OOPsyBaseVisitor):
             return self.evaluate_binary_operation(left, op, right)
         if ctx.LEFT_PARENTHESIS():
             return self.visit(ctx.valueExpression(0))
+        if ctx.inputCall():
+            return self.visit(ctx.inputCall())
 
     def visitLogicalExpression(self, ctx):
         result = self.visit(ctx.logicalTerm(0))
@@ -258,3 +260,8 @@ class Interpreter(OOPsyBaseVisitor):
         for i, value in enumerate(args):
             if i < len(attr_names):
                 instance.set_attr(attr_names[i], value)
+
+    def visitInputCall(self, ctx):
+        prompt = self.visit(ctx.valueExpression())
+        return input(prompt)
+

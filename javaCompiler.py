@@ -18,6 +18,8 @@ class JavaCompiler(OOPsyBaseVisitor):
         self.classes_with_parents = {}
         self.class_param_counts = {}
         self.superclass_param_map = {}
+        self.class_fields = {}
+        self.variable_types = {}
 
     def compile(self, tree):
         self.visit(tree)
@@ -43,6 +45,11 @@ class JavaCompiler(OOPsyBaseVisitor):
     def visitAttributeDecl(self, ctx):
         name = ctx.IDENTIFIER().getText()
         type_ = TYPE_MAP.get(ctx.typeName().getText(), ctx.typeName().getText())
+
+        if self.current_class not in self.class_fields:
+            self.class_fields[self.current_class] = {}
+        self.class_fields[self.current_class][name] = type_
+
         self.output.append(f"    public {type_} {name};")
 
     def visitMethodDecl(self, ctx):
@@ -108,6 +115,7 @@ class JavaCompiler(OOPsyBaseVisitor):
     def visitCreateStatement(self, ctx):
         var = ctx.IDENTIFIER(0).getText()
         typ = ctx.IDENTIFIER(1).getText()
+        self.variable_types[var] = typ
         args = ""
         if ctx.argumentList():
             args = self.visit(ctx.argumentList())
@@ -115,13 +123,41 @@ class JavaCompiler(OOPsyBaseVisitor):
 
     def visitAssignment(self, ctx):
         target = ctx.getChild(0)
-        value = self.visit(ctx.valueExpression())
+        value_expr = ctx.valueExpression()
+
         if target.getChildCount() > 1:
             target_code = self.visitMemberAccess(target)
+            var_name = target.getChild(0).getText()
+            attr_name = target.getChild(2).getText()
         else:
             target_code = target.getText()
+            var_name = None
+            attr_name = None
 
-        self.output.append(f"        {target_code} = {value};")
+        if value_expr.inputCall():
+            prompt = self.visit(value_expr.inputCall().valueExpression())
+            self.ensure_scanner_initialized()
+            self.output.append(f"        System.out.print({prompt});")
+
+            # domyślny typ to string
+            field_type = "String"
+
+            if var_name and attr_name:
+                class_name = self.variable_types.get(var_name)
+                if class_name and class_name in self.class_fields:
+                    field_type = self.class_fields[class_name].get(attr_name, "String")
+
+            if field_type == "int":
+                self.output.append(f"        {target_code} = Integer.parseInt(scanner.nextLine());")
+            elif field_type == "float":
+                self.output.append(f"        {target_code} = Float.parseFloat(scanner.nextLine());")
+            elif field_type == "boolean":
+                self.output.append(f"        {target_code} = Boolean.parseBoolean(scanner.nextLine());")
+            else:
+                self.output.append(f"        {target_code} = scanner.nextLine();")
+        else:
+            value = self.visit(value_expr)
+            self.output.append(f"        {target_code} = {value};")
 
     def visitPrintStatement(self, ctx):
         value = self.visit(ctx.valueExpression())
@@ -149,6 +185,13 @@ class JavaCompiler(OOPsyBaseVisitor):
             return f"({left} {op} {right})"
         if ctx.LEFT_PARENTHESIS():
             return f"({self.visit(ctx.valueExpression(0))})"
+        if ctx.inputCall():
+            prompt = self.visit(ctx.inputCall().valueExpression())
+            self.ensure_scanner_initialized()
+            tmp_var = f"__input_tmp_{len(self.output)}"
+            self.output.append(f'        System.out.print({prompt});')
+            self.output.append(f'        String {tmp_var} = scanner.nextLine();')
+            return tmp_var
         return ""
 
     def visitMemberAccess(self, ctx):
@@ -238,3 +281,12 @@ class JavaCompiler(OOPsyBaseVisitor):
     def visitSuperCallStatement(self, ctx):
         args = self.visit(ctx.argumentList()) if ctx.argumentList() else ""
         self.output.append(f"        super({args});")
+
+    def ensure_scanner_initialized(self):
+        if "import java.util.Scanner;" not in self.output:
+            self.output.insert(0, "import java.util.Scanner;")
+        if not any("Scanner scanner = new Scanner(System.in);" in line for line in self.output):
+            for i, line in enumerate(self.output):
+                if "public static void main" in line:
+                    self.output.insert(i + 1, "        Scanner scanner = new Scanner(System.in);")
+                    break

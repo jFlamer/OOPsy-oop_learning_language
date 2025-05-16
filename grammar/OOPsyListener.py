@@ -80,6 +80,15 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by OOPsyParser#accessModifier.
+    def enterAccessModifier(self, ctx:OOPsyParser.AccessModifierContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#accessModifier.
+    def exitAccessModifier(self, ctx:OOPsyParser.AccessModifierContext):
+        pass
+
+
     # Enter a parse tree produced by OOPsyParser#assignment.
     def enterAssignment(self, ctx:OOPsyParser.AssignmentContext):
         pass
@@ -143,6 +152,15 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by OOPsyParser#forStatement.
+    def enterForStatement(self, ctx:OOPsyParser.ForStatementContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#forStatement.
+    def exitForStatement(self, ctx:OOPsyParser.ForStatementContext):
+        pass
+
+
     # Enter a parse tree produced by OOPsyParser#breakStatement.
     def enterBreakStatement(self, ctx:OOPsyParser.BreakStatementContext):
         pass
@@ -167,6 +185,15 @@ class OOPsyListener(ParseTreeListener):
 
     # Exit a parse tree produced by OOPsyParser#superCallStatement.
     def exitSuperCallStatement(self, ctx:OOPsyParser.SuperCallStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#inputStatement.
+    def enterInputStatement(self, ctx:OOPsyParser.InputStatementContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#inputStatement.
+    def exitInputStatement(self, ctx:OOPsyParser.InputStatementContext):
         pass
 
 
@@ -248,6 +275,15 @@ class OOPsyListener(ParseTreeListener):
 
     # Exit a parse tree produced by OOPsyParser#methodCall.
     def exitMethodCall(self, ctx:OOPsyParser.MethodCallContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#inputCall.
+    def enterInputCall(self, ctx:OOPsyParser.InputCallContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#inputCall.
+    def exitInputCall(self, ctx:OOPsyParser.InputCallContext):
         pass
 
 

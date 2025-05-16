@@ -8,6 +8,7 @@ statement
     | assignment
     | ifStatement
     | loopStatement
+    | forStatement
     | returnStatement
     | printStatement
     | expressionStatement
@@ -15,19 +16,23 @@ statement
     | breakStatement
     | continueStatement
     | superCallStatement
+    | inputStatement
     ;
 
 mainMethod      : METHOD_KEYWORD MAIN_KEYWORD LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
-classDecl       : CLASS_KEYWORD IDENTIFIER (INHERITS_KEYWORD IDENTIFIER)? LEFT_BRACE classElement* RIGHT_BRACE ;
+classDecl       : (ABSTRACT_KEYWORD | FINAL_KEYWORD)? CLASS_KEYWORD IDENTIFIER (INHERITS_KEYWORD IDENTIFIER)? LEFT_BRACE classElement* RIGHT_BRACE ;
 classElement
     : attributeDecl
     | methodDecl
     | constructorDecl
     ;
-methodDecl      : METHOD_KEYWORD IDENTIFIER LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
-attributeDecl   : HAS_ATTRIBUTE_KEYWORD IDENTIFIER COLON_SEPARATOR typeName SEMICOLON_SEPARATOR ;
-constructorDecl : CONSTRUCTOR_KEYWORD LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
-
+methodDecl      : accessModifier? (OVERRIDE_KEYWORD | ABSTRACT_KEYWORD)? METHOD_KEYWORD IDENTIFIER LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS (block | SEMICOLON_SEPARATOR) ;
+attributeDecl   : accessModifier? HAS_ATTRIBUTE_KEYWORD IDENTIFIER COLON_SEPARATOR typeName SEMICOLON_SEPARATOR ;
+constructorDecl : accessModifier? CONSTRUCTOR_KEYWORD LEFT_PARENTHESIS paramList? RIGHT_PARENTHESIS block ;
+accessModifier
+    : PUBLIC_MODIFIER
+    | PRIVATE_MODIFIER
+    ;
 
 assignment      : (IDENTIFIER | memberAccess) ASSIGNMENT_OPERATOR valueExpression SEMICOLON_SEPARATOR ;
 returnStatement : RETURN_STATEMENT valueExpression? SEMICOLON_SEPARATOR ;
@@ -37,10 +42,14 @@ createStatement : CREATE_KEYWORD IDENTIFIER OF_STATEMENT IDENTIFIER (LEFT_PARENT
 
 ifStatement     : IF_KEYWORD logicalExpression block (ELSE_KEYWORD block)? ;
 loopStatement   : REPEAT_KEYWORD block UNTIL_KEYWORD logicalExpression SEMICOLON_SEPARATOR ;
+forStatement    : FOR_KEYWORD IDENTIFIER IN_KEYWORD valueExpression block ;
 breakStatement  : BREAK_STATEMENT SEMICOLON_SEPARATOR ;
 continueStatement   : CONTINUE_STATEMENT SEMICOLON_SEPARATOR ;
 superCallStatement
-    : 'super' '(' argumentList? ')' ';'
+    : SUPER_CALL LEFT_PARENTHESIS argumentList? RIGHT_PARENTHESIS SEMICOLON_SEPARATOR
+    ;
+inputStatement
+    : INPUT_STATEMENT LEFT_PARENTHESIS STRING_LITERAL RIGHT_PARENTHESIS ASSIGNMENT_OPERATOR (IDENTIFIER | memberAccess) SEMICOLON_SEPARATOR
     ;
 
 block           : LEFT_BRACE statement* RIGHT_BRACE ;
@@ -61,6 +70,7 @@ valueExpression
     | methodCall
     | memberAccess
     | LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS
+    | inputCall
     ;
 
 logicalExpression
@@ -83,10 +93,11 @@ anyExpression
     ;
 
 methodCall      : IDENTIFIER DOT_SEPARATOR IDENTIFIER LEFT_PARENTHESIS argumentList? RIGHT_PARENTHESIS ;
+inputCall       : INPUT_STATEMENT LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS ;
 argumentList    : valueExpression (COMMA_SEPARATOR valueExpression)* ;
 memberAccess    : (IDENTIFIER | SELF_KEYWORD) DOT_SEPARATOR IDENTIFIER ;
 
-typeName        : OOPSY_TYPE_INT | OOPSY_TYPE_FLOAT | OOPSY_TYPE_STRING | OOPSY_TYPE_CHAR | OOPSY_TYPE_BOOL | IDENTIFIER ;
+typeName        : OOPSY_TYPE_INT | OOPSY_TYPE_FLOAT | OOPSY_TYPE_STRING | OOPSY_TYPE_CHAR | OOPSY_TYPE_BOOL | LIST_TYPE | DICTIONARY_TYPE | IDENTIFIER ;
 
 // === LEXER RULES ===
 // === Data Types ===
@@ -163,11 +174,13 @@ IF_KEYWORD             : 'if';
 ELSE_KEYWORD           : 'else';
 REPEAT_KEYWORD         : 'repeat';
 UNTIL_KEYWORD          : 'until';
+FOR_KEYWORD            : 'for';
+IN_KEYWORD             : 'in';
 INPUT_STATEMENT        : 'input';
 SELF_KEYWORD           : 'self';
-ABSTRACT_CLASS         : 'abstract';
-FINAL_CLASS            : 'final';
-OVERRIDE_METHOD        : 'override';
+ABSTRACT_KEYWORD       : 'abstract';
+FINAL_KEYWORD          : 'final';
+OVERRIDE_KEYWORD       : 'override';
 SUPER_CALL             : 'super';
 PUBLIC_MODIFIER        : 'public';
 PRIVATE_MODIFIER       : 'private';
