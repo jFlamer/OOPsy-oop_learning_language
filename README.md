@@ -94,6 +94,7 @@ ANTLR will be used to define the grammar of the language, from which it will aut
 | Name                      | Regex         | Description |
 |---------------------------|---------------|-------------|
 | CLASS_KEYWORD            | `class`       | Keyword to define a class |
+| MAIN_KEYWORD             | `main`        | Entry point of the program |
 | INHERITS_KEYWORD         | `inherits`    | Keyword to declare inheritance |
 | HAS_ATTRIBUTE_KEYWORD    | `has`         | Keyword to declare attributes |
 | METHOD_KEYWORD           | `method`      | Keyword to declare methods |
@@ -101,9 +102,9 @@ ANTLR will be used to define the grammar of the language, from which it will aut
 | CREATE_KEYWORD           | `create`      | Keyword to instantiate objects |
 | OF_STATEMENT             | `of`          | Used in constructs like `create X of Y` |
 | SELF_KEYWORD             | `self`        | Reference to current object |
-| ABSTRACT_CLASS           | `abstract`    | Declares a class as abstract |
-| FINAL_CLASS              | `final`       | Declares a class as non-inheritable |
-| OVERRIDE_METHOD          | `override`    | Indicates method override |
+| ABSTRACT_KEYWORD         | `abstract`    | Declares a class or method as abstract |
+| FINAL_KEYWORD            | `final`       | Declares a class or method as non-inheritable |
+| OVERRIDE_KEYWORD         | `override`    | Indicates method override |
 | SUPER_CALL               | `super`       | Call to parent class method |
 | PUBLIC_MODIFIER          | `public`      | Public access modifier |
 | PRIVATE_MODIFIER         | `private`     | Private access modifier |
@@ -121,28 +122,22 @@ ANTLR will be used to define the grammar of the language, from which it will aut
 | ELSE_KEYWORD        | `else`      | Alternate branch keyword |
 | REPEAT_KEYWORD      | `repeat`    | Loop keyword |
 | UNTIL_KEYWORD       | `until`     | Loop exit condition keyword |
+| FOR_KEYWORD         | `for`       | For-loop keyword |
+| IN_KEYWORD          | `in`        | Membership or iteration keyword |
+| DO_KEYWORD          | `do`        | Loop body start keyword |
 | INPUT_STATEMENT     | `input`     | Keyword to read user input |
 | RETURN_STATEMENT    | `return`    | Keyword for returning from a function |
 | BREAK_STATEMENT     | `break`     | Keyword to exit a loop early |
 | CONTINUE_STATEMENT  | `continue`  | Keyword to skip to next loop iteration |
-| PRINT_KEYWORD                | `print`                        | Keyword for printing values |
-| IF_KEYWORD                   | `if`                           | Conditional keyword |
-| ELSE_KEYWORD                 | `else`                         | Alternate branch keyword |
-| REPEAT_KEYWORD               | `repeat`                       | Loop keyword |
-| UNTIL_KEYWORD                | `until`                        | Loop exit condition keyword |
-| INPUT_STATEMENT              | `input`                        | Keyword to read user input |
-| SELF_KEYWORD                 | `self`                         | Reference to current object |
-| ABSTRACT_CLASS               | `abstract`                     | Declares a class as abstract |
-| FINAL_CLASS                  | `final`                        | Declares a class as non-inheritable |
-| OVERRIDE_METHOD              | `override`                     | Indicates method override |
-| SUPER_CALL                   | `super`                        | Call to parent class method |
-| PUBLIC_MODIFIER              | `public`                       | Public access modifier |
-| PRIVATE_MODIFIER             | `private`                      | Private access modifier |
-| LIST_TYPE                    | `list`                         | Declares a list type |
-| DICTIONARY_TYPE              | `dict`                         | Declares a dictionary type |
-| RETURN_STATEMENT             | `return`                       | Keyword for returning from a function |
-| BREAK_STATEMENT              | `break`                        | Keyword to exit a loop early |
-| CONTINUE_STATEMENT          | `continue`                     | Keyword to skip to next loop iteration |
+
+---
+
+### **Identifiers**
+
+| Name            | Regex                    | Description                 |
+|-----------------|--------------------------|-----------------------------|
+| IDENTIFIER      | `[a-zA-Z_][a-zA-Z0-9_]*` | Keyword for printing values |
+
 
 ## Sample Code
 
