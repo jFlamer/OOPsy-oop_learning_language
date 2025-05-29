@@ -109,8 +109,10 @@ class Instance:
     #         raise Exception(f"Próba ustawienia nieistniejącego atrybutu '{name}'")
 
 class Interpreter(OOPsyBaseVisitor):
-    def __init__(self):
+    def __init__(self, input_func=input, print_func=print):
         super().__init__()
+        self.input_func = input_func
+        self.print_func = print_func
         self.classes = {}
         self.variables = {}
         self.current_instance = None
@@ -157,7 +159,7 @@ class Interpreter(OOPsyBaseVisitor):
                 if overridden:
                     super_modifier, _ = super_methods[method_name]
                     if super_modifier == "final":
-                        raise Exception(f"Nie można nadpisać finalnej metody '{method_name}'")
+                        raise Exception(f"Nie mozna nadpisac finalnej metody '{method_name}'")
 
                 if is_abstract_method:
                     if method_ctx.block():
@@ -266,7 +268,7 @@ class Interpreter(OOPsyBaseVisitor):
 
     def visitPrintStatement(self, ctx):
         value = self.visit(ctx.valueExpression())
-        print(value)
+        self.print_func(value)
 
     def visitIfStatement(self, ctx):
         condition = self.visit(ctx.logicalExpression())
@@ -451,7 +453,7 @@ class Interpreter(OOPsyBaseVisitor):
 
     def visitInputCall(self, ctx):
         prompt = self.visit(ctx.valueExpression())
-        return input(prompt)
+        return self.input_func(prompt)
 
     def visitCommentStatement(self, ctx):
         pass
