@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import simpledialog, messagebox
 from antlr4 import *
+from antlr4.error.ErrorListener import ErrorListener
 import re
 
 
@@ -20,6 +21,16 @@ def gui_print(*args):
 
 def gui_input(prompt=""):
     return simpledialog.askstring("Input", prompt)
+
+class GUIErrorListener(ErrorListener):
+    def __init__(self):
+        super(GUIErrorListener, self).__init__()
+        self.errors = []
+
+    def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
+        error_msg = f"Line {line}:{column} - {msg}"
+        print(error_msg)  # <--- debug
+        self.errors.append(error_msg)
 
 
 def update_line_numbers(event=None):
@@ -45,9 +56,26 @@ def run_code():
     try:
         input_stream = InputStream(code)
         lexer = OOPsyLexer(input_stream)
+
+        error_listener = GUIErrorListener()
+
+        lexer.removeErrorListeners()
+        lexer.addErrorListener(error_listener)
+
+
         stream = CommonTokenStream(lexer)
         parser = OOPsyParser(stream)
+
+
+        parser.removeErrorListeners()
+        parser.addErrorListener(error_listener)
+
+
         tree = parser.program()
+
+        if error_listener.errors:
+            messagebox.showerror("Syntax Error", "\n".join(error_listener.errors))
+            return
 
         #interpreter
         interpreter = Interpreter(input_func=gui_input, print_func=gui_print)
@@ -63,6 +91,17 @@ def run_code():
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
+
+    # except Exception as e:
+    #     line_info = ""
+    #     if hasattr(e, "line") and hasattr(e, "column"):
+    #         line_info = f"\nLine {e.line}, column {e.column}"
+    #     elif hasattr(e, "ctx") and hasattr(e.ctx, "start"):
+    #         token = e.ctx.start
+    #         line_info = f"\nLine {token.line}, column {token.column}"
+    #
+    #     messagebox.showerror("Error", f"{str(e)}{line_info}")
+
 
 def highlight_syntax(event=None):
     code = code_text.get("1.0", tk.END)
