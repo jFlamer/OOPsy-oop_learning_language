@@ -18,7 +18,7 @@ class SemanticChecker(OOPsyBaseVisitor):
         self.visit(ctx.mainMethod())
 
         if self.errors:
-            raise Exception("Błędy semantyczne:\n" + "\n".join(self.errors))
+            raise Exception("Semantic errors:\n" + "\n".join(self.errors))
 
 
     def visitClassDecl(self, ctx: OOPsyParser.ClassDeclContext):
@@ -44,12 +44,14 @@ class SemanticChecker(OOPsyBaseVisitor):
                 if method_name in superclass_methods:
                     super_modifier, _ = superclass_methods[method_name]
                     if super_modifier == "final":
+                        line = method_ctx.start.line
                         self.errors.append(
-                            f"Nie można nadpisać finalnej metody '{method_name}' w klasie '{class_name}'.")
+                            f"[line {line}]Cannot override final method '{method_name}' in class  '{class_name}'.")
 
                 if is_override and method_name not in superclass_methods:
+                    line = method_ctx.start.line
                     self.errors.append(
-                        f"Metoda '{method_name}' w klasie '{class_name}' ma override, ale nie istnieje w nadklasie.")
+                        f"[line {line}]Method '{method_name}' in class '{class_name}' is overriding, but does not exists in the parent class.")
 
                 modifier = "final" if is_final else "public"
                 method_map[method_name] = (modifier, param_count)
@@ -61,7 +63,7 @@ class SemanticChecker(OOPsyBaseVisitor):
         self.visit(ctx.block())
 
         if self.errors:
-            raise Exception("Błędy semantyczne:\n" + "\n".join(self.errors))
+            raise Exception("Semantic errors:\n" + "\n".join(self.errors))
 
     def visitBlock(self, ctx: OOPsyParser.BlockContext):
         for stmt in ctx.statement():
@@ -70,7 +72,8 @@ class SemanticChecker(OOPsyBaseVisitor):
     def visitLocalVarDecl(self, ctx: OOPsyParser.LocalVarDeclContext):
         var_name = ctx.IDENTIFIER().getText()
         if var_name in self.variables:
-            self.errors.append(f"Zmienna '{var_name}' została zadeklarowana wielokrotnie.")
+            line = var_name.start.line
+            self.errors.append(f"[line {line}]Variable '{var_name}' has been declared multiple times.")
         else:
             self.variables.add(var_name)
         self.visit(ctx.valueExpression())
@@ -80,26 +83,30 @@ class SemanticChecker(OOPsyBaseVisitor):
         if target.getChildCount() == 1:
             var_name = target.getText()
             if var_name not in self.variables:
-                self.errors.append(f"Zmienna '{var_name}' została użyta przed zadeklarowaniem.")
+                line = target.start.line
+                self.errors.append(f"[line {line}]Variable '{var_name}' has been used before declaration.")
         self.visit(ctx.valueExpression())
 
     def visitValueExpression(self, ctx: OOPsyParser.ValueExpressionContext):
         if ctx.IDENTIFIER():
             var_name = ctx.IDENTIFIER().getText()
             if var_name not in self.variables:
-                self.errors.append(f"Zmienna '{var_name}' została użyta przed zadeklarowaniem.")
+                line = ctx.start.line
+                self.errors.append(f"[line {line}]Variable '{var_name}' has been used before declaration.")
         for child in ctx.getChildren():
             self.visit(child)
         #dzielenie przez 0
         if ctx.getChildCount() == 3:
             left = ctx.getChild(0)
+            operator_node = ctx.getChild(1)
             operator = ctx.getChild(1).getText()
             right = ctx.getChild(2)
 
             if operator in ["/", "DIV"]:
                 # Sprawdzamy, czy prawa strona to 0
                 if right.getText() == "0":
-                    self.errors.append("Dzielenie przez 0 jest niedozwoloną operacją")
+                    line = operator_node.symbol.line if hasattr(operator_node, 'symbol') else ctx.start.line
+                    self.errors.append(f"[line {line}]Remember cholero don't divide by 0")
 
 
     def visitMethodCall(self, ctx: OOPsyParser.MethodCallContext):
@@ -107,31 +114,41 @@ class SemanticChecker(OOPsyBaseVisitor):
         method_name = ctx.IDENTIFIER(1).getText()
 
         if obj_name not in self.variables:
-            self.errors.append(f"Obiekt '{obj_name}' nie istnieje.")
+            line = ctx.start.line
+            self.errors.append(f"[line {line}]Object '{obj_name}' does't exist.")
             return
 
         class_name = self.variable_types.get(obj_name)
         if not class_name:
-            self.errors.append(f"Nieznana klasa obiektu '{obj_name}'.")
+            line = ctx.start.line
+            self.errors.append(f"[line {line}]Unknown object class '{obj_name}'.")
             return
         method_info = self.class_methods.get(class_name, {}).get(method_name)
         if not method_info:
-            self.errors.append(f"Metoda '{method_name}' nie istnieje w klasie '{class_name}'.")
+            line = ctx.start.line
+            self.errors.append(f"[line {line}]Method '{method_name}' doesn't exist in '{class_name}'.")
             return
 
         expected_args = method_info[1]
         given_args = len(ctx.argumentList().valueExpression()) if ctx.argumentList() else 0
         if expected_args != given_args:
+            line = ctx.start.line
             self.errors.append(
-                f"Metoda '{method_name}' w klasie '{class_name}' oczekuje {expected_args} argumentów, podano {given_args}.")
+                f"[line {line}]Method '{method_name}' in class '{class_name}' expects {expected_args} arguments, got {given_args}.")
 
 
     def visitCreateStatement(self, ctx: OOPsyParser.CreateStatementContext):
         var_name = ctx.IDENTIFIER(0).getText()
         class_name = ctx.IDENTIFIER(1).getText()
 
+        if class_name not in self.class_methods:
+            line = ctx.start.line
+            self.errors.append(f"[line {line}]Unknown class '{class_name}'.")
+            return
+
         if var_name in self.variables:
-            self.errors.append(f"Zmienna '{var_name}' została zadeklarowana wielokrotnie.")
+            line = ctx.start.line
+            self.errors.append(f"[line {line}]Variable '{var_name}' has been declared multiple times.")
         else:
             self.variables.add(var_name)
             self.variable_types[var_name] = class_name

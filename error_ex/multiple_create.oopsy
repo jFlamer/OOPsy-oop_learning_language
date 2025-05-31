@@ -1,0 +1,4 @@
+method main() {
+    create user of Person();
+    create user of Person();
+}

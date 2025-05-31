@@ -1,0 +1,4 @@
+method main() {
+    create x of Number();
+    create x of Number();
+}

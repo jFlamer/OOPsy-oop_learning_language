@@ -1,0 +1,16 @@
+class A {
+    final method speak() {
+        print("A");
+    }
+}
+
+class B inherits A {
+    override method speak() {
+        print("B");
+    }
+}
+
+method main() {
+    create b of B();
+    b.speak();
+}

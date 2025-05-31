@@ -1,0 +1,10 @@
+class A {
+    method walk() {
+        print("Walking");
+    }
+}
+
+method main() {
+    create a of A();
+    a.run();
+}

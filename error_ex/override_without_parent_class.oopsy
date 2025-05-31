@@ -1,0 +1,12 @@
+class A {}
+
+class B inherits A {
+    override method jump() {
+        print("Jumping");
+    }
+}
+
+method main() {
+    create b of B();
+    b.jump();
+}

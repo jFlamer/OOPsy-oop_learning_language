@@ -1,0 +1,4 @@
+method main() {
+    create x of Number();
+    x = 10 / 0;
+}

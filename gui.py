@@ -10,6 +10,7 @@ from grammar.OOPsyParser import OOPsyParser
 
 from interpreter import Interpreter
 from javaCompiler import JavaCompiler
+from semantic_checker import SemanticChecker
 
 
 def gui_print(*args):
@@ -72,6 +73,13 @@ def run_code():
 
 
         tree = parser.program()
+
+        checker = SemanticChecker()
+        try:
+            checker.visit(tree)
+        except Exception as e:
+            messagebox.showerror("Semantic Error", str(e))
+            return
 
         if error_listener.errors:
             messagebox.showerror("Syntax Error", "\n".join(error_listener.errors))

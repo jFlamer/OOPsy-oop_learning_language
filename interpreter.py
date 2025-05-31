@@ -373,7 +373,15 @@ class Interpreter(OOPsyBaseVisitor):
         obj = self.variables.get(obj_name)
         if not obj:
             raise Exception(f"Nieznany obiekt '{obj_name}'")
-        return obj.get_attr(attr_name)
+
+        if isinstance(obj, Instance):
+            return obj.get_attr(attr_name)
+        elif isinstance(obj, dict):
+            return obj.get(attr_name)
+        elif isinstance(obj, list):
+            raise Exception(f"Nie można używać kropki do uzyskiwania dostępu do elementu listy '{obj_name}'")
+        else:
+            raise Exception(f"Obiekt '{obj_name}' nie ma atrybutów – typ: {type(obj).__name__}")
 
     def visitValueExpression(self, ctx):
         if ctx.INT_LITERAL():
@@ -485,7 +493,8 @@ class Interpreter(OOPsyBaseVisitor):
         pass
 
     def visitListLiteral(self, ctx):
-        return [self.visit(e) for e in ctx.valueExpression()]
+        elements = [self.visit(e) for e in ctx.valueExpression()]
+        return list(map(int, elements))
 
     def visitDictLiteral(self, ctx):
         return {
@@ -498,13 +507,34 @@ class Interpreter(OOPsyBaseVisitor):
         value = self.visit(ctx.valueExpression())
         self.variables[var_name] = value
 
+    # def visitIndexedAccess(self, ctx):
+    #     target_ctx = ctx.getChild(0)
+    #     index_ctx = ctx.valueExpression()
+    #
+    #     index = self.visit(index_ctx)
+    #
+    #     # obsługa memberAccess (np. obj.list[1])
+    #     if isinstance(target_ctx, OOPsyParser.MemberAccessContext):
+    #         collection = self.visit(target_ctx)
+    #
+    #     else:
+    #         var_name = target_ctx.getText()
+    #         if var_name in self.variables:
+    #             collection = self.variables[var_name]
+    #         else:
+    #             raise Exception(f"Nieznana zmienna lub pole: '{var_name}'")
+    #
+    #     try:
+    #         return collection[index]
+    #     except (TypeError, IndexError, KeyError) as e:
+    #         raise Exception(f"Nie można uzyskać elementu: {collection}[{index}] — {e}")
     def visitIndexedAccess(self, ctx):
         target_ctx = ctx.getChild(0)
         index_ctx = ctx.valueExpression()
 
         index = self.visit(index_ctx)
 
-        # obsługa memberAccess (np. obj.list[1])
+        # Obsługa memberAccess (np. obj.list[1])
         if isinstance(target_ctx, OOPsyParser.MemberAccessContext):
             collection = self.visit(target_ctx)
         else:
@@ -516,6 +546,7 @@ class Interpreter(OOPsyBaseVisitor):
 
         try:
             return collection[index]
-        except (TypeError, IndexError, KeyError) as e:
-            raise Exception(f"Nie można uzyskać elementu: {collection}[{index}] — {e}")
+        except (TypeError, IndexError, KeyError):
+            raise Exception(f"Nie można uzyskać dostępu do indeksu: {collection}[{index}]")
+
 
