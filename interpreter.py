@@ -1,4 +1,5 @@
 from grammar.OOPsyBaseVisitor import OOPsyBaseVisitor
+from grammar.OOPsyParser import OOPsyParser
 
 
 class ClassDef:
@@ -246,12 +247,35 @@ class Interpreter(OOPsyBaseVisitor):
         target = ctx.getChild(0)
         value = self.visit(ctx.valueExpression())
 
-        if target.getChildCount() == 1:
+        if isinstance(target, OOPsyParser.IndexedAccessContext):
+            # Przypisanie do elementu listy lub słownika, np. numbers[1] = 10
+            collection_expr = target.getChild(0)
+            index_expr = target.valueExpression()
+
+            # Obsługa nazw zmiennych lub memberAccess
+            if isinstance(collection_expr, OOPsyParser.MemberAccessContext):
+                collection = self.visit(collection_expr)
+            else:
+                var_name = collection_expr.getText()
+                if var_name in self.variables:
+                    collection = self.variables[var_name]
+                else:
+                    raise Exception(f"Nieznana zmienna lub pole: '{var_name}'")
+
+            index = self.visit(index_expr)
+
+            try:
+                collection[index] = value
+            except (TypeError, IndexError, KeyError):
+                raise Exception(f"Nie można przypisać do elementu: {collection}[{index}]")
+
+        elif target.getChildCount() == 1:
             var_name = target.getText()
             if var_name in self.variables:
                 self.variables[var_name] = value
             else:
                 raise Exception(f"Nieznana zmienna '{var_name}'")
+
         else:
             obj_name = target.getChild(0).getText()
             attr_name = target.getChild(2).getText()
@@ -386,6 +410,8 @@ class Interpreter(OOPsyBaseVisitor):
             return self.visit(ctx.listLiteral())
         if ctx.dictLiteral():
             return self.visit(ctx.dictLiteral())
+        if ctx.indexedAccess():
+            return self.visit(ctx.indexedAccess())
 
     def visitLogicalExpression(self, ctx):
         result = self.visit(ctx.logicalTerm(0))
@@ -471,3 +497,25 @@ class Interpreter(OOPsyBaseVisitor):
         var_name = ctx.IDENTIFIER().getText()
         value = self.visit(ctx.valueExpression())
         self.variables[var_name] = value
+
+    def visitIndexedAccess(self, ctx):
+        target_ctx = ctx.getChild(0)
+        index_ctx = ctx.valueExpression()
+
+        index = self.visit(index_ctx)
+
+        # obsługa memberAccess (np. obj.list[1])
+        if isinstance(target_ctx, OOPsyParser.MemberAccessContext):
+            collection = self.visit(target_ctx)
+        else:
+            var_name = target_ctx.getText()
+            if var_name in self.variables:
+                collection = self.variables[var_name]
+            else:
+                raise Exception(f"Nieznana zmienna lub pole: '{var_name}'")
+
+        try:
+            return collection[index]
+        except (TypeError, IndexError, KeyError) as e:
+            raise Exception(f"Nie można uzyskać elementu: {collection}[{index}] — {e}")
+

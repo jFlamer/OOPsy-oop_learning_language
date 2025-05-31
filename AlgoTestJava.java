@@ -9,6 +9,14 @@ public class Main {
         System.out.println(d.get("a"));
         var x = l.get(0);
         System.out.println(x);
+        var numbers = new java.util.ArrayList<>(java.util.Arrays.asList(5, 8, 7));
+        numbers.set(1, 6);
+        System.out.println(numbers.get(0));
+        System.out.println(numbers.get(1));
+        System.out.println(numbers.get(2));
+        for (Object n : numbers) {
+        System.out.println(("Liczba: " + n));
+        }
         return;
     }
 }

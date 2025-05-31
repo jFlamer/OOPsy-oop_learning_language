@@ -156,6 +156,25 @@ class JavaCompiler(OOPsyBaseVisitor):
     def visitAssignment(self, ctx):
         target = ctx.getChild(0)
         value_expr = ctx.valueExpression()
+        value = self.visit(value_expr)
+
+        # if isinstance(target, OOPsyParser.IndexedAccessContext):
+        #     target_code = self.visit(target.getChild(0))  # nazwa listy/słownika
+        #     index_code = self.visit(target.valueExpression())
+        #     self.output.append(f"        {target_code}.set({index_code}, {value});")
+        #     return
+        if ctx.indexedAccess():
+            ia = ctx.indexedAccess()
+            if ia.IDENTIFIER():
+                target = ia.IDENTIFIER().getText()
+            elif ia.memberAccess():
+                target = self.visit(ia.memberAccess())
+            else:
+                target = "UNKNOWN"
+
+            index = self.visit(ia.valueExpression())
+            self.output.append(f"        {target}.set({index}, {value});")
+            return
 
         if target.getChildCount() > 1:
             target_code = self.visitMemberAccess(target)
@@ -228,6 +247,8 @@ class JavaCompiler(OOPsyBaseVisitor):
             return self.visit(ctx.listLiteral())
         if ctx.dictLiteral():
             return self.visit(ctx.dictLiteral())
+        if ctx.indexedAccess():
+            return self.visit(ctx.indexedAccess())
         return ""
 
     def visitMemberAccess(self, ctx):
@@ -363,6 +384,17 @@ class JavaCompiler(OOPsyBaseVisitor):
     def visitCommentStatement(self, ctx):
         comment = ctx.LINE_COMMENT().getText()
         self.output.append(f"        {comment}")
+
+    def visitIndexedAccess(self, ctx):
+        if ctx.IDENTIFIER():
+            target = ctx.IDENTIFIER().getText()
+        elif ctx.memberAccess():
+            target = self.visit(ctx.memberAccess())
+        else:
+            target = "UNKNOWN"
+
+        index = self.visit(ctx.valueExpression())
+        return f"{target}.get({index})"
 
     def ensure_scanner_initialized(self):
         # self.imports.add("import java.util.Scanner;")

@@ -42,14 +42,16 @@ public class Main {
         }
         Student unknown = new Student("", 0, false);
         System.out.print("What is your name? ");
+        String __input_tmp_42 = scanner.nextLine();
+        System.out.print("What is your name? ");
         unknown.name = scanner.nextLine();
         unknown.introduce();
         var l = new java.util.ArrayList<>(java.util.Arrays.asList(1, 2, 3));
         System.out.println(l);
-        java.util.HashMap<Object, Object> __map_47 = new java.util.HashMap<>();
-        __map_47.put("key", "value");
-        __map_47.put("x", "y");
-        var d = __map_47;
+        java.util.HashMap<Object, Object> __map_49 = new java.util.HashMap<>();
+        __map_49.put("key", "value");
+        __map_49.put("x", "y");
+        var d = __map_49;
         System.out.println(d);
         return;
     }
