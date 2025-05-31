@@ -314,6 +314,15 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by OOPsyParser#indexedAccess.
+    def enterIndexedAccess(self, ctx:OOPsyParser.IndexedAccessContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#indexedAccess.
+    def exitIndexedAccess(self, ctx:OOPsyParser.IndexedAccessContext):
+        pass
+
+
     # Enter a parse tree produced by OOPsyParser#methodCall.
     def enterMethodCall(self, ctx:OOPsyParser.MethodCallContext):
         pass

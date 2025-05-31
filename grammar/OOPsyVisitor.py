@@ -179,6 +179,11 @@ class OOPsyVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by OOPsyParser#indexedAccess.
+    def visitIndexedAccess(self, ctx:OOPsyParser.IndexedAccessContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by OOPsyParser#methodCall.
     def visitMethodCall(self, ctx:OOPsyParser.MethodCallContext):
         return self.visitChildren(ctx)

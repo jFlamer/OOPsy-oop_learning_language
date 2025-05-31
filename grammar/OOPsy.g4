@@ -36,7 +36,7 @@ accessModifier
     | PRIVATE_MODIFIER
     ;
 
-assignment      : (IDENTIFIER | memberAccess) ASSIGNMENT_OPERATOR valueExpression SEMICOLON_SEPARATOR;
+assignment      : (IDENTIFIER | memberAccess | indexedAccess) ASSIGNMENT_OPERATOR valueExpression SEMICOLON_SEPARATOR ;
 returnStatement : RETURN_STATEMENT valueExpression? SEMICOLON_SEPARATOR ;
 expressionStatement : anyExpression SEMICOLON_SEPARATOR ;
 printStatement  : PRINT_KEYWORD LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS SEMICOLON_SEPARATOR ;
@@ -73,7 +73,7 @@ valueExpression
     | inputCall
     | listLiteral
     | dictLiteral
-    | valueExpression '[' valueExpression ']'
+    | indexedAccess
     ;
 
 listLiteral : LEFT_BRACKET (valueExpression (COMMA_SEPARATOR valueExpression)*)? RIGHT_BRACKET ;
@@ -99,6 +99,7 @@ anyExpression
     | PRINT_KEYWORD LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS
     ;
 
+indexedAccess : (IDENTIFIER | memberAccess) LEFT_BRACKET valueExpression RIGHT_BRACKET ;
 methodCall      : IDENTIFIER DOT_SEPARATOR IDENTIFIER LEFT_PARENTHESIS argumentList? RIGHT_PARENTHESIS ;
 inputCall       : INPUT_STATEMENT LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS ;
 argumentList    : valueExpression (COMMA_SEPARATOR valueExpression)* ;
