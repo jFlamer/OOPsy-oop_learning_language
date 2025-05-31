@@ -36,7 +36,7 @@ accessModifier
     | PRIVATE_MODIFIER
     ;
 
-assignment      : (IDENTIFIER | memberAccess) ASSIGNMENT_OPERATOR valueExpression SEMICOLON_SEPARATOR ;
+assignment      : (IDENTIFIER | memberAccess) ASSIGNMENT_OPERATOR valueExpression SEMICOLON_SEPARATOR;
 returnStatement : RETURN_STATEMENT valueExpression? SEMICOLON_SEPARATOR ;
 expressionStatement : anyExpression SEMICOLON_SEPARATOR ;
 printStatement  : PRINT_KEYWORD LEFT_PARENTHESIS valueExpression RIGHT_PARENTHESIS SEMICOLON_SEPARATOR ;
@@ -50,7 +50,7 @@ continueStatement   : CONTINUE_STATEMENT SEMICOLON_SEPARATOR ;
 superCallStatement  : SUPER_CALL LEFT_PARENTHESIS argumentList? RIGHT_PARENTHESIS SEMICOLON_SEPARATOR ;
 inputStatement  : INPUT_STATEMENT LEFT_PARENTHESIS STRING_LITERAL RIGHT_PARENTHESIS ASSIGNMENT_OPERATOR (IDENTIFIER | memberAccess) SEMICOLON_SEPARATOR ;
 commentStatement: LINE_COMMENT ;
-localVarDecl    : HAS_ATTRIBUTE_KEYWORD IDENTIFIER COLON_SEPARATOR typeName ASSIGNMENT_OPERATOR valueExpression ;
+localVarDecl    : VAR_KEYWORD IDENTIFIER COLON_SEPARATOR typeName ASSIGNMENT_OPERATOR valueExpression SEMICOLON_SEPARATOR ;
 
 block           : LEFT_BRACE statement* RIGHT_BRACE ;
 
@@ -73,6 +73,7 @@ valueExpression
     | inputCall
     | listLiteral
     | dictLiteral
+    | valueExpression '[' valueExpression ']'
     ;
 
 listLiteral : LEFT_BRACKET (valueExpression (COMMA_SEPARATOR valueExpression)*)? RIGHT_BRACKET ;
@@ -196,6 +197,7 @@ DICTIONARY_TYPE        : 'dict';
 RETURN_STATEMENT       : 'return';
 BREAK_STATEMENT        : 'break';
 CONTINUE_STATEMENT     : 'continue';
+VAR_KEYWORD            : 'var';
 
 // === Identifiers ===
 IDENTIFIER : [a-zA-Z_][a-zA-Z0-9_]*;

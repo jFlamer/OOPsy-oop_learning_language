@@ -39,7 +39,7 @@ method main() {
         alice.age = alice.age + 1;
     } until alice.age > 24;
 
-    has numbers: list = [1, 2, 3];
+    var numbers: list = [1, 2, 3];
     for n in numbers do {
         print("Liczba: " + n);
     }
@@ -47,10 +47,10 @@ method main() {
     unknown.name = input("What is your name? ");
     unknown.introduce();
 
-    has l: list = [1, 2, 3];
+    var l: list = [1, 2, 3];
     print(l);
 
-    has d: dict = {"key": "value", "x": "y"};
+    var d: dict = {"key": "value", "x": "y"};
     print(d);
     return;
 }

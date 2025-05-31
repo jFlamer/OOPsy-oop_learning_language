@@ -1,0 +1,10 @@
+method main() {
+    var l: list = [10, 20, 30];
+    var d: dict = {"a": 1};
+    print(l[1]);
+    print(d["a"]);
+
+    var x: int = l[0];
+    print(x);
+    return;
+}

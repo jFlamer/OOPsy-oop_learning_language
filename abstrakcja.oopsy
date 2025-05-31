@@ -6,14 +6,9 @@ abstract class Animal {
 }
 
 class Dog inherits Animal {
-    override method speAak() {
+    override method speak() {
         print("Woof!");
     }
-
-    // Błąd – nie można nadpisać final
-    //override method info() {
-    //    print("Overridden info");
-    //}
 }
 
 method main() {
