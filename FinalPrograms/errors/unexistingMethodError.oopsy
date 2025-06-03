@@ -1,0 +1,7 @@
+class A {}
+
+method main() {
+    create a of A();
+    a.doSomething();
+    return;
+}

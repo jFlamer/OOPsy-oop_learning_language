@@ -1,0 +1,4 @@
+method main() {
+    ghost.sayHello();
+    return;
+}

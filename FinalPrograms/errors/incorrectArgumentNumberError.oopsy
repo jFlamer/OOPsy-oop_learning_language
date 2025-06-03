@@ -1,0 +1,11 @@
+class A {
+    method greet(name: string) {
+        print("Hello " + name);
+    }
+}
+
+method main() {
+    create obj of A();
+    obj.greet();
+    return;
+}

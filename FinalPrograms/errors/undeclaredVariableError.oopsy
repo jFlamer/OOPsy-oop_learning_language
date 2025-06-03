@@ -1,4 +1,3 @@
 method main() {
-    obj.run();
+    x = 5;
 }
-

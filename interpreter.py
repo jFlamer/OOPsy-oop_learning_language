@@ -2,6 +2,19 @@ from grammar.OOPsyBaseVisitor import OOPsyBaseVisitor
 from grammar.OOPsyParser import OOPsyParser
 
 
+class OOPsyType:
+    def __init__(self, base, subtypes=None):
+        self.base = base
+        self.subtypes = subtypes or []
+
+    def __eq__(self, other):
+        return isinstance(other, OOPsyType) and self.base == other.base and self.subtypes == other.subtypes
+
+    def __str__(self):
+        if self.subtypes:
+            return f"{self.base}<{', '.join(map(str, self.subtypes))}>"
+        return self.base
+
 class ClassDef:
     def __init__(self, name, superclass=None, is_abstract=False):
         self.name = name
@@ -243,42 +256,67 @@ class Interpreter(OOPsyBaseVisitor):
 
         self.variables[var_name] = instance
 
+    # def visitAssignment(self, ctx):
+    #     target = ctx.getChild(0)
+    #     value = self.visit(ctx.valueExpression())
+    #
+    #     if isinstance(target, OOPsyParser.IndexedAccessContext):
+    #         # Przypisanie do elementu listy lub słownika, np. numbers[1] = 10
+    #         collection_expr = target.getChild(0)
+    #         index_expr = target.valueExpression()
+    #
+    #         # Obsługa nazw zmiennych lub memberAccess
+    #         if isinstance(collection_expr, OOPsyParser.MemberAccessContext):
+    #             collection = self.visit(collection_expr)
+    #         else:
+    #             var_name = collection_expr.getText()
+    #             if var_name in self.variables:
+    #                 collection = self.variables[var_name]
+    #             else:
+    #                 raise Exception(f"Nieznana zmienna lub pole: '{var_name}'")
+    #
+    #         index = self.visit(index_expr)
+    #
+    #         try:
+    #             collection[index] = value
+    #         except (TypeError, IndexError, KeyError):
+    #             raise Exception(f"Nie można przypisać do elementu: {collection}[{index}]")
+    #     elif target.getChildCount() == 1:
+    #         var_name = target.getText()
+    #         if var_name in self.variables:
+    #             self.variables[var_name] = value
+    #         else:
+    #             raise Exception(f"Nieznana zmienna '{var_name}'")
+    #
+    #     else:
+    #         obj_name = target.getChild(0).getText()
+    #         attr_name = target.getChild(2).getText()
+    #
+    #         if obj_name == "self":
+    #             if self.current_instance is None:
+    #                 raise Exception("Użycie 'self' poza metodą")
+    #             self.current_instance.set_attr(attr_name, value, requester=self.current_instance)
+    #         else:
+    #             obj = self.variables.get(obj_name)
+    #             if not obj:
+    #                 raise Exception(f"Nieznany obiekt '{obj_name}'")
+    #             obj.set_attr(attr_name, value)
     def visitAssignment(self, ctx):
-        target = ctx.getChild(0)
         value = self.visit(ctx.valueExpression())
 
-        if isinstance(target, OOPsyParser.IndexedAccessContext):
-            # Przypisanie do elementu listy lub słownika, np. numbers[1] = 10
-            collection_expr = target.getChild(0)
-            index_expr = target.valueExpression()
-
-            # Obsługa nazw zmiennych lub memberAccess
-            if isinstance(collection_expr, OOPsyParser.MemberAccessContext):
-                collection = self.visit(collection_expr)
-            else:
-                var_name = collection_expr.getText()
-                if var_name in self.variables:
-                    collection = self.variables[var_name]
-                else:
-                    raise Exception(f"Nieznana zmienna lub pole: '{var_name}'")
-
-            index = self.visit(index_expr)
-
-            try:
-                collection[index] = value
-            except (TypeError, IndexError, KeyError):
-                raise Exception(f"Nie można przypisać do elementu: {collection}[{index}]")
-
-        elif target.getChildCount() == 1:
-            var_name = target.getText()
+        # Przypisanie do zmiennej globalnej/lokalnej
+        if ctx.IDENTIFIER():
+            var_name = ctx.IDENTIFIER().getText()
             if var_name in self.variables:
                 self.variables[var_name] = value
             else:
                 raise Exception(f"Nieznana zmienna '{var_name}'")
 
-        else:
-            obj_name = target.getChild(0).getText()
-            attr_name = target.getChild(2).getText()
+        # Przypisanie do pola obiektu (np. obj.x = 5)
+        elif ctx.memberAccess():
+            access_ctx = ctx.memberAccess()
+            obj_name = access_ctx.getChild(0).getText()
+            attr_name = access_ctx.getChild(2).getText()
 
             if obj_name == "self":
                 if self.current_instance is None:
@@ -289,6 +327,28 @@ class Interpreter(OOPsyBaseVisitor):
                 if not obj:
                     raise Exception(f"Nieznany obiekt '{obj_name}'")
                 obj.set_attr(attr_name, value)
+
+        # Przypisanie do indeksu w liście lub słowniku (np. l[2] = 7)
+        elif ctx.indexedAccess():
+            access_ctx = ctx.indexedAccess()
+
+            # collection = self.visit(access_ctx.getChild(0))
+            collection = self.visit(access_ctx.getChild(0))
+            if collection is None:
+                var_name = access_ctx.getChild(0).getText()
+                collection = self.variables.get(var_name)
+            index = self.visit(access_ctx.valueExpression())
+
+            # if collection is None:
+            #     raise Exception("Brak kolekcji do indeksowania")
+
+            try:
+                collection[index] = value
+            except (TypeError, IndexError, KeyError):
+                raise Exception(f"Nie można przypisać do elementu: {collection}[{index}]")
+
+        else:
+            raise Exception("Nieobsługiwany typ przypisania")
 
     def visitPrintStatement(self, ctx):
         value = self.visit(ctx.valueExpression())
@@ -405,11 +465,22 @@ class Interpreter(OOPsyBaseVisitor):
             return self.visit(ctx.methodCall())
         if ctx.memberAccess():
             return self.visit(ctx.memberAccess())
+        # if ctx.valueExpression(0) and ctx.valueExpression(1):
+        #     left = self.visit(ctx.valueExpression(0))
+        #     right = self.visit(ctx.valueExpression(1))
+        #     op = ctx.getChild(1).getText()
+        #     return self.evaluate_binary_operation(left, op, right)
         if ctx.valueExpression(0) and ctx.valueExpression(1):
             left = self.visit(ctx.valueExpression(0))
             right = self.visit(ctx.valueExpression(1))
             op = ctx.getChild(1).getText()
-            return self.evaluate_binary_operation(left, op, right)
+
+            if op in ['+', '-', '*', '/', '%']:
+                return self.evaluate_binary_operation(left, op, right)
+            elif op in ['==', '!=', '<', '>', '<=', '>=']:
+                return self.evaluate_comparison(left, op, right)
+            else:
+                raise Exception(f"Nieznany operator: {op}")
         if ctx.LEFT_PARENTHESIS():
             return self.visit(ctx.valueExpression(0))
         if ctx.inputCall():
@@ -433,14 +504,26 @@ class Interpreter(OOPsyBaseVisitor):
             result = result and self.visit(ctx.logicalFactor(i))
         return result
 
+    # def visitLogicalFactor(self, ctx):
+    #     if ctx.valueExpression(1):
+    #         left = self.visit(ctx.valueExpression(0))
+    #         right = self.visit(ctx.valueExpression(1))
+    #         op = ctx.getChild(1).getText()
+    #         return self.evaluate_comparison(left, op, right)
+    #     else:
+    #         return self.visit(ctx.valueExpression(0))
     def visitLogicalFactor(self, ctx):
-        if ctx.valueExpression(1):
-            left = self.visit(ctx.valueExpression(0))
-            right = self.visit(ctx.valueExpression(1))
+        if ctx.getChildCount() == 3 and ctx.getChild(1).getText() in ['==', '!=', '<', '>', '<=', '>=']:
+            left = self.visit(ctx.getChild(0))
+            right = self.visit(ctx.getChild(2))
             op = ctx.getChild(1).getText()
             return self.evaluate_comparison(left, op, right)
+        elif ctx.getChildCount() == 1:
+            return self.visit(ctx.getChild(0))
+        elif ctx.getChild(0).getText() == '(':
+            return self.visit(ctx.logicalExpression())
         else:
-            return self.visit(ctx.valueExpression(0))
+            raise Exception("Nieobsługiwany logicalFactor")
 
     def evaluate_binary_operation(self, left, op, right):
         if op == '+':
@@ -494,7 +577,7 @@ class Interpreter(OOPsyBaseVisitor):
 
     def visitListLiteral(self, ctx):
         elements = [self.visit(e) for e in ctx.valueExpression()]
-        return list(map(int, elements))
+        return elements
 
     def visitDictLiteral(self, ctx):
         return {
@@ -502,10 +585,34 @@ class Interpreter(OOPsyBaseVisitor):
             for entry in ctx.dictEntry()
         }
 
+    # def visitLocalVarDecl(self, ctx):
+    #     var_name = ctx.IDENTIFIER().getText()
+    #     value = self.visit(ctx.valueExpression())
+    #     # self.variables[var_name] = value
+    #     type_ctx = ctx.typeName()
+    #     declared_type = self.extract_type(type_ctx)
+    #     actual_value = self.visit(ctx.valueExpression())
+    #
+    #     if not self.check_type_compatibility(declared_type, actual_value):
+    #         raise Exception(
+    #             f"Typ wartości ({type(actual_value).__name__}) nie pasuje do zadeklarowanego typu {declared_type}")
+    #
+    #     self.variables[var_name] = actual_value
     def visitLocalVarDecl(self, ctx):
         var_name = ctx.IDENTIFIER().getText()
-        value = self.visit(ctx.valueExpression())
-        self.variables[var_name] = value
+        type_ctx = ctx.typeName()
+        declared_type = self.extract_type(type_ctx)
+        actual_value = self.visit(ctx.valueExpression())
+
+        if actual_value is None:
+            raise Exception(f"Nie udało się odczytać wartości zmiennej '{var_name}'")
+
+        if not self.check_type_compatibility(declared_type, actual_value):
+            raise Exception(
+                f"Typ wartości ({type(actual_value).__name__}) nie pasuje do zadeklarowanego typu {declared_type}"
+            )
+
+        self.variables[var_name] = actual_value
 
     # def visitIndexedAccess(self, ctx):
     #     target_ctx = ctx.getChild(0)
@@ -513,10 +620,9 @@ class Interpreter(OOPsyBaseVisitor):
     #
     #     index = self.visit(index_ctx)
     #
-    #     # obsługa memberAccess (np. obj.list[1])
+    #     # Obsługa memberAccess (np. obj.list[1])
     #     if isinstance(target_ctx, OOPsyParser.MemberAccessContext):
     #         collection = self.visit(target_ctx)
-    #
     #     else:
     #         var_name = target_ctx.getText()
     #         if var_name in self.variables:
@@ -526,27 +632,67 @@ class Interpreter(OOPsyBaseVisitor):
     #
     #     try:
     #         return collection[index]
-    #     except (TypeError, IndexError, KeyError) as e:
-    #         raise Exception(f"Nie można uzyskać elementu: {collection}[{index}] — {e}")
+    #     except (TypeError, IndexError, KeyError):
+    #         raise Exception(f"Nie można uzyskać dostępu do indeksu: {collection}[{index}]")
     def visitIndexedAccess(self, ctx):
-        target_ctx = ctx.getChild(0)
-        index_ctx = ctx.valueExpression()
+        index = self.visit(ctx.valueExpression())
 
-        index = self.visit(index_ctx)
+        # target = ctx.getChild(0)
+        target = ctx.getChild(0)
+        collection = self.visit(target)
+        if collection is None:
+            # Spróbuj odzyskać po nazwie, jeśli nie zadziałało
+            if hasattr(target, 'getText'):
+                var_name = target.getText()
+                collection = self.variables.get(var_name)
+            if collection is None:
+                raise Exception("Brak kolekcji do indeksowania")
 
-        # Obsługa memberAccess (np. obj.list[1])
-        if isinstance(target_ctx, OOPsyParser.MemberAccessContext):
-            collection = self.visit(target_ctx)
+        # if isinstance(target, OOPsyParser.MemberAccessContext):
+        #     collection = self.visit(target)
+        # elif isinstance(target, OOPsyParser.IndexedAccessContext):
+        #     collection = self.visit(target)
         else:
-            var_name = target_ctx.getText()
-            if var_name in self.variables:
-                collection = self.variables[var_name]
-            else:
-                raise Exception(f"Nieznana zmienna lub pole: '{var_name}'")
+            var_name = target.getText()
+            collection = self.variables.get(var_name)
+
+        if collection is None:
+            raise Exception("Brak kolekcji do indeksowania")
 
         try:
             return collection[index]
-        except (TypeError, IndexError, KeyError):
-            raise Exception(f"Nie można uzyskać dostępu do indeksu: {collection}[{index}]")
+        except Exception as e:
+            raise Exception(f"Błąd przy indeksowaniu: {collection}[{index}] — {e}")
 
+    def extract_type(self, ctx):
+        if ctx.simpleType():
+            return OOPsyType(ctx.simpleType().getText())
+        elif ctx.listType():
+            inner = self.extract_type(ctx.listType().typeName())
+            return OOPsyType("list", [inner])
+        elif ctx.dictType():
+            key_type = self.extract_type(ctx.dictType().typeName(0))
+            value_type = self.extract_type(ctx.dictType().typeName(1))
+            return OOPsyType("dict", [key_type, value_type])
+        raise Exception("Nieznany typ")
 
+    def check_type_compatibility(self, declared_type, value):
+        if declared_type.base == "int" and isinstance(value, int):
+            return True
+        if declared_type.base == "float" and isinstance(value, float):
+            return True
+        if declared_type.base == "string" and isinstance(value, str):
+            return True
+        if declared_type.base == "char" and isinstance(value, str) and len(value) == 1:
+            return True
+        if declared_type.base == "bool" and isinstance(value, bool):
+            return True
+        if declared_type.base == "list" and isinstance(value, list):
+            return all(self.check_type_compatibility(declared_type.subtypes[0], v) for v in value)
+        if declared_type.base == "dict" and isinstance(value, dict):
+            return all(
+                self.check_type_compatibility(declared_type.subtypes[0], k) and
+                self.check_type_compatibility(declared_type.subtypes[1], v)
+                for k, v in value.items()
+            )
+        return False

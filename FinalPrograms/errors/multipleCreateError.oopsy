@@ -1,0 +1,7 @@
+class A {}
+
+method main() {
+    create x of A();
+    create x of A();
+    return;
+}

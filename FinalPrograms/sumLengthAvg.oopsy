@@ -1,0 +1,20 @@
+method main() {
+    var numbers: list<int> = [2, 4, 6, 8, 10];
+    var sum: int = 0;
+    var count: int = 0;
+
+    for n in numbers do {
+        var tmpSum: int = sum + n;
+        var tmpCount: int = count + 1;
+        sum = tmpSum;
+        count = tmpCount;
+    }
+
+    print("Suma: " + sum);
+    print("Dlugosc listy: " + count);
+
+    var avg: float = sum / 1.0 / count;
+    print("Srednia: " + avg);
+
+    return;
+}

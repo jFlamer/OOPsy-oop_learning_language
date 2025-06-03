@@ -44,12 +44,16 @@ class SemanticChecker(OOPsyBaseVisitor):
                 if method_name in superclass_methods:
                     super_modifier, _ = superclass_methods[method_name]
                     if super_modifier == "final":
-                        line = method_ctx.start.line
+                        # line = method_ctx.start.line
+                        # line = ctx.IDENTIFIER().symbol.line
+                        line = ctx.IDENTIFIER(0).symbol.line
                         self.errors.append(
                             f"[line {line}]Cannot override final method '{method_name}' in class  '{class_name}'.")
 
                 if is_override and method_name not in superclass_methods:
-                    line = method_ctx.start.line
+                    # line = method_ctx.start.line
+                    # line = ctx.IDENTIFIER().symbol.line
+                    line = ctx.IDENTIFIER(0).symbol.line
                     self.errors.append(
                         f"[line {line}]Method '{method_name}' in class '{class_name}' is overriding, but does not exists in the parent class.")
 
@@ -72,7 +76,8 @@ class SemanticChecker(OOPsyBaseVisitor):
     def visitLocalVarDecl(self, ctx: OOPsyParser.LocalVarDeclContext):
         var_name = ctx.IDENTIFIER().getText()
         if var_name in self.variables:
-            line = var_name.start.line
+            # line = var_name.start.line
+            line = ctx.IDENTIFIER().symbol.line
             self.errors.append(f"[line {line}]Variable '{var_name}' has been declared multiple times.")
         else:
             self.variables.add(var_name)
@@ -83,7 +88,9 @@ class SemanticChecker(OOPsyBaseVisitor):
         if target.getChildCount() == 1:
             var_name = target.getText()
             if var_name not in self.variables:
-                line = target.start.line
+                # line = target.start.line
+                # line = ctx.IDENTIFIER().symbol.line
+                line = ctx.IDENTIFIER(0).symbol.line if ctx.IDENTIFIER() else ctx.start.line
                 self.errors.append(f"[line {line}]Variable '{var_name}' has been used before declaration.")
         self.visit(ctx.valueExpression())
 
@@ -91,7 +98,9 @@ class SemanticChecker(OOPsyBaseVisitor):
         if ctx.IDENTIFIER():
             var_name = ctx.IDENTIFIER().getText()
             if var_name not in self.variables:
-                line = ctx.start.line
+                # line = ctx.start.line
+                # line = ctx.IDENTIFIER().symbol.line
+                line = ctx.IDENTIFIER(0).symbol.line if ctx.IDENTIFIER() else ctx.start.line
                 self.errors.append(f"[line {line}]Variable '{var_name}' has been used before declaration.")
         for child in ctx.getChildren():
             self.visit(child)
@@ -105,7 +114,8 @@ class SemanticChecker(OOPsyBaseVisitor):
             if operator in ["/", "DIV"]:
                 # Sprawdzamy, czy prawa strona to 0
                 if right.getText() == "0":
-                    line = operator_node.symbol.line if hasattr(operator_node, 'symbol') else ctx.start.line
+                    # line = operator_node.symbol.line if hasattr(operator_node, 'symbol') else ctx.start.line
+                    line = operator_node.symbol.line if hasattr(operator_node, 'symbol') else ctx.IDENTIFIER().symbol.line
                     self.errors.append(f"[line {line}]Remember cholero don't divide by 0")
 
 
@@ -114,7 +124,9 @@ class SemanticChecker(OOPsyBaseVisitor):
         method_name = ctx.IDENTIFIER(1).getText()
 
         if obj_name not in self.variables:
-            line = ctx.start.line
+            # line = ctx.start.line
+            # line = ctx.IDENTIFIER().symbol.line
+            line = ctx.IDENTIFIER(0).symbol.line
             self.errors.append(f"[line {line}]Object '{obj_name}' does't exist.")
             return
 
@@ -125,14 +137,18 @@ class SemanticChecker(OOPsyBaseVisitor):
             return
         method_info = self.class_methods.get(class_name, {}).get(method_name)
         if not method_info:
-            line = ctx.start.line
+            # line = ctx.start.line
+            # line = ctx.IDENTIFIER().symbol.line
+            line = ctx.IDENTIFIER(0).symbol.line
             self.errors.append(f"[line {line}]Method '{method_name}' doesn't exist in '{class_name}'.")
             return
 
         expected_args = method_info[1]
         given_args = len(ctx.argumentList().valueExpression()) if ctx.argumentList() else 0
         if expected_args != given_args:
-            line = ctx.start.line
+            # line = ctx.start.line
+            # line = ctx.IDENTIFIER().symbol.line
+            line = ctx.IDENTIFIER(0).symbol.line
             self.errors.append(
                 f"[line {line}]Method '{method_name}' in class '{class_name}' expects {expected_args} arguments, got {given_args}.")
 
@@ -142,12 +158,16 @@ class SemanticChecker(OOPsyBaseVisitor):
         class_name = ctx.IDENTIFIER(1).getText()
 
         if class_name not in self.class_methods:
-            line = ctx.start.line
+            # line = ctx.start.line
+            # line = ctx.IDENTIFIER().symbol.line
+            line = ctx.IDENTIFIER(1).symbol.line
             self.errors.append(f"[line {line}]Unknown class '{class_name}'.")
             return
 
         if var_name in self.variables:
-            line = ctx.start.line
+            # line = ctx.start.line
+            # line = ctx.IDENTIFIER().symbol.line
+            line = ctx.IDENTIFIER(0).symbol.line
             self.errors.append(f"[line {line}]Variable '{var_name}' has been declared multiple times.")
         else:
             self.variables.add(var_name)

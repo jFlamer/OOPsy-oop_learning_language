@@ -1,0 +1,27 @@
+method main() {
+    var numbers: list<int> = [5, 2, 8, 1, 3];
+    var n: int = 0;
+
+    for x in numbers do {
+        var tmp: int = n + 1;
+        n = tmp;
+    }
+
+        var reversedList: list<int> = [0, 0, 0, 0, 0];
+
+    var i: int = 0;
+    repeat {
+        var indexFromEnd: int = n - i - 1;
+        var val: int = numbers[indexFromEnd];
+        reversedList[i] = val;
+
+        var tmpi: int = i + 1;
+        i = tmpi;
+    } until i >= n;
+
+    for x in reversedList do {
+        print(x);
+    }
+
+    return;
+}

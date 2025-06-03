@@ -1,0 +1,4 @@
+method main() {
+    create x of Ghost();
+    return;
+}

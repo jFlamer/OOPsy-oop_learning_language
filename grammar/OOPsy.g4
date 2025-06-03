@@ -105,7 +105,10 @@ inputCall       : INPUT_STATEMENT LEFT_PARENTHESIS valueExpression RIGHT_PARENTH
 argumentList    : valueExpression (COMMA_SEPARATOR valueExpression)* ;
 memberAccess    : (IDENTIFIER | SELF_KEYWORD) DOT_SEPARATOR IDENTIFIER ;
 
-typeName        : OOPSY_TYPE_INT | OOPSY_TYPE_FLOAT | OOPSY_TYPE_STRING | OOPSY_TYPE_CHAR | OOPSY_TYPE_BOOL | LIST_TYPE | DICTIONARY_TYPE | IDENTIFIER ;
+typeName        : simpleType | listType | dictionaryType ;
+simpleType      : OOPSY_TYPE_INT | OOPSY_TYPE_FLOAT | OOPSY_TYPE_STRING | OOPSY_TYPE_CHAR | OOPSY_TYPE_BOOL | IDENTIFIER ;
+listType        : LIST_TYPE '<' typeName '>' ;
+dictionaryType  : DICTIONARY_TYPE '<' typeName COMMA_SEPARATOR typeName '>' ;
 
 // === LEXER RULES ===
 // === Data Types ===

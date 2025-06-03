@@ -368,5 +368,32 @@ class OOPsyListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by OOPsyParser#simpleType.
+    def enterSimpleType(self, ctx:OOPsyParser.SimpleTypeContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#simpleType.
+    def exitSimpleType(self, ctx:OOPsyParser.SimpleTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#listType.
+    def enterListType(self, ctx:OOPsyParser.ListTypeContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#listType.
+    def exitListType(self, ctx:OOPsyParser.ListTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by OOPsyParser#dictionaryType.
+    def enterDictionaryType(self, ctx:OOPsyParser.DictionaryTypeContext):
+        pass
+
+    # Exit a parse tree produced by OOPsyParser#dictionaryType.
+    def exitDictionaryType(self, ctx:OOPsyParser.DictionaryTypeContext):
+        pass
+
+
 
 del OOPsyParser

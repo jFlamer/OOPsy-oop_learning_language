@@ -209,5 +209,20 @@ class OOPsyVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by OOPsyParser#simpleType.
+    def visitSimpleType(self, ctx:OOPsyParser.SimpleTypeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by OOPsyParser#listType.
+    def visitListType(self, ctx:OOPsyParser.ListTypeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by OOPsyParser#dictionaryType.
+    def visitDictionaryType(self, ctx:OOPsyParser.DictionaryTypeContext):
+        return self.visitChildren(ctx)
+
+
 
 del OOPsyParser

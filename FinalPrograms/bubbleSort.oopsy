@@ -1,0 +1,40 @@
+method main() {
+    var numbers: list<int> = [5, 2, 8, 1, 3];
+    var n: int = 0;
+
+    for x in numbers do {
+        var tmp: int = n + 1;
+        n = tmp;
+    }
+
+    var tempList: list<int> = numbers;
+
+    var i: int = 0;
+    repeat {
+        var j: int = 0;
+        repeat {
+            var tmpNextIndex: int = j + 1;
+
+            var a: int = tempList[j];
+            var b: int = tempList[tmpNextIndex];
+
+            if a > b {
+                var temp: int = a;
+                tempList[j] = b;
+                tempList[tmpNextIndex] = temp;
+            }
+
+            var tmpj: int = j + 1;
+            j = tmpj;
+        } until j >= n - 1;
+
+        var tmpi: int = i + 1;
+        i = tmpi;
+    } until i >= n;
+
+    for num in tempList do {
+        print(num);
+    }
+
+    return;
+}

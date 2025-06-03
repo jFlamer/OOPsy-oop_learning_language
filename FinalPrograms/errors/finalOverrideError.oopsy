@@ -1,0 +1,15 @@
+class A {
+    final method test() {
+        print("A");
+    }
+}
+
+class B inherits A {
+    override method test() {
+        print("B");
+    }
+}
+
+method main() {
+    return;
+}
