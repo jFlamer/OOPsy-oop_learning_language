@@ -139,7 +139,7 @@ def highlight_syntax(event=None):
 
 
 
-# === Styl
+#Styl
 bg_color = "#ffe6f0"
 text_bg_color = "#fff0f5"
 output_bg_color = "#fcd6e6"
@@ -194,7 +194,7 @@ code_text.tag_config("comment", foreground="#d8bfd8")   # Thistle
 code_text.tag_config("operator", foreground="#ee82ee")  # Violet
 
 
-# Inicjalna aktualizacja
+#aktualizacja
 update_line_numbers()
 
 
@@ -207,7 +207,7 @@ run_button = tk.Button(frame, text="Run", command=run_code, background=button_co
                        activebackground="#ffa6c9")
 run_button.pack(pady=5)
 
-#Interpreter - okienko
+#Interpretera okienko
 output_label = tk.Label(frame, text="Interpreter Output:", background=bg_color, foreground=text_fg_color)
 output_label.pack(anchor='w')
 
