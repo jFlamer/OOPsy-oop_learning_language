@@ -194,6 +194,8 @@ The grammar is defined using two files:
 - `OOPsyLexer.g4` – defines tokens (keywords, operators, literals, etc.)
 - `OOPsy.g4` – defines parser rules (program structure, statements, expressions)
 
-## TBA
-1. Exceptions handling (semantic).
-2. GUI
+## Exception and error handling
+Errors (semantic) are handled by program semantic_checker.py by static iteration over the code. Example programs resulting in errors are placed in errors directory.
+
+## GUI
+Graphical user interface allows the user to type code in OOPsy and receive the same programme in Java as well as interpreted output. It also returns error message in case of an issue. The code is located gui.py file.
